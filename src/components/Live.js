@@ -4,7 +4,6 @@ import {
     CardGroup, CardHeader
 } from 'reactstrap';
 import { COUNTRIES } from '../shared/livecountries';
-
 const RenderCards = ({ topcountries }) => {
 
 

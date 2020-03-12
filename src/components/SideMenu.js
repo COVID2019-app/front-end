@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Nav, NavItem, NavLink, UncontrolledCollapse} from 'reactstrap';
-import Footer from './FooterComponent'
 import {COUNTRIES} from '../shared/livecountries';
 
 const RenderDetailedCountries = ({countries}) =>{
@@ -38,10 +37,13 @@ class Sidemenu extends Component {
               Dashboard
                 <Nav vertical >
                     <NavItem>
+                            <NavItem>
+                                <NavLink href="/">Live</NavLink>
+                            </NavItem>
                         <NavLink className="caret" href="#" id="toggler">Country Tables</NavLink>
                         <UncontrolledCollapse toggler='#toggler'>
                             <NavItem>
-                                <NavLink href='#'>All Countries</NavLink>
+                                    <NavLink href='/allcountriestable'>All Countries</NavLink>
                             </NavItem>
                             <RenderDetailedCountries countries={this.state.country}/>
                         </UncontrolledCollapse>
@@ -53,16 +55,15 @@ class Sidemenu extends Component {
                         <NavLink href="#">Maps</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink disabled href="#">Disabled Link</NavLink>
+                        <NavLink href="#">Sparklines</NavLink>
                     </NavItem>
                 </Nav>
                 <hr />
-                <p>Link based</p>
+                <p>Contributors?</p>
                 <Nav vertical>
-                    <NavLink href="#">Link</NavLink> <NavLink href="#">Link</NavLink> <NavLink href="#">Another Link</NavLink> <NavLink disabled href="#">Disabled Link</NavLink>
+                    <NavLink href="#">Gonna</NavLink> <NavLink href="#">Figure</NavLink> <NavLink href="#">These out</NavLink> <NavLink disabled href="#">As I go</NavLink>
                 </Nav>
                 </div>
-                <Footer/>
             </div>
         );
     }

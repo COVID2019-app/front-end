@@ -75,7 +75,7 @@ Object.keys(covidData).map(item => {
     return 1;
   });
 });
-export default function Home2() {
+export default function AllCountriesTable() {
   return (
     <table id="customers" className="table table-bordered">
       <thead>
