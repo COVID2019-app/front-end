@@ -15,6 +15,11 @@ function Header() {
       <button >
         Home
       </button></Link>
+      <Link to="usa/chart">
+        <button>
+          USA
+        </button>
+      </Link>
     </HeaderContainer>
   );
 }
