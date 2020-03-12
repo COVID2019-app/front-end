@@ -23,7 +23,7 @@ const USAChart=()=> {
 
         <Series type="bar" />
 
-        <Legend visible={false} />
+        <Legend visible={true} />
       </Chart>
     );
   
