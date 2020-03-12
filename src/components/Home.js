@@ -43,11 +43,15 @@ var headers = [
 ];
 
 function Home(props) {
+  
   // interactions with Redux Store
   const { getCountryList, country, isFetching } = props;
+
+  
   useEffect(() => {
     getCountryList();
   }, []);
+
   return (
     <TableContainer>
       <thead>
@@ -150,7 +154,7 @@ export default connect(mapStateToProps, {
 
 const TableContainer = styled.table`
   max-width: 1200px;
-  margin: 0 20px;
+  margin: 20px 20px 50px 20px;
   position: relative;
   border-collapse: collapse;
 `;
