@@ -1,15 +1,14 @@
 import React from 'react';
 import './App.css';
+import HomeC from './components/HomeC'
 
-import Home from "./components/Home"
-import Home2 from "./components/Home2";
 
 
 function App() {
   return (
     <div className="App">
       <h1>Covid2019</h1>
-      <Home2/>
+      <HomeC/>
     </div>
   );
 }
