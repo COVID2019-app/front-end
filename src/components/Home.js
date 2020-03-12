@@ -154,7 +154,7 @@ export default connect(mapStateToProps, {
 
 const TableContainer = styled.table`
   max-width: 1200px;
-  margin: 20px 20px 50px 20px;
+  margin: 20px auto 50px auto;
   position: relative;
   border-collapse: collapse;
 `;
