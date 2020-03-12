@@ -2,15 +2,15 @@ import React from 'react';
 import './App.css';
 import styled from "styled-components";
 
-import Home from "./components/Home";
-import USAChart from "./components/usa/USAChart";
+import Header from "./components/Header";
+import Routes from "./utils/Routes";
 
 function App() {
   return (
     <AppContainer>
-      <h1 style={{textAlign:"center"}}>Covid2019</h1>
-      <Home />
-      <USAChart />
+      <h1 style={{ textAlign: "center" }}>Covid2019</h1>
+      <Header />
+      <Routes />
     </AppContainer>
   );
 }
