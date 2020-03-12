@@ -1,96 +1,163 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import styled from "styled-components";
 
-const covidData = {
-  Territories: {
-    0: "China",
-    1: "Thailand",
-    2: "Japan"
+import { getCountryList } from "../store/actions";
+
+var headers = [
+  {
+    name: "Territories",
+    color: "black",
+    colspanNum: "1"
   },
-  confirmed_case: {
-    0: 80695,
-    1: 47,
-    2: 461
+  {
+    name: "Confirmed_case",
+    color: "blue",
+    colspanNum: "1"
   },
-  deaths: {
-    0: 3097,
-    1: 1,
-    2: 6
+  {
+    name: "deaths",
+    color: "red",
+    colspanNum: "2"
   },
-  recovered: {
-    0: 55404,
-    1: 31,
-    2: 69
+  {
+    name: "recovered",
+    color: "green",
+    colspanNum: "2"
+  },
+  {
+    name: "severe/critical",
+    color: "purple",
+    colspanNum: "2"
+  },
+  {
+    name: "Tested",
+    color: "grey",
+    colspanNum: "1"
+  },
+  {
+    name: "Active Cases",
+    color: "#e69900",
+    colspanNum: "2"
   }
-};
-
-const useStyles = makeStyles({
-  root: {
-    width: "100%",
-    overflowX: "auto"
-  },
-  table: {
-    minWidth:200
-  }
-});
-
-function createData(Territories, confirmed_cases, deaths, recovered) {
-  return { Territories, confirmed_cases, deaths, recovered };
-}
-
-var rows = [
-//   createData("China", 80695,3097,55404),
-//   createData("Thailand", 47,1,31),
-//   createData("Japan", 461,6,69),
-//   createData("Diamond Princess", 696,6,242),
-//   createData("Korea", 7134,50,130)
 ];
 
-for (var i = 0; i < Object.keys(covidData.Territories).length; i++){
-    rows.push(
-      createData(
-        covidData.Territories[i],
-        covidData.confirmed_case[i],
-        covidData.deaths[i],
-        covidData.recovered[i]
-      )
-    );
-}
-
-export default function Home() {
-  const classes = useStyles();
-
+function Home(props) {
+  // interactions with Redux Store
+  const { getCountryList, country, isFetching } = props;
+  useEffect(() => {
+    getCountryList();
+  }, []);
   return (
-    <Paper className={classes.root}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Territories</TableCell>
-            <TableCell align="right">confirmed_cases</TableCell>
-            <TableCell align="right">deaths</TableCell>
-            <TableCell align="right">recovered</TableCell>
-            
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.Territories}
-              </TableCell>
-              <TableCell align="right">{row.confirmed_cases}</TableCell>
-              <TableCell align="right">{row.deaths}</TableCell>
-              <TableCell align="right">{row.recovered}</TableCell>
-            </TableRow>
+    <TableContainer>
+      <thead>
+        <tr>
+          {headers.map(heading => (
+            <th
+              colspan={heading.colspanNum}
+              style={{
+                color: heading.color,
+                border: "1px solid #ddd",
+                padding: "8px",
+                position: "sticky",
+                top: "0",
+                background: "skyblue"
+              }}
+            >
+              {heading.name}
+            </th>
           ))}
-        </TableBody>
-      </Table>
-    </Paper>
+        </tr>
+      </thead>
+      <tbody>
+        {country.map(item => (
+          <tr>
+            <Tabletd>{item.country_name}</Tabletd>
+            <Tabletd>
+              {item.confirmed_cases
+                .toString()
+                .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
+            </Tabletd>
+            <Tabletd style={{ color: "red" }}>
+              {item.deaths.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
+            </Tabletd>
+            <Tabletd
+              style={{
+                background: `rgba(255, 0, 0, ${item.deaths /
+                  item.confirmed_cases})`
+              }}
+            >
+              {((item.deaths / item.confirmed_cases) * 100).toFixed(2)}%
+            </Tabletd>
+            <Tabletd style={{ color: "green" }}>
+              {item.recovered
+                .toString()
+                .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
+            </Tabletd>
+            <Tabletd
+              style={{
+                background: `rgba(0,128,0, ${item.recovered /
+                  item.confirmed_cases})`
+              }}
+            >
+              {((item.recovered / item.confirmed_cases) * 100).toFixed(2)}%
+            </Tabletd>
+            <Tabletd style={{ color: "purple" }}>
+              {item.severe_critical
+                .toString()
+                .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
+            </Tabletd>
+            <Tabletd
+              style={{
+                background: `rgba(128,0,128, ${item.severe_critical /
+                  item.confirmed_cases})`
+              }}
+            >
+              {((item.severe_critical / item.confirmed_cases) * 100).toFixed(2)}
+              %
+            </Tabletd>
+            <Tabletd style={{ color: "grey" }}>
+              {item.tested.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
+            </Tabletd>
+            <Tabletd style={{ color: "#e69900" }}>
+              {item.active_cases
+                .toString()
+                .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
+            </Tabletd>
+            <Tabletd
+              style={{
+                background: `rgba(255, 171, 0, ${item.active_cases /
+                  item.confirmed_cases})`
+              }}
+            >
+              {((item.active_cases / item.confirmed_cases) * 100).toFixed(2)}%
+            </Tabletd>
+          </tr>
+        ))}
+      </tbody>
+    </TableContainer>
   );
 }
+const mapStateToProps = state => {
+  return {
+    isFetching: state.isFetching,
+    country: state.country
+  };
+};
+export default connect(mapStateToProps, {
+  getCountryList
+})(Home);
+
+const TableContainer = styled.table`
+  max-width: 1200px;
+  margin: 0 20px;
+  position: relative;
+  border-collapse: collapse;
+`;
+
+const Tabletd = styled.td`
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align:center;
+`;
+
