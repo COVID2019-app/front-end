@@ -6,7 +6,9 @@ import {
 
 export const initialState = {
          isFetching: false,
-         country: []
+         country: [],
+         isServerError:false,
+         message:''
        };
 
 function rootReducer(state = initialState, action) {
@@ -22,6 +24,14 @@ function rootReducer(state = initialState, action) {
           country: [...state.country, action.payload],
           isFetching: false,
         };
+        case FETCHING_COUNTRY_FAILURE:
+          return {
+            ...state,
+            isFetching:false,
+            isServerError:true,
+            message:action.payload
+
+          }
       default:
         return state;
     }
