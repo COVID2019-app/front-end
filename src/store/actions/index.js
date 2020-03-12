@@ -10,9 +10,9 @@ export const getCountryList = () => dispatch => {
            .get("https://cvid.herokuapp.com/country")
            .then(res => {
              console.log("comments  from server :", res);
-              res.data.forEach(data => {
-                dispatch({ type: FETCHING_COUNTRY_SUCCESS, payload: data });
-              });
+              
+                dispatch({ type: FETCHING_COUNTRY_SUCCESS, payload: res.data });
+              
            })
            .catch(err => {
              console.log(err);
