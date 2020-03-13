@@ -21,7 +21,7 @@ function rootReducer(state = initialState, action) {
       case FETCHING_COUNTRY_SUCCESS:
         return {
           ...state,
-          country: [...state.country, action.payload],
+          country: action.payload,
           isFetching: false,
         };
         case FETCHING_COUNTRY_FAILURE:
