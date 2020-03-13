@@ -67,7 +67,7 @@ function Home(props) {
 
   useEffect(() => {
     getCountryList(info);
-  }, [info]);
+  }, [getCountryList, info]);
 
 const handleChange = name => event => {
   setInfo({
