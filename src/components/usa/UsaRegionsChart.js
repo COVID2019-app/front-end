@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
+import { Table } from 'reactstrap';
 import usaflag from '../../shared/images/usaflag.png'
 import { getUsRegions } from '../../store/actions/index';
-import axios from 'axios'
+
 
 function UsaRegionsChart(props){
     const { getUsRegions, region_name, isFetching } = props;
@@ -21,14 +21,14 @@ function UsaRegionsChart(props){
      <center>
          <h1>United States Of America</h1>
      </center>
-     <table>
+     <Table responsive>
      <thead>
      <tr>
-         <th>Regions</th>
-         <th>ISO Code</th>
-         <th>Confirmed Cases</th>
-         <th>Deaths</th>
-         <th>Fatality Rate</th>
+         <th style={{backgroundColor:"red"}}>Regions</th>
+         <th style={{backgroundColor:"pink"}}>ISO Code</th>
+         <th style={{backgroundColor:"blue"}}>Confirmed Cases</th>
+         <th style={{backgroundColor:"maroon"}}>Deaths</th>
+         <th style={{backgroundColor:"gray"}}>Fatality Rate</th>
          </tr>
          </thead>
         <tbody>
@@ -36,31 +36,33 @@ function UsaRegionsChart(props){
             <tr>
             <td>{item.region_name.toUpperCase()}</td>
             <td>{item.iso_code.toUpperCase()}</td>
-            <tb>{item.confirmed}</tb>
-            <td>{item.cases}</td>
+            <td>{item.confirmed}</td>
             <td>{item.deaths}</td>
+            <td>{item.fatality_rate}</td>
+       
             </tr>
         ))}
         </tbody>
         
-            <tr>
-            <th>total</th>
+            <tr style={{backgroundColor:"yellow"}}>
+            <th >Total</th>
              <th></th>
-             <td>num</td>
+             <td>{}</td>
              <th></th>
-             <td>num</td>             
+             <td>{}</td>             
             </tr>
-        <tfoot>
+       
+     </Table>
+     <tfoot>
             <tr>
 
-            <td>Because of the Immense Nature of the US, we are listing Regions on this main tab and below will have tables specific for the individual states to showcase outbreak by state</td>
+            <td style={{backgroundColor:"pink"}}>Because of the Immense Nature of the US, we are listing Regions on this main tab and below will have tables specific for the individual states to showcase outbreak by state</td>
           
             </tr>
             <tr>
-            <td>*Repatriated means they were not infected on the diamond princess/Grand Princess cruise ships but tested positve once returned and in quarentime and 3 others came home from Wuhan rescue flights</td>
+            <td style={{backgroundColor:"grey"}}>**Repatriated means they were not infected on the diamond princess/Grand Princess cruise ships but tested positve once returned and in quarentime and 3 others came home from Wuhan rescue flights</td>
             </tr>
         </tfoot>
-     </table>
      </div>
  )
 }

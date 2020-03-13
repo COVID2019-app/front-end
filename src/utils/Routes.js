@@ -15,13 +15,13 @@ const Routes = () => {
 			<SideMenu />
 			<main className="col-md-9 ml-sm-auto col-lg-10 px-4">
 				<Switch>
-					{/* <Route exact path="/" render={() => <Redirect to="/live" />} />{' '} */}
+					<Route exact path="/" render={() => <Redirect to="/live" />} />{' '}
 					<Route exact path="/home" component={Home} /> 
                     <Route exact path="/live" component={Live} />{' '}
               
 					<Route exact path="/usa/chart" component={USAChart} /> 
 					<Route exact path="/usa/charts/regions" component={UsaRegionsChart}/>
-                    {/* <Redirect to="/" /> */}
+                    <Redirect to="/" />
 				</Switch>
 			</main>{' '}
 		</React.Fragment>

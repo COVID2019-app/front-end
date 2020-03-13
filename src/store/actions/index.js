@@ -26,7 +26,7 @@ export const getCountryList = () => dispatch => {
 export const getUsRegions = () => dispatch =>{
     dispatch({type:FETCHING_US_START})
     axios
-    .get('http://localhost:3000/usa_regions')
+    .get('https://cvid.herokuapp.com/usa_regions')
     .then(res => {
         console.log("usa_regions:",res);
         dispatch({type:FETCHING_US_SUCCESS,payload:res.data})
