@@ -1,58 +1,57 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
+import { connect } from "react-redux";
 import { Card, CardText, CardBody, CardGroup, CardHeader } from 'reactstrap';
-import { COUNTRIES } from '../shared/livecountries';
-
-
-const RenderCards = ({ topcountries }) => {
-    return (
-        <div className="col-lg-10 offset-lg-2">
-            <CardGroup>
-
-                {topcountries.data.map((x) => {
-
-                    return (
-                        <div key={x.index} className="col-sm-3 live-container ">
-                            <Card >
-                                <CardHeader>{x.Country}</CardHeader>
-                                <CardBody className="live-card">
-                                    <CardText className="live-cases">{x.Cases}</CardText>
-                                    <CardText className="live-deaths">{x.Deaths}</CardText>
-                                    {/*<Button>Go to Page</Button>*/}
-                                </CardBody>
-                            </Card>
-                        </div>
-                    );
-                })}
-            </CardGroup>
-        </div>
-
-    );
-
-}
+import { getCountryList } from "../store/actions";
+import {withRouter} from 'react-router-dom';
 
 
 
-class Live extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            country: COUNTRIES
-        }
-    }
 
+function Live (props) {
 
-    render() {
+    const { getCountryList, country} = props;
+    
+    useEffect(() => {
+        getCountryList();
+    }, [getCountryList]);
+
+    
         return (
             <div className="container">
+                <div className="col-lg-10 offset-lg-2">
+                    <CardGroup>
 
-                <RenderCards topcountries={this.state.country} />
+                        {country.slice(0,24).map((x) => {
 
+                            return (
+                                <div key={x.country_id} className="col-sm-3 live-container ">
+                                    <Card >
+                                        <CardHeader>{x.country_name === "United States of America" ? "USA" : x.country_name}</CardHeader>
+                                        <CardBody className="live-card">
+                                            <CardText className="live-cases">{x.confirmed_cases}</CardText>
+                                            <CardText className="live-deaths">{x.deaths}</CardText>
+                                            {/*<Button>Go to Page</Button>*/}
+                                        </CardBody>
+                                    </Card>
+                                </div>
+                            );
+                        })}
+                    </CardGroup>
+                </div>
             </div>
         );
-    }
+    
 }
 
-export default Live;
+
+const mapStateToProps = state => {
+    return {
+        //isFetching: state.isFetching,
+        country: state.country
+    };
+};
+
+export default withRouter(connect(mapStateToProps, {getCountryList})(Live));
 
 
 
