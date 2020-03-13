@@ -123,7 +123,7 @@ div ::-webkit-scrollbar {
 
 @media (min-width: 768px) {
   main {
-    padding-top: 70px; /* Space for fixed navbar */
+    padding-top: 50px; /* Space for fixed navbar */
   }
 }
 .fixed-nav {

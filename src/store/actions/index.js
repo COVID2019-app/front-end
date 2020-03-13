@@ -4,7 +4,8 @@ export const FETCHING_COUNTRY_START = "FETCHING_COUNTRY_START";
 export const FETCHING_COUNTRY_SUCCESS = "FETCHING_COUNTRY_SUCCESS";
 export const FETCHING_COUNTRY_FAILURE = "FETCHING_COUNTRY_FAILURE";
 
-export const getCountryList = () => dispatch => {
+export const getCountryList = (info) => dispatch => {
+  console.log(info)
          dispatch({ type: FETCHING_COUNTRY_START });
          axios
            .get("https://cvid.herokuapp.com/country")
