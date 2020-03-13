@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import styled from 'styled-components';
-=======
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 //import Loading from "./Loading";
->>>>>>> ef07c9150a18917ff88e599d8a6b641af7d1a12f
 
 import { getCountryList } from '../store/actions';
 

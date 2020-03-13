@@ -21,7 +21,7 @@ function rootReducer(state = initialState, action) {
           country: action.payload,
           isFetching: false,
         };
-        case FETCHING_COUNTRY_FAILURE:
+        case ActionTypes.FETCHING_COUNTRY_FAILURE:
           return {
             ...state,
             isFetching:false,
@@ -29,19 +29,19 @@ function rootReducer(state = initialState, action) {
             message:action.payload
 
           }
-        case FETCHING_US_START:
+        case ActionTypes.FETCHING_US_START:
           return{
             ...state,
            isFetching:true,
 
           }
-        case FETCHING_US_SUCCESS:
+        case ActionTypes.FETCHING_US_SUCCESS:
           return{
             ...state,
             usa_region:action.payload,
             isFetching:false
           }
-          case FETCHING_US_FAILURE:
+          case ActionTypes.FETCHING_US_FAILURE:
             return{
               ...state,
               isFetching:false,

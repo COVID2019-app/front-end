@@ -18,15 +18,15 @@ export const getCountryList = () => dispatch => {
        };
 
        export const getUsRegions = () => dispatch =>{
-        dispatch({type:FETCHING_US_START})
+        dispatch({type: ActionTypes.FETCHING_US_START})
         axios
         .get('https://cvid.herokuapp.com/usa_regions')
         .then(res => {
             console.log("usa_regions:",res);
-            dispatch({type:FETCHING_US_SUCCESS,payload:res.data})
+            dispatch({type:ActionTypes.FETCHING_US_SUCCESS,payload:res.data})
         })
         .catch(err =>{
-            dispatch({type:FETCHING_US_FAILURE, payload:err.message})
+            dispatch({type:ActionTypes.FETCHING_US_FAILURE, payload:err.message})
             console.log(err)
         })
     }
