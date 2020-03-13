@@ -16,17 +16,17 @@ var headers = [
     colspanNum: "1"
   },
   {
-    name: "deaths",
+    name: "Deaths",
     color: "red",
     colspanNum: "2"
   },
   {
-    name: "recovered",
+    name: "Recovered",
     color: "green",
     colspanNum: "2"
   },
   {
-    name: "severe/critical",
+    name: "Severe/Critical",
     color: "purple",
     colspanNum: "2"
   },
@@ -43,11 +43,15 @@ var headers = [
 ];
 
 function Home(props) {
+  
   // interactions with Redux Store
   const { getCountryList, country, isFetching } = props;
+
+  
   useEffect(() => {
     getCountryList();
   }, []);
+
   return (
     <TableContainer>
       <thead>
@@ -60,8 +64,9 @@ function Home(props) {
                 border: "1px solid #ddd",
                 padding: "8px",
                 position: "sticky",
-                top: "0",
-                background: "skyblue"
+                top: "25px",
+                background: "skyblue",
+                textAlign:"center"
               }}
             >
               {heading.name}
@@ -150,7 +155,7 @@ export default connect(mapStateToProps, {
 
 const TableContainer = styled.table`
   max-width: 1200px;
-  margin: 0 20px;
+  margin: 20px auto 50px auto;
   position: relative;
   border-collapse: collapse;
 `;
