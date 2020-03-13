@@ -54,7 +54,7 @@ function Home(props) {
         <tr>
           {headers.map(heading => (
             <th
-              colspan={heading.colspanNum}
+              colSpan={heading.colspanNum}
               style={{
                 color: heading.color,
                 border: "1px solid #ddd",
