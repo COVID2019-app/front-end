@@ -1,14 +1,18 @@
 import {
   FETCHING_COUNTRY_START,
   FETCHING_COUNTRY_SUCCESS,
-  FETCHING_COUNTRY_FAILURE
+  FETCHING_COUNTRY_FAILURE,
+  FETCHING_US_START,
+  FETCHING_US_SUCCESS,
+  FETCHING_US_FAILURE
 } from "../actions";
 
 export const initialState = {
          isFetching: false,
          country: [],
          isServerError:false,
-         message:''
+         message:'',
+         usa_region:[]
        };
 
 function rootReducer(state = initialState, action) {
@@ -32,6 +36,25 @@ function rootReducer(state = initialState, action) {
             message:action.payload
 
           }
+        case FETCHING_US_START:
+          return{
+            ...state,
+           isFetching:true,
+
+          }
+        case FETCHING_US_SUCCESS:
+          return{
+            ...state,
+            usa_region:action.payload,
+            isFetching:false
+          }
+          case FETCHING_US_FAILURE:
+            return{
+              ...state,
+              isFetching:false,
+              isServerError:true,
+              message:action.payload
+            }
       default:
         return state;
     }
