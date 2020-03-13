@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
-import {Link } from 'react-router-dom';
-import { Nav, NavItem, NavLink, UncontrolledCollapse} from 'reactstrap';
+import React, { useState} from 'react';
+import {Link, NavLink } from 'react-router-dom';
+import { Nav, NavItem, UncontrolledCollapse} from 'reactstrap';
 import {COUNTRIES} from '../shared/livecountries';
 
 const RenderDetailedCountries = ({countries}) =>{
     return(
         <div>
-            {countries.data.map((x) => {
+            {countries[0].data.map((x) => {
                 return(
-                    <div>
-                        <NavItem>
-                            <NavLink href='#'>{x.Country}</NavLink>
-                        </NavItem>
-
+                    <div className= "submenu" key={x.index}>
+                        <NavLink className="submenu" to='#'>{x.Country}</NavLink>
                     </div>
                 )
 
@@ -22,57 +19,51 @@ const RenderDetailedCountries = ({countries}) =>{
     )
 }
 
-class Sidemenu extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            country: COUNTRIES
-        }
-    }
+function SideMenu(props) {
 
+    const countries = useState(COUNTRIES)
 
-    render() {
+    
         return (
             <div className="col-lg-2 sidebar sidebar-sicky bg-light">
                 <div className="container">
               Dashboard
                 <Nav vertical >
-                    
                     <NavItem>
-                        <NavLink href="/">Live</NavLink>
+                        <NavLink className="nav-link" to="/">Live</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="/home">Home</NavLink>
+                        <NavLink className="nav-link" to="/home">Home</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="#" id="toggler">Country Tables</NavLink>
-                        <UncontrolledCollapse toggler='#toggler'>
-                            <NavLink href='/home'>All Countries</NavLink>
-                            <RenderDetailedCountries countries={this.state.country}/>
+                        <NavLink className="nav-link" to="#" id="toggler">Country Tables</NavLink>
+                        <UncontrolledCollapse  toggler='#toggler'>
+                                <NavLink className="submenu" to='/home'>All Countries</NavLink>
+                            <RenderDetailedCountries countries={countries}/>
                         </UncontrolledCollapse>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="#" id="toggler2">Charts</NavLink>
-                            <UncontrolledCollapse toggler='#toggler2'>
-                                    <NavLink href='/usa/chart'>USA Chart</NavLink>
-                            </UncontrolledCollapse>
+                        <NavLink className="nav-link" to="#" id="toggler2">Charts</NavLink>
+                        <UncontrolledCollapse toggler='#toggler2'>
+                                <NavLink className="submenu" to='/usa/chart'>USA Chart</NavLink>
+                        </UncontrolledCollapse>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="#">Maps</NavLink>
+                        <NavLink className="nav-link" to="#">Maps</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="#">Sparklines</NavLink>
+                        <NavLink className="nav-link" to="#">Sparklines</NavLink>
                     </NavItem>
                 </Nav>
                 <hr />
                 <p>Popular</p>
                 <Nav vertical>
-                    <NavLink href="/usa/chart">USA Chart</NavLink> <NavLink href="/home">All Countries</NavLink> <NavLink href="#">Something Popular</NavLink> <NavLink disabled href="#">Something Popular</NavLink>
+                        <NavLink className="nav-link" to="/usa/chart">USA Chart</NavLink> <NavLink className="nav-link" to="/home">All Countries</NavLink> <NavLink className="nav-link" to="#">Something Popular</NavLink> <NavLink className="nav-link" disabled to="#">Something Popular</NavLink>
                 </Nav>
                 </div>
             </div>
         );
-    }
+
 }
 
-export default Sidemenu;
+export default SideMenu;

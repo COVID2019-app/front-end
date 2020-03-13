@@ -45,18 +45,25 @@
    margin-bottom: 0rem;
    height: 3rem;
    font-size: 2rem;
+   text-align: center;
  }
  .live-deaths {
    background: rgb(216, 14, 41);
    color: white;
    height: 3rem;  
    font-size: 2rem;
+   text-align: center
  }
  .live-container {
    padding-right: 5px;
    padding-left: 5px;
    margin-bottom: 1rem
  }
+
+ .submenu {
+  color: rgb(58, 58, 58) !important;
+  font-weight: 300px
+}
 
 
  .sidebar {
@@ -107,6 +114,8 @@ div ::-webkit-scrollbar {
   font-size: .75rem;
   text-transform: uppercase;
 }
+
+
 
  main {
   padding-top: 133px; /* Space for fixed navbar */
