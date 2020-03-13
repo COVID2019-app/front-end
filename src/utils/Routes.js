@@ -18,7 +18,7 @@ const Routes = () => {
 					<Route exact path="/" render={() => <Redirect to="/live" />} />{' '}
 					<Route exact path="/home" component={Home} /> 
                     <Route exact path="/live" component={Live} />{' '}
-              
+			
 					<Route exact path="/usa/chart" component={USAChart} /> 
 					<Route exact path="/usa/charts/regions" component={UsaRegionsChart}/>
                     <Redirect to="/" />
