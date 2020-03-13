@@ -11,6 +11,7 @@
     "cjs": "^0.0.11",
     "devextreme": "19.2.7-build-20071-0309",
     "devextreme-react": "^19.2.6",
+    "logger": "^0.0.1",
     "react": "^16.13.0",
     "react-dev-utils": "^10.2.0",
     "react-dom": "^16.13.0",
@@ -18,6 +19,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.0",
     "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.0.1"
   },

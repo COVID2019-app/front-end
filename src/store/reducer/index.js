@@ -1,8 +1,4 @@
-import {
-  FETCHING_COUNTRY_START,
-  FETCHING_COUNTRY_SUCCESS
-  //FETCHING_COUNTRY_FAILURE
-} from "../actions";
+import * as ActionTypes from '../actions/ActionTypes'
 
 export const initialState = {
          isFetching: false,
@@ -11,12 +7,12 @@ export const initialState = {
 
 function rootReducer(state = initialState, action) {
     switch (action.type) {
-      case FETCHING_COUNTRY_START:
+      case ActionTypes.FETCHING_COUNTRY_START:
         return {
           ...state,
           isFetching: true
         };
-      case FETCHING_COUNTRY_SUCCESS:
+      case ActionTypes.FETCHING_COUNTRY_SUCCESS:
         return {
           ...state,
           country: action.payload,

@@ -68,6 +68,7 @@ function Home(props) {
           <tr>
             {headers.map(heading => (
               <th
+              key={heading.name}
                 colSpan={heading.colspanNum}
                 style={{
                   color: heading.color,
@@ -86,7 +87,7 @@ function Home(props) {
         </thead>
         <tbody>
           {country.map(item => (
-            <tr>
+            <tr key={item.country_id}>
               <Tabletd>{item.country_name}</Tabletd>
               <Tabletd>
                 {item.confirmed_cases
