@@ -2,7 +2,7 @@ import React, { useState} from 'react';
 import {NavLink } from 'react-router-dom';
 import { Nav, NavItem, UncontrolledCollapse} from 'reactstrap';
 import {COUNTRIES} from '../shared/livecountries';
-import UsaRegionsChart from '../components/usa/UsaRegionsChart'
+//import UsaRegionsChart from '../components/usa/UsaRegionsChart'
 const RenderDetailedCountries = ({countries}) =>{
     return(
         <div>

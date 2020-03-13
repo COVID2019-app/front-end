@@ -7,14 +7,14 @@ import Chart, {
   Series
 } from "devextreme-react/chart";
 
-import { USAComfirmedData } from "./region_confirm_data";
+import { USAConfirmedData } from "./region_confirm_data";
 
 const USAChart=()=> {
   
     return (
       <Chart
-        title="USA Comfirmed Case by Regions"
-        dataSource={USAComfirmedData}
+        title="USA Confirmed Cases by Region"
+        dataSource={USAConfirmedData}
         id="chart"
       >
         <ArgumentAxis tickInterval={10}>

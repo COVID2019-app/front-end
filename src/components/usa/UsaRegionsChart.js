@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
 import usaflag from '../../shared/images/usaflag.png'
@@ -6,12 +6,12 @@ import { getUsRegions } from '../../store/actions/index';
 
 
 function UsaRegionsChart(props){
-    const { getUsRegions, region_name, isFetching } = props;
+    const { getUsRegions, region_name/*, isFetching*/ } = props;
    useEffect(() =>{
     getUsRegions();
 
 
-   },[])
+   },[getUsRegions])
  
  return (
      <div className='usaRegionsContainer'>

@@ -1,4 +1,4 @@
-export const USAComfirmedData = [
+export const USAConfirmedData = [
          {
            arg: "NE",
            val: 103
