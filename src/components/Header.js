@@ -1,34 +1,32 @@
-import React from "react";
+import React, { Component } from 'react';
+import { Navbar, NavbarBrand } from 'reactstrap';
 
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+class Header extends Component {
+    constructor(props) {
+        super(props);
 
-function Header() {
-    return (
-        <HeaderContainer>
-            <Link to="/">
-                <button>
-                    Live
-      </button>
-            </Link>
-            <Link to="/home">
-                <button >
-                    Home
-      </button></Link>
-            <Link to="usa/chart">
-                <button>
-                    USA
-        </button>
-            </Link>
-        </HeaderContainer>
-    );
+        this.toggleNav = this.toggleNav.bind(this);
+        this.state = {
+            isNavOpen: false
+        };
+    }
+
+    toggleNav() {
+        this.setState({
+            isNavOpen: !this.state.isNavOpen
+        });
+    }
+
+    render() {
+        return (
+            <React.Fragment>
+                <Navbar className="fixed-nav fixed-top" color="dark" dark expand="md">
+                    <NavbarBrand className="brand" href="/">Covid2019 App</NavbarBrand>
+                    <p>     Live Updates</p>
+                </Navbar>
+            </React.Fragment>
+        );
+    }
 }
 
 export default Header;
-
-const HeaderContainer = styled.div`
-margin: 10px 20px;
-`
-const LinkContainer = styled.button`
-  margin: 10px 20px;
-`;

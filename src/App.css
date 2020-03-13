@@ -94,23 +94,14 @@ div ::-webkit-scrollbar {
 }
 
 .sidebar .nav-link {
-  font-weight: 300;
+  font-weight: 200;
   color: #333;
 }
 
-.sidebar .nav-link .feather {
-  margin-right: 4px;
-  color: #999;
-}
-
-.sidebar .nav-link.active {
+.sidebar .nav-link:active {
   color: #007bff;
 }
 
-.sidebar .nav-link:hover .feather,
-.sidebar .nav-link.active .feather {
-  color: inherit;
-}
 
 .sidebar-heading {
   font-size: .75rem;
