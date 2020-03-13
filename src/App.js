@@ -1,18 +1,23 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom'; 
-import Main from './components/Main'
 import './App.css';
+import styled from "styled-components";
 
-
+import Header from "./components/Header";
+import Routes from "./utils/Routes";
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Main/>
-      </div>
-    </BrowserRouter>
+    <AppContainer>
+      <h1 style={{ textAlign: "center" }}>Covid2019</h1>
+      <Header />
+      <Routes />
+    </AppContainer>
   );
 }
 
 export default App;
+
+const AppContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+`;
