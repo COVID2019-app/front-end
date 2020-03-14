@@ -3,6 +3,7 @@ import {NavLink } from 'react-router-dom';
 import { Nav, NavItem, UncontrolledCollapse} from 'reactstrap';
 import {COUNTRIES} from '../shared/livecountries';
 import UsaRegionsChart from '../components/usa/UsaRegionsChart'
+import TableEdit from '../components/TableEdit'
 const RenderDetailedCountries = ({countries}) =>{
     return(
         <div>
@@ -61,7 +62,8 @@ function SideMenu(props) {
                 <hr />
                 <p>Popular</p>
                 <Nav vertical>
-                        <NavLink className="nav-link" to="/usa/chart">USA Chart</NavLink> <NavLink className="nav-link" to="/home">All Countries</NavLink> <NavLink className="nav-link" to="#">Something Popular</NavLink> <NavLink className="nav-link" disabled to="#">Something Popular</NavLink>
+                        <NavLink className="nav-link" to="/usa/chart">USA Chart</NavLink> <NavLink className="nav-link" to="/home">All Countries</NavLink> <NavLink className="nav-link" to="/edit">Table search and edit</NavLink> <NavLink className="nav-link" disabled to="#">Something Popular</NavLink>
+                        
                 </Nav>
                 </div>
             </div>
