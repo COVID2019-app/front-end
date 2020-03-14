@@ -8,7 +8,7 @@ export const getCountryList = (info) => dispatch => {
   console.log(info)
          dispatch({ type: FETCHING_COUNTRY_START });
          axios
-           .get("https://cvid.herokuapp.com/country", { Headers: { category: info.category } })
+           .get("https://cvid.herokuapp.com/country", info.category)
            .then(res => {
              console.log("comments  from server :", res);
               
