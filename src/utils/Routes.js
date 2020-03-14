@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Home from '../components/Home';
+import {Home} from '../components/Home';
 import Live from '../components/Live';
 import SideMenu from '../components/SideMenu';
 import Header from '../components/Header';

@@ -43,7 +43,7 @@ var headers = [
 	},
 ];
 
-function Home(props) {
+export function Home(props) {
   
   // interactions with Redux Store
   const { getCountryList, country/*, isFetching */} = props;
@@ -156,15 +156,7 @@ function Home(props) {
   }
 //}
 
-const mapStateToProps = state => {
-  return {
-    //isFetching: state.isFetching,
-    country: state.country
-  };
-};
-export default connect(mapStateToProps, {
-	getCountryList,
-})(Home);
+ 
 
 const TableContainer = styled.table`
 	max-width: 1200px;

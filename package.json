@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
- 
     "@devexpress/dx-react-core": "^2.5.1",
     "@devexpress/dx-react-grid": "^2.5.1",
     "@devexpress/dx-react-grid-material-ui": "^2.5.1",
@@ -15,7 +14,6 @@
     "axios": "^0.19.2",
     "bit": "^1.0.20",
     "bootstrap": "^4.4.1",
- 
     "devextreme": "19.2.7-build-20071-0309",
     "devextreme-react": "^19.2.6",
     "logger": "^0.0.1",
@@ -34,6 +32,7 @@
     "react-smart-data-table": "^0.7.3",
     "reactstrap": "^8.4.1",
     "redux": "^4.0.5",
+    "redux-devtools": "^3.5.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.0.1",

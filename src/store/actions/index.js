@@ -31,7 +31,9 @@ export const getCountryList = () => dispatch => {
         })
     }
     export const isUpdating =() => dispatch =>{
+      console.log('LLLLLLL')
       dispatch({type: ActionTypes.IS_UPDATING_START})
+      console.log('IIAMAHEREREERE')
 
       let id;
       
