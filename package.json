@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@bit/grommet.grommet.data-table": "file:./components/data-table",
+ 
     "@devexpress/dx-react-core": "^2.5.1",
     "@devexpress/dx-react-grid": "^2.5.1",
     "@devexpress/dx-react-grid-material-ui": "^2.5.1",
@@ -15,7 +15,7 @@
     "axios": "^0.19.2",
     "bit": "^1.0.20",
     "bootstrap": "^4.4.1",
-    "cjs": "^0.0.11",
+ 
     "devextreme": "19.2.7-build-20071-0309",
     "devextreme-react": "^19.2.6",
     "logger": "^0.0.1",
