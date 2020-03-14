@@ -1,14 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-<<<<<<< HEAD
 import { makeStyles } from "@material-ui/core/styles";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import NativeSelect from "@material-ui/core/NativeSelect";
-=======
 //import Loading from "./Loading";
->>>>>>> master
 
 import { getCountryList } from '../store/actions';
 
@@ -63,7 +60,6 @@ function Home(props) {
   // interactions with Redux Store
   const { getCountryList, country/*, isFetching */} = props;
 
-<<<<<<< HEAD
   const classes = useStyles();
   const [info, setInfo] = useState({
     search: "",
@@ -79,7 +75,16 @@ const handleChange = name => event => {
     ...info,
     [name]: event.target.value
   });
-};
+  };
+
+  /* Slower table loads after first render
+    if(isFetching){
+    return(
+      <Loading/>
+    )
+
+  }
+  else{*/
   return (
     <div>
       <FormControl className={classes.formControl}>
@@ -98,32 +103,13 @@ const handleChange = name => event => {
         </NativeSelect>
         <FormHelperText>Sorted By</FormHelperText>
       </FormControl>
-=======
- 
-  useEffect(() => {
-    getCountryList();
-  }, [getCountryList]);
-
-  /* Slower table loads after first render
-    if(isFetching){
-    return(
-      <Loading/>
-    )
-
-  }
-  else{*/
-    return (
     
->>>>>>> master
       <TableContainer>
         <thead>
           <tr>
             {headers.map(heading => (
               <th
-<<<<<<< HEAD
-=======
               key={heading.name}
->>>>>>> master
                 colSpan={heading.colspanNum}
                 style={{
                   color: heading.color,
@@ -132,14 +118,8 @@ const handleChange = name => event => {
                   position: "sticky",
                   top: "25px",
                   background: "skyblue",
-<<<<<<< HEAD
-                  textAlign: "center"
-                }}
-                key={heading.name}
-=======
                   textAlign:"center"
                 }}
->>>>>>> master
               >
                 {heading.name}
               </th>
@@ -156,13 +136,7 @@ const handleChange = name => event => {
                   .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
               </Tabletd>
               <Tabletd style={{ color: "red" }}>
-<<<<<<< HEAD
-                {item.deaths
-                  .toString()
-                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
-=======
                 {item.deaths.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
->>>>>>> master
               </Tabletd>
               <Tabletd
                 style={{
@@ -196,23 +170,11 @@ const handleChange = name => event => {
                     item.confirmed_cases})`
                 }}
               >
-<<<<<<< HEAD
-                {((item.severe_critical / item.confirmed_cases) * 100).toFixed(
-                  2
-                )}
-                %
-              </Tabletd>
-              <Tabletd style={{ color: "grey" }}>
-                {item.tested
-                  .toString()
-                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
-=======
                 {((item.severe_critical / item.confirmed_cases) * 100).toFixed(2)}
                 %
               </Tabletd>
               <Tabletd style={{ color: "grey" }}>
                 {item.tested.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
->>>>>>> master
               </Tabletd>
               <Tabletd style={{ color: "#e69900" }}>
                 {item.active_cases
@@ -231,16 +193,11 @@ const handleChange = name => event => {
           ))}
         </tbody>
       </TableContainer>
-<<<<<<< HEAD
-    </div>
-  );
-}
-=======
+      </div>
     );
   }
-//}
 
->>>>>>> master
+
 const mapStateToProps = state => {
   return {
     //isFetching: state.isFetching,
