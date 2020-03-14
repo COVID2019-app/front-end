@@ -1,8 +1,8 @@
 import React, { useState} from 'react';
-import {Link, NavLink } from 'react-router-dom';
+import {NavLink } from 'react-router-dom';
 import { Nav, NavItem, UncontrolledCollapse} from 'reactstrap';
 import {COUNTRIES} from '../shared/livecountries';
-
+import UsaRegionsChart from '../components/usa/UsaRegionsChart'
 const RenderDetailedCountries = ({countries}) =>{
     return(
         <div>
@@ -45,7 +45,10 @@ function SideMenu(props) {
                     <NavItem>
                         <NavLink className="nav-link" to="#" id="toggler2">Charts</NavLink>
                         <UncontrolledCollapse toggler='#toggler2'>
-                                <NavLink className="submenu" to='/usa/chart'>USA Chart</NavLink>
+                        <>
+                                <NavLink className="submenu" to='/usa/chart'>USA Chart</NavLink><br/>
+                                <NavLink className="submenu" to="/usa/charts/regions">USA Regions</NavLink>
+                                </>
                         </UncontrolledCollapse>
                     </NavItem>
                     <NavItem>
