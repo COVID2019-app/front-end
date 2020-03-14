@@ -1,6 +1,6 @@
 import React, { useState} from 'react';
 import {NavLink } from 'react-router-dom';
-import { Nav, Navbar, NavItem, UncontrolledCollapse, Collapse, NavbarToggler} from 'reactstrap';
+import { Nav, Navbar, NavItem, UncontrolledCollapse, Collapse} from 'reactstrap';
 import {COUNTRIES} from '../shared/livecountries';
 import { Button } from 'devextreme-react/button';
 import 'devextreme/dist/css/dx.common.css';
@@ -30,12 +30,10 @@ const SideMenu = (props) => {
     const toggleNavbar = () => setCollapsed(!collapsed);
 
     
-
-    
         return (
             <React.Fragment>
                 <Navbar expand="lg" className=".d-md-none .d-lg-block">
-                    <Button onClick={toggleNavbar} icon="menu" className="mr-2" id="navToggler"  />
+                    <Button onClick={toggleNavbar} icon="menu" className=".d-none .d-sm-block .d-md-none mr-2 " id="navToggler"  />
                     <Collapse isOpen={!collapsed} navbar>
             <div className="col-lg-2 sidebar sidebar-sicky bg-light">
                 <div className="container">

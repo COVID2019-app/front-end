@@ -115,13 +115,17 @@ div ::-webkit-scrollbar {
   text-transform: uppercase;
 }
 
+@media (min-width: 900px) {
+  #navToggler {
+    display: none;
+  }
+}
+
 #navToggler {
- 
   position: fixed;
   right: 0;
   margin-top: 1rem;
   width: 2rem;
-
   z-index: 20000;
 }
 
