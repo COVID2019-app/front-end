@@ -6,6 +6,8 @@ import { Button } from 'devextreme-react/button';
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.dark.css';
 //import UsaRegionsChart from '../components/usa/UsaRegionsChart'
+import UsaRegionsChart from '../components/usa/UsaRegionsChart'
+import TableEdit from '../components/TableEdit'
 const RenderDetailedCountries = ({countries}) =>{
     return(
         <div>
