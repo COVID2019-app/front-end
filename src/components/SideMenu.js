@@ -71,7 +71,7 @@ const SideMenu = (props) => {
                     <NavItem>
                         <NavLink className="nav-link" to="#">Sparklines</NavLink>
                     </NavItem>
-                    <p style={{width: '200%', height: '70%'}}><hr /></p>
+                    <div style={{width: '200%', height: '70%'}}><hr /></div>
                     Popular Links
                                     
                     <NavLink className="nav-link" to="/usa/chart">USA Chart</NavLink> 

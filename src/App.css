@@ -124,7 +124,7 @@ div ::-webkit-scrollbar {
 #navToggler {
   position: fixed;
   right: 0;
-  margin-top: 1rem;
+  margin-top: 0.7rem;
   width: 2rem;
   z-index: 20000;
 }
