@@ -5,7 +5,7 @@ import * as ActionTypes from './ActionTypes'
 export const getCountryList = () => dispatch => {
          dispatch({ type: ActionTypes.FETCHING_COUNTRY_START });
          axios
-           .get("https://cvid.herokuapp.com/country")
+           .get("https://cvid.herokuapp.com/country/sort",)
            .then(res => {
              console.log("comments  from server :", res);
               
@@ -30,6 +30,20 @@ export const getCountryList = () => dispatch => {
             console.log(err)
         })
     }
+    export const isUpdating =() => dispatch =>{
+      dispatch({type: ActionTypes.IS_UPDATING_START})
+
+      let id;
+      
+      axios
+      .put(`http://localhost5000/${id}`,'updates')
+      .then(response => {
+        dispatch({type:ActionTypes.IS_UPDATING_SUCCESS,payload:response.data  })
+      })
+     
+      .catch(err =>{console.log(err)
+        dispatch({type:ActionTypes.IS_UPDATING_FAILURE, payload:err.message})
+        })    }
 
 /*Needs daily countries ordered by confirmed cases by server can limit to 25 for 
 export const getTopCountries = () => dispatch => {
