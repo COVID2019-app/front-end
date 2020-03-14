@@ -145,7 +145,7 @@ const columns = [{
     text: 'Tested',
     filter: textFilter(),
     validator: (newValue, row, column, done) => {
-        this.settimeout(() => {
+    
          // async validation ok
          if (newValue = Number){
          return done();
@@ -156,8 +156,7 @@ const columns = [{
            message: 'SOME_REASON_HERE'
          });
     
-       }, 2000);
-       return { async: true };
+
      }
   
   },{
@@ -165,9 +164,9 @@ const columns = [{
     text: 'Active'  ,
     filter: textFilter(),
     validator: (newValue, row, column, done) => {
-        this.settimeout(() => {
+
          // async validation ok
-         if (newValue = Number){
+         if (newValue === Number){
          return done();
          }
          // async validation not ok
@@ -176,8 +175,6 @@ const columns = [{
            message: 'SOME_REASON_HERE'
          });
     
-       }, 2000);
-       return { async: true };
      }
   }
 ];
