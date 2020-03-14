@@ -36,7 +36,7 @@ export const getCountryList = () => dispatch => {
       let id;
       
       axios
-      .put(`http://localhost5000/${id}`,'updates')
+      .put(`https://cvid.herokuapp.com/country/${id}`,'updates')
       .then(response => {
         dispatch({type:ActionTypes.IS_UPDATING_SUCCESS,payload:response.data  })
       })
