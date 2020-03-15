@@ -3,39 +3,23 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory, { Type } from 'react-bootstrap-table2-editor';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
-import axios from 'axios';
 import { connect,useDispatch } from 'react-redux';
 import { getCountryList,isUpdating } from '../store/actions/index';
 import number from 'react-bootstrap-table2-filter/lib/src/components/number';
+
 const TableEdit = props => {
-  const dispatch = useDispatch()
-  const { country, getCountryList , isUpdating } = props;
-  console.log("PROPS",props)
-  const [local, setLocal] = useState();
+
+	const { country, getCountryList, isUpdating } = props;
   
 	useEffect(() => {
     getCountryList()
         
 	}, [getCountryList]);
 
-	const handleSubmit = (evt) => {
-
-      
-
-     
-      setLocal(evt)
-       isUpdating(evt)
-	    console.log(evt)
-  
-
-    
-  }
-	
-	const handleChange = newValue => {
-      setLocal(newValue)
-    console.log(props)
-
-		console.log(local);
+	const handleChange = (row,column,newValue) => {
+		let updatedData = {}
+		updatedData[column.dataField] = parseInt(newValue)
+		isUpdating(row.country_id, updatedData)
 	};
 
 	const columns = [
@@ -97,31 +81,43 @@ const TableEdit = props => {
 
 			},
 	
-  ];
-  const onTableChange = (type, newState) => {
+	];
+		return (
+      <BootstrapTable
+        keyField="country_id"
+        data={country}
+        columns={columns}
+        cellEdit={cellEditFactory({
+          mode: "click",
+			afterSaveCell: (oldValue, newValue, row, column) => { 
+            handleChange(row, column,newValue);
+          }
+        })}
+        // onClick={e => {
+        //   handleChange(e);
+        // }}
+        filter={filterFactory()}
+      />
+    );
+//   const onTableChange = (type, newState) => {
 
-      
+
+// 	return (
+// 		<BootstrapTable
     
-  
-
-
-
-	return (
-		<BootstrapTable
-    
-			keyField="country_id"
-			data={country}
-			columns={columns}
+// 			keyField="country_id"
+// 			data={country}
+// 			columns={columns}
      
-			cellEdit={cellEditFactory({
-        onTableChange:{onTableChange}, 
-        mode: 'click',
-        afterSaveCell:(newValue)=>{ handleChange(newValue)} })}
-        onClick={(e) => {handleChange(e)}}
-		    	filter={filterFactory()}
+// 			cellEdit={cellEditFactory({
+//         onTableChange:{onTableChange}, 
+//         mode: 'click',
+//         afterSaveCell:(newValue)=>{ handleChange(newValue)} })}
+//         onClick={(e) => {handleChange(e)}}
+// 		    	filter={filterFactory()}
       
-         />)
-  }
+//          />)
+//   }
 }
     
 

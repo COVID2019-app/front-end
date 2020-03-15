@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 //import Loading from "./Loading";
+import { withRouter } from "react-router-dom";
 
 import { getCountryList } from '../store/actions';
 
@@ -46,8 +47,8 @@ var headers = [
 export function Home(props) {
   
   // interactions with Redux Store
-  const { getCountryList, country/*, isFetching */} = props;
-
+  // const { getCountryList, country/*, isFetching */} = props;
+const { getCountryList, country } = props;
  
   useEffect(() => {
     getCountryList();
@@ -155,7 +156,14 @@ export function Home(props) {
     );
   }
 //}
+const mapStateToProps = state => {
+  return {
+    //isFetching: state.isFetching,
+    country: state.country
+  };
+};
 
+export default withRouter(connect(mapStateToProps, { getCountryList })(Home));
  
 
 const TableContainer = styled.table`
