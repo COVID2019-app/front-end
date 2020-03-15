@@ -11,8 +11,9 @@ function UsaRegionsChart(props){
     getUsRegions();
 
 
-   },[getUsRegions])
-
+   }, [getUsRegions])
+    
+// re-generate the data from backend
     var data = []
     for (var i in region_name) {
         var d = {

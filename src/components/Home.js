@@ -16,7 +16,7 @@ var headers = [
     colspanNum: "1"
   },
   {
-    name: "Confirmed_case",
+    name: "Confirmed Case",
     color: "blue",
     colspanNum: "1"
   },
