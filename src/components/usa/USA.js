@@ -1,13 +1,37 @@
-import React from "react"
-import UsaRegionsChart from "./UsaRegionsChart"
-import USAChart from "./USAChart";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { getUsRegions } from "../../store/actions/index";
 
-export default function USA() {
+import Loading from "../Loading";
+
+import UsaRegionsChart from "./UsaRegionsChart";
+import USABarChart from "./USABarChart";
+import USAPieChart from "./USAPieChart";
+function USA(props) {
+  const { getUsRegions, usa_region, isFetching } = props;
+  useEffect(() => {
+    getUsRegions();
+  }, [getUsRegions]);
+  if (isFetching) {
+    return <Loading />;
+  } else {
     return (
-        <div>
-            <UsaRegionsChart />
-            <USAChart />
+<div>
+          <UsaRegionsChart data={usa_region} />
 
-        </div>
-    )
+          <USABarChart data={usa_region} />
+          <USAPieChart data={usa_region} />
+</div>
+    );
+  }
 }
+const mapStateToProps = state => {
+  return {
+    isFetching: state.isFetching,
+    usa_region: state.usa_region
+  };
+};
+export default connect(mapStateToProps, {
+  getUsRegions
+})(USA);
+
