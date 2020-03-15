@@ -5,10 +5,11 @@ import Live from '../components/Live';
 import SideMenu from '../components/SideMenu';
 import Header from '../components/Header';
 import USAChart from '../components/usa/USAChart';
-import PrivateRoute from    '../utils/Auth'
+// import PrivateRoute from    './Auth'
 import EditForm from '../Form'
 import UsaRegionsChart from '../components/usa/UsaRegionsChart';
 import TableEdit from '../components/TableEdit'
+// import {LoginPage} from './Login' 
 const Routes = () => {
 	return (
 		<React.Fragment>
