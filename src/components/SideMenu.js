@@ -7,7 +7,7 @@ import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.dark.css';
 //import UsaRegionsChart from '../components/usa/UsaRegionsChart'
 import UsaRegionsChart from '../components/usa/UsaRegionsChart'
-import TableEdit from '../components/TableEdit'
+import TableEdit from './HomeTableEdit'
 const RenderDetailedCountries = ({countries}) =>{
     return(
         <div>
