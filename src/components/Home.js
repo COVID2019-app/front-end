@@ -7,7 +7,7 @@ import FormControl from "@material-ui/core/FormControl";
 import NativeSelect from "@material-ui/core/NativeSelect";
 //import Loading from "./Loading";
 
-import { getCountryList } from "../store/actions";
+import { getSortedCountryList } from "../store/actions";
 
 var headers = [
   {
@@ -57,21 +57,21 @@ const useStyles = makeStyles(theme => ({
 }));
 function Home(props) {
   // interactions with Redux Store
-  const { getCountryList, country /*, isFetching */ } = props;
+  const { getSortedCountryList, country /*, isFetching */ } = props;
 
   const classes = useStyles();
-  const [info, setInfo] = useState({
+  const [sorted, setSorted] = useState({
     search: "",
     category: "confirmed_cases"
   });
 
   useEffect(() => {
-    getCountryList(info);
-  }, [getCountryList, info]);
+    getSortedCountryList(sorted.category);
+  }, [getSortedCountryList, sorted]);
 
 const handleChange = name => event => {
-  setInfo({
-    ...info,
+  setSorted({
+    ...sorted,
     [name]: event.target.value
   });
   };
@@ -88,7 +88,7 @@ const handleChange = name => event => {
     <div>
           <FormControl className={classes.formControl}>
         <NativeSelect
-          value={info.category}
+          value={sorted.category}
           onChange={handleChange("category")}
           name="category"
           className={classes.selectEmpty}
@@ -203,7 +203,7 @@ const mapStateToProps = state => {
   };
 };
 export default connect(mapStateToProps, {
-  getCountryList
+  getSortedCountryList
 })(Home);
 
 const TableContainer = styled.table`

@@ -1,15 +1,45 @@
 import axios from "axios";
 import * as ActionTypes from './ActionTypes'
 
-
 export const getCountryList = () => dispatch => {
+  dispatch({ type: ActionTypes.FETCHING_COUNTRY_START });
+  axios
+    .get("https://cvid.herokuapp.com/country/sort")
+    .then(res => {
+      console.log("comments  from server :", res);
+
+      dispatch({
+        type: ActionTypes.FETCHING_COUNTRY_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+export const getSortedCountryList = (sortedBy) => dispatch => {
+  var order = "desc";
+  if (sortedBy === "country_name") {
+    order ="asc"
+  } 
          dispatch({ type: ActionTypes.FETCHING_COUNTRY_START });
          axios
            .get("https://cvid.herokuapp.com/country/sort",)
            .then(res => {
              console.log("comments  from server :", res);
-              
-                dispatch({ type: ActionTypes.FETCHING_COUNTRY_SUCCESS, payload: res.data });
+             res.data.sort(function (a, b) {
+                  let comparison = 0;
+                  if (a[sortedBy] > b[sortedBy]) {
+                    comparison = 1;
+                  } else if (a[sortedBy] < b[sortedBy]) {
+                           comparison = -1;
+                         }
+                  return order === "desc" ? comparison * -1 : comparison;
+             })
+                dispatch({
+                  type: ActionTypes.FETCHING_COUNTRY_SUCCESS,
+                  payload: res.data
+                });
               
            })
            .catch(err => {
