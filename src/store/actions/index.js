@@ -6,7 +6,6 @@ export const getCountryList = () => dispatch => {
   axios
     .get("https://cvid.herokuapp.com/country/sort")
     .then(res => {
-      console.log("comments  from server :", res);
 
       dispatch({
         type: ActionTypes.FETCHING_COUNTRY_SUCCESS,
