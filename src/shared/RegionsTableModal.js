@@ -80,7 +80,7 @@ function RegionsTableModal(props) {
 
           <tr className="table-warning">
             <th>Total</th>
-            <td></td>
+          
             <td
               style={{
                 fontWeight: "600",

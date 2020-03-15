@@ -13,7 +13,17 @@ function UsaRegionsChart(props){
 
    },[getUsRegions])
 
-   
+    var data = []
+    for (var i in region_name) {
+        var d = {
+          id: region_name[i].id,
+          name: region_name[i].region_name,
+          confirmed: region_name[i].confirmed,
+          deaths: region_name[i].deaths,
+          fatality_rate: region_name[i].fatality_rate
+        };
+        data.push(d)
+    }
 //    var i; 
 //    var tot_cases =0 ;
 //    var tot_deaths =0
@@ -32,7 +42,7 @@ function UsaRegionsChart(props){
      </div>
      <center>
        <h1>United States Of America</h1>
-     </center><RegionsTableModal data={region_name} />
+     </center><RegionsTableModal data={data} />
      {/* <Table hover responsive>
        <thead>
          <tr className="thead-dark" style={{ textAlign: "center" }}>
