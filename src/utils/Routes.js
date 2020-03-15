@@ -5,6 +5,7 @@ import Live from '../components/Live';
 import SideMenu from '../components/SideMenu';
 import Header from '../components/Header';
 import USAChart from '../components/usa/USAChart';
+import PrivateRoute from    '../utils/Auth'
 import EditForm from '../Form'
 import UsaRegionsChart from '../components/usa/UsaRegionsChart';
 import TableEdit from '../components/TableEdit'
@@ -15,6 +16,7 @@ const Routes = () => {
 			<SideMenu />
 			<main className="col-md-9 ml-sm-auto col-lg-10 px-4">
 				<Switch>
+				{/* <PrivateRoute exact path="/edit" component={TableEdit}/> */}
 					<Route exact path="/" render={() => <Redirect to="/live" />} />{' '}
 					<Route exact path="/home" component={Home} /> 
                     <Route exact path="/live" component={Live} />{' '}
