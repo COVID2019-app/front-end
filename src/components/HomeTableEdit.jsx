@@ -58,10 +58,7 @@ const HomeTableEdit = props => {
       dataField: "tested",
       text: "Tested",
     },
-    {
-      dataField: "active_cases",
-      text: "Active",
-    }
+    
   ];
 		return (
       <BootstrapTable

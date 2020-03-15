@@ -86,7 +86,7 @@ const handleChange = name => event => {
   else{*/
   return (
     <div>
-          <FormControl className={classes.formControl}>
+      <FormControl className={classes.formControl}>
         <NativeSelect
           value={sorted.category}
           onChange={handleChange("category")}
@@ -102,96 +102,109 @@ const handleChange = name => event => {
         </NativeSelect>
         <FormHelperText>Sorted By</FormHelperText>
       </FormControl>
-    <TableContainer>
-      <thead>
-        <tr>
-          {headers.map(heading => (
-            <th
-              key={heading.name}
-              colSpan={heading.colspanNum}
-              style={{
-                color: heading.color,
-                border: "1px solid #ddd",
-                padding: "8px",
-                position: "sticky",
-                top: "25px",
-                background: "skyblue",
-                textAlign: "center"
-              }}
-            >
-              {heading.name}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {country.map(item => (
-          <tr key={item.country_id}>
-            <Tabletd>{item.country_name}</Tabletd>
-            <Tabletd>
-              {item.confirmed_cases
-                .toString()
-                .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
-            </Tabletd>
-            <Tabletd style={{ color: "red" }}>
-              {item.deaths.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
-            </Tabletd>
-            <Tabletd
-              style={{
-                background: `rgba(255, 0, 0, ${item.deaths /
-                  item.confirmed_cases})`
-              }}
-            >
-              {((item.deaths / item.confirmed_cases) * 100).toFixed(2)}%
-            </Tabletd>
-            <Tabletd style={{ color: "green" }}>
-              {item.recovered
-                .toString()
-                .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
-            </Tabletd>
-            <Tabletd
-              style={{
-                background: `rgba(0,128,0, ${item.recovered /
-                  item.confirmed_cases})`
-              }}
-            >
-              {((item.recovered / item.confirmed_cases) * 100).toFixed(2)}%
-            </Tabletd>
-            <Tabletd style={{ color: "purple" }}>
-              {item.severe_critical
-                .toString()
-                .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
-            </Tabletd>
-            <Tabletd
-              style={{
-                background: `rgba(128,0,128, ${item.severe_critical /
-                  item.confirmed_cases})`
-              }}
-            >
-              {((item.severe_critical / item.confirmed_cases) * 100).toFixed(2)}
-              %
-            </Tabletd>
-            <Tabletd style={{ color: "grey" }}>
-              {item.tested.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
-            </Tabletd>
-            <Tabletd style={{ color: "#e69900" }}>
-              {item.active_cases
-                .toString()
-                .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
-            </Tabletd>
-            <Tabletd
-              style={{
-                background: `rgba(255, 171, 0, ${item.active_cases /
-                  item.confirmed_cases})`
-              }}
-            >
-              {((item.active_cases / item.confirmed_cases) * 100).toFixed(2)}%
-            </Tabletd>
+      <TableContainer>
+        <thead>
+          <tr>
+            {headers.map(heading => (
+              <th
+                key={heading.name}
+                colSpan={heading.colspanNum}
+                style={{
+                  color: heading.color,
+                  border: "1px solid #ddd",
+                  padding: "8px",
+                  position: "sticky",
+                  top: "25px",
+                  background: "skyblue",
+                  textAlign: "center"
+                }}
+              >
+                {heading.name}
+              </th>
+            ))}
           </tr>
-        ))}
-      </tbody>
+        </thead>
+        <tbody>
+          {country.map(item => (
+            <tr key={item.country_id}>
+              <Tabletd>{item.country_name}</Tabletd>
+              <Tabletd>
+                {item.confirmed_cases
+                  .toString()
+                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
+              </Tabletd>
+              <Tabletd style={{ color: "red" }}>
+                {item.deaths
+                  .toString()
+                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
+              </Tabletd>
+              <Tabletd
+                style={{
+                  background: `rgba(255, 0, 0, ${item.deaths /
+                    item.confirmed_cases})`
+                }}
+              >
+                {((item.deaths / item.confirmed_cases) * 100).toFixed(2)}%
+              </Tabletd>
+              <Tabletd style={{ color: "green" }}>
+                {item.recovered
+                  .toString()
+                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
+              </Tabletd>
+              <Tabletd
+                style={{
+                  background: `rgba(0,128,0, ${item.recovered /
+                    item.confirmed_cases})`
+                }}
+              >
+                {((item.recovered / item.confirmed_cases) * 100).toFixed(2)}%
+              </Tabletd>
+              <Tabletd style={{ color: "purple" }}>
+                {item.severe_critical
+                  .toString()
+                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
+              </Tabletd>
+              <Tabletd
+                style={{
+                  background: `rgba(128,0,128, ${item.severe_critical /
+                    item.confirmed_cases})`
+                }}
+              >
+                {((item.severe_critical / item.confirmed_cases) * 100).toFixed(
+                  2
+                )}
+                %
+              </Tabletd>
+              <Tabletd style={{ color: "grey" }}>
+                {item.tested
+                  .toString()
+                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
+              </Tabletd>
+              <Tabletd style={{ color: "#e69900" }}>
+                {(item.confirmed_cases - item.deaths - item.recovered)
+                  .toString()
+                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
+              </Tabletd>
+              <Tabletd
+                style={{
+                  background: `rgba(255, 171, 0, ${(item.confirmed_cases -
+                    item.deaths -
+                    item.recovered) /
+                    item.confirmed_cases})`
+                }}
+              >
+                {(
+                  ((item.confirmed_cases - item.deaths - item.recovered) /
+                    item.confirmed_cases) *
+                  100
+                ).toFixed(2)}
+                %
+              </Tabletd>
+            </tr>
+          ))}
+        </tbody>
       </TableContainer>
-      </div>
+    </div>
   );
 }
 //}
