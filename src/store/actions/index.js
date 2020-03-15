@@ -30,13 +30,12 @@ export const getCountryList = () => dispatch => {
             console.log(err)
         })
     }
-    export const isUpdating =() => dispatch =>{
-      dispatch({type: ActionTypes.IS_UPDATING_START})
+export const isUpdating = (country_id, updates) => dispatch => {
 
-      let id;
+      dispatch({type: ActionTypes.IS_UPDATING_START})
       
       axios
-      .put(`https://cvid.herokuapp.com/country/${id}`,'updates')
+      .put(`https://cvid.herokuapp.com/country/${country_id}`,updates)
       .then(response => {
         dispatch({type:ActionTypes.IS_UPDATING_SUCCESS,payload:response.data  })
       })

@@ -1,11 +1,14 @@
 import * as ActionTypes from '../actions/ActionTypes'
+import { isUpdating } from '../actions';
 
 export const initialState = {
          isFetching: false,
          country: [],
          isServerError:false,
          message:'',
-         usa_region:[]
+         usa_region:[],
+        isUpdating:false,
+        updatedCountry:[]
        };
 
 function rootReducer(state = initialState, action) {
@@ -48,6 +51,30 @@ function rootReducer(state = initialState, action) {
               isServerError:true,
               message:action.payload
             }
+            case ActionTypes.IS_UPDATING_START:
+              return{
+                ...state,
+                isUpdating:true,
+                isServerError:false,
+                message:action.payload
+        
+                }
+                  case ActionTypes.IS_UPDATING_SUCCESS:
+                return{
+                  ...state,
+                  isUpdating:false,
+                  isServerError:false,
+                  updatedCountry:action.payload,
+                  message:action.payload
+                  }
+                  case ActionTypes.IS_UPDATING_FAILURE:
+                    return{
+                      ...state,
+                      isUpdating:false,
+                      isServerError:true,
+                      message:action.payload,
+                      }
+
       default:
         return state;
     }
