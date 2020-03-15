@@ -6,7 +6,6 @@ export const getCountryList = () => dispatch => {
   axios
     .get("https://cvid.herokuapp.com/country/sort")
     .then(res => {
-      console.log("comments  from server :", res);
 
       dispatch({
         type: ActionTypes.FETCHING_COUNTRY_SUCCESS,
@@ -26,16 +25,18 @@ export const getSortedCountryList = (sortedBy) => dispatch => {
          axios
            .get("https://cvid.herokuapp.com/country/sort",)
            .then(res => {
-             console.log("comments  from server :", res);
-             res.data.sort(function (a, b) {
-                  let comparison = 0;
-                  if (a[sortedBy] > b[sortedBy]) {
-                    comparison = 1;
-                  } else if (a[sortedBy] < b[sortedBy]) {
-                           comparison = -1;
-                         }
-                  return order === "desc" ? comparison * -1 : comparison;
+             res.data.forEach((item) => {
+              item.active_cases = item.confirmed_cases - item.deaths - item.recovered
              })
+             res.data.sort(function(a, b) {
+               let comparison = 0;
+               if (a[sortedBy] > b[sortedBy]) {
+                 comparison = 1;
+               } else if (a[sortedBy] < b[sortedBy]) {
+                 comparison = -1;
+               }
+               return order === "desc" ? comparison * -1 : comparison;
+             });
                 dispatch({
                   type: ActionTypes.FETCHING_COUNTRY_SUCCESS,
                   payload: res.data
