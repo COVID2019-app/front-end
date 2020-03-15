@@ -105,9 +105,10 @@ const SideMenu = (props) => {
                       <NavLink className="nav-link" to="/home">
                         All Countries
                       </NavLink>
-                      <NavLink className="nav-link" to="/edit">
+                      {/* Hidden from public view /*}
+                      {/* <NavLink className="nav-link" to="/edit">
                         Edit
-                      </NavLink>
+                      </NavLink> */}
                       <NavLink className="nav-link" disabled to="#">
                         Something Popular
                       </NavLink>
