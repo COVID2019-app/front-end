@@ -1,9 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { makeStyles } from "@material-ui/core/styles";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import NativeSelect from "@material-ui/core/NativeSelect";
 //import Loading from "./Loading";
 
-import { getCountryList } from "../store/actions";
+import { getSortedCountryList } from "../store/actions";
 
 var headers = [
   {
@@ -42,14 +46,35 @@ var headers = [
     colspanNum: "2"
   }
 ];
-
+const useStyles = makeStyles(theme => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2)
+  }
+}));
 function Home(props) {
   // interactions with Redux Store
-  const { getCountryList, country /*, isFetching */ } = props;
+  const { getSortedCountryList, country /*, isFetching */ } = props;
+
+  const classes = useStyles();
+  const [sorted, setSorted] = useState({
+    search: "",
+    category: "confirmed_cases"
+  });
 
   useEffect(() => {
-    getCountryList();
-  }, [getCountryList]);
+    getSortedCountryList(sorted.category);
+  }, [getSortedCountryList, sorted]);
+
+const handleChange = name => event => {
+  setSorted({
+    ...sorted,
+    [name]: event.target.value
+  });
+  };
 
   /* Slower table loads after first render
     if(isFetching){
@@ -60,6 +85,23 @@ function Home(props) {
   }
   else{*/
   return (
+    <div>
+          <FormControl className={classes.formControl}>
+        <NativeSelect
+          value={sorted.category}
+          onChange={handleChange("category")}
+          name="category"
+          className={classes.selectEmpty}
+          inputProps={{ "aria-label": "category" }}
+        >
+          <option value="confirmed_cases">confirmed cases</option>
+          <option value={"deaths"}>deaths</option>
+          <option value={"severe_critical"}>severe/critical</option>
+          <option value={"active_cases"}>active cases</option>
+          <option value={"country_name"}>territories</option>
+        </NativeSelect>
+        <FormHelperText>Sorted By</FormHelperText>
+      </FormControl>
     <TableContainer>
       <thead>
         <tr>
@@ -148,7 +190,8 @@ function Home(props) {
           </tr>
         ))}
       </tbody>
-    </TableContainer>
+      </TableContainer>
+      </div>
   );
 }
 //}
@@ -160,7 +203,7 @@ const mapStateToProps = state => {
   };
 };
 export default connect(mapStateToProps, {
-  getCountryList
+  getSortedCountryList
 })(Home);
 
 const TableContainer = styled.table`
