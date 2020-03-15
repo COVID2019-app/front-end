@@ -19,7 +19,7 @@ export const COUNTRIES = {"data": [
         },
     {
         "index": 3,
-        "Country": "Korea, Republic of",
+        "Country": "Korea",
         "Cases": 7755,
         "Deaths": 7
         },
@@ -49,7 +49,7 @@ export const COUNTRIES = {"data": [
         },
     {
         "index": 8,
-        "Country": "Diamond Princess",
+        "Country": "Diamond_Princess",
         "Cases": 696,
         "Deaths": 3
         },
@@ -85,7 +85,7 @@ export const COUNTRIES = {"data": [
         },
     {
         "index": 14,
-        "Country": "United Kingdom",
+        "Country": "United_Kingdom",
         "Cases": 456,
         "Deaths": 0
         },
