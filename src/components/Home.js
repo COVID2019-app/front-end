@@ -181,20 +181,18 @@ const handleChange = name => event => {
                   .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
               </Tabletd>
               <Tabletd style={{ color: "#e69900" }}>
-                {(item.confirmed_cases - item.deaths - item.recovered)
+                {item.active_cases
                   .toString()
                   .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
               </Tabletd>
               <Tabletd
                 style={{
-                  background: `rgba(255, 171, 0, ${(item.confirmed_cases -
-                    item.deaths -
-                    item.recovered) /
+                  background: `rgba(255, 171, 0, ${item.active_cases /
                     item.confirmed_cases})`
                 }}
               >
                 {(
-                  ((item.confirmed_cases - item.deaths - item.recovered) /
+                  (item.active_cases /
                     item.confirmed_cases) *
                   100
                 ).toFixed(2)}
