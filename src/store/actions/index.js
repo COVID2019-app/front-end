@@ -26,6 +26,9 @@ export const getSortedCountryList = (sortedBy) => dispatch => {
            .get("https://cvid.herokuapp.com/country/sort",)
            .then(res => {
              res.data.forEach((item) => {
+               if (item.tested === null) {
+                 item.tested=0
+               }
               item.active_cases = item.confirmed_cases - item.deaths - item.recovered
              })
              res.data.sort(function(a, b) {
