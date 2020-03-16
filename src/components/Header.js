@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, NavbarBrand } from 'reactstrap';
+import { Navbar} from 'reactstrap';
 
 function Header(props) {
     return (
