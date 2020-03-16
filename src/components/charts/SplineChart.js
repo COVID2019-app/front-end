@@ -27,8 +27,8 @@ function SplineChart ({country}){
             <React.Fragment>
                 <Chart
                     palette="Violet"
-                    dataSource={countrydata[country].slice(2, (countrydata[country].length))}
-                    title={`${country} Regions Spline Chart`}
+                    dataSource={countrydata[country].slice(1, (countrydata[country].length))}
+                    title={`${country} Spline Chart by Region`}
             >
                     <CommonSeriesSettings
                         argumentField="Date"
@@ -38,7 +38,7 @@ function SplineChart ({country}){
                         <Grid visible={true} />
                     </CommonAxisSettings>
                     {
-                        Object.keys(countrydata[country][0]).slice(2, ((Object.keys(countrydata[country][0])).length)).map((x) => {
+                        Object.keys(countrydata[country][0]).slice(1, ((Object.keys(countrydata[country][0])).length)).map((x) => {
                             return (
                                 <Series
                                     key={x}
@@ -70,9 +70,6 @@ function SplineChart ({country}){
                 {/*Need to figure out how to style this
                 <div className="row justify-content-center">
                 <div className="options container" style={{marginTop: '100px'}}>
-
-
-
 
                     <div className="caption">Options</div>
                     <div className="option">

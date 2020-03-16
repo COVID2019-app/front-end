@@ -83,18 +83,6 @@ export const isUpdating = (country_id, updates, token) => dispatch => {
     });
 };
 
-/*Needs daily countries ordered by confirmed cases by server can limit to 25 for 
-export const getTopCountries = () => dispatch => {
-  dispatxh({type: ActionTypes.FETCHING_TOP_COUNTRIES});
-  axios
-    .get("https://cvid.herokuapp.com/")
-    .then(res => {
-      dispatch({ type: ActionTypes.FETCHING_TOP_COUNTRIES_SUCCESS, payload: res.data});
-    })
-    .catch(err => {
-      dispatch({type: ActionTypes.FETCHING_TOP_COUNTRIES_FAILURE, payload: err})
-    })
-}*/
 
 export const login = ({ username, password }) => dispatch => {
   axios
