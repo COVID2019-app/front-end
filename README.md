@@ -1,4 +1,4 @@
-# Front-end repo for COVID2019 app#
+# Front-end repo for COVID2019 app
 ### This is the react repo for the COVID2019 app 
 ### To contribute git clone `repo url`
 ### cd `front-end`
