@@ -23,7 +23,7 @@ function USA(props) {
           <USABarChart data={usa_region} />
           <USAPieChart data={usa_region} />
           <BarChart country="USA" /> 
-          <SplineChart />
+          <SplineChart country='USA' />
 </div>
     );
   }
