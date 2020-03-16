@@ -6,10 +6,10 @@ import { countrydata } from '../../shared/allcountries';
 function CountryTable ({country}) {
 
 
-    var dataGrid = null
-    //var positionDisableSorting = false
+    /*var dataGrid = null
+    var positionDisableSorting = false
 
-    /*function onPositionSortingChanged() {
+    function onPositionSortingChanged() {
 
     positionDisableSorting = !positionDisableSorting
     dataGrid.instance.columnOption(5, 'sortOrder', void 0);
@@ -20,22 +20,19 @@ function CountryTable ({country}) {
         return (
             <div>
                 <DataGrid
-                    dataSource={countrydata[country]}
+                    dataSource={countrydata[country].slice(1, (countrydata[country].length))}
                     showBorders={true}
                     showRowLines= {true}
-                    ref={(ref) => dataGrid = ref}
                 >
                     <Sorting mode="multiple" />
 
                     {
                         Object.keys(countrydata[country][0]).map((x) => {
-                            console.log(x)
                             return (
                                 <Column
                                     key={x}
                                     dataField={x}
                                     width={90}
-                                    
                                 />
                             )
                         })
@@ -46,9 +43,9 @@ function CountryTable ({country}) {
                         Object.keys(countrydata[country][0]).slice(1, ((Object.keys(countrydata[country][0])).length)).map((x) => {
                             return(
                         <TotalItem
+                            key={x}
                             column={x}
                             summaryType="sum" />
-                        
                             )
                         })}
                     </Summary>

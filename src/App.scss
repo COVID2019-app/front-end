@@ -36,11 +36,14 @@
     transform: rotate(360deg);
   }
 }
+main {
+  overflow-y: scroll
+}
 .live-card {
   padding: 0rem;
 }
 .live-cases {
-  background: rgb(71, 71, 243) !important;
+  background: rgb(17, 85, 205) !important;
   color: white;
   margin-bottom: 0rem;
   height: 3rem;
@@ -48,18 +51,25 @@
   text-align: center;
 }
 .live-deaths {
-  background: rgb(216, 14, 41);
+  background: rgb(204, 0, 0);
   color: white;
-  height: 3rem;
-  font-size: 2rem;
+  height: 2rem;
+  font-size: 1.2rem;
   text-align: center;
 }
+
 .live-container {
   padding-right: 5px;
   padding-left: 5px;
   margin-bottom: 1rem;
 }
-
+.live-total p{
+  margin-bottom: 0rem;
+  height: 3rem;
+  font-size: 2rem;
+  text-align: center;
+  color: white;
+}
 .submenu {
   color: rgb(58, 58, 58) !important;
   font-weight: 300px;
