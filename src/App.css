@@ -127,6 +127,9 @@ div ::-webkit-scrollbar {
   margin-top: 0.7rem;
   width: 2rem;
   z-index: 20000;
+  background-color: rgb(107, 107, 107);
+  border-color: rgb(78, 78, 78);
+  color: rgb(107, 107, 107)
 }
 
  main {

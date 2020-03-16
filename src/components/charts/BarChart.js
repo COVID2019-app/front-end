@@ -4,33 +4,35 @@ import { countrydata } from '../../shared/allcountries';
 
 
 
-
-var i
-
-for (i in countrydata.USA.slice(2, (countrydata.USA.length))){
-    if (new Date(countrydata.USA[i].Date)!=="Invalid Date"){
-        countrydata.USA[i].Date = new Date(countrydata.USA[i].Date)
-
-    }
-    
-}
+function BarChart({country}){
 
 
-class BarChart extends React.Component {
-    customizeTooltip(arg) {
+
+    const customizeTooltip = (arg) =>{
         return {
-            text: `${arg.seriesName} years: ${arg.valueText}`
+            text: `${arg.seriesName} cases: ${arg.valueText}`
         };
     }
+
+
+
+    for (var i in countrydata[country].slice(2, (countrydata[country].length))) {
+        if (new Date(countrydata[country][i].Date) !== "Invalid Date") {
+            countrydata[country][i].Date = new Date(countrydata[country][i].Date)
+
+        }
+
+    }
+
+    
     
 
-    render() {
         return (
             <React.Fragment>
             <Chart id="chart"
-                title="USA Stacked Bar Chart"
-                    dataSource={countrydata.USA.slice(2, (countrydata.USA.length))}
-                onPointClick={this.onPointClick}>
+                title={`${country} Stacked Bar Chart`}
+                    dataSource={countrydata[country].slice(2, (countrydata[country].length))}
+                >
 
                 <CommonSeriesSettings
                     argumentField="Date"
@@ -57,7 +59,7 @@ class BarChart extends React.Component {
                     />
               
                 {
-                    Object.keys(countrydata.USA[0]).slice(2, ((Object.keys(countrydata.USA[0])).length)).map((x)=>{
+                    Object.keys(countrydata[country][0]).slice(2, ((Object.keys(countrydata[country][0])).length)).map((x)=>{
                         return(
                             <Series
                                 key={x}
@@ -73,14 +75,13 @@ class BarChart extends React.Component {
                     <Tooltip
                         enabled={true}
                         location="edge"
-                        customizeTooltip={this.customizeTooltip}
+                        customizeTooltip={customizeTooltip}
                     />
         
             </Chart>
             </React.Fragment>
             
         )
-    }
 
 }
 
