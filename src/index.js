@@ -9,7 +9,7 @@ import logger from "redux-logger";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import rootReducer /*{ initialState }*/ from "./store/reducer";
-import { composeWithDevTools } from 'redux-devtools'
+//import { composeWithDevTools } from 'redux-devtools'
 const store = createStore(
   rootReducer, 
  
