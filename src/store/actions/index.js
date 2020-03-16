@@ -96,8 +96,8 @@ export const getTopCountries = () => dispatch => {
     })
 }*/
 
-export const login = ({ username, password }) => dispatch => {
-  axios
+export const login = ({ username, password }) => async dispatch => {
+  await axios
     .post('https://cvid.herokuapp.com/auth/login', {
       username,
       password,
@@ -113,5 +113,9 @@ export const login = ({ username, password }) => dispatch => {
         type: ActionTypes.LOGIN_USER_FAILURE,
         payload: error,
       });
+
+      // We throw the error so we can catch it in components
+      // and update accordingly!
+      throw error;
     });
 };
