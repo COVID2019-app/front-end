@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
@@ -57,14 +57,13 @@ const useStyles = makeStyles(theme => ({
 }));
 function Home(props) {
   // interactions with Redux Store
-  const { getSortedCountryList, country , isFetching  } = props;
+  const { getSortedCountryList, country, isFetching } = props;
 
   const classes = useStyles();
   const [sorted, setSorted] = useState({
     search: "",
     category: "confirmed_cases"
   });
-
   useEffect(() => {
     getSortedCountryList(sorted.category);
   }, [getSortedCountryList, sorted]);
@@ -78,12 +77,13 @@ function Home(props) {
 
   /* Slower table loads after first render*/
   if (isFetching) {
-    return (
-      <Loading />
-    )
-
-  }
-  else {
+    return <Loading />;
+  } else {
+    country.forEach(item => {
+      if (item.tested === null) {
+        item.tested = 0;
+      }
+    });
     return (
       <div>
         <FormControl className={classes.formControl}>
@@ -145,7 +145,7 @@ function Home(props) {
                   }}
                 >
                   {((item.deaths / item.confirmed_cases) * 100).toFixed(2)}%
-              </Tabletd>
+                </Tabletd>
                 <Tabletd style={{ color: "green" }}>
                   {item.recovered
                     .toString()
@@ -158,7 +158,7 @@ function Home(props) {
                   }}
                 >
                   {((item.recovered / item.confirmed_cases) * 100).toFixed(2)}%
-              </Tabletd>
+                </Tabletd>
                 <Tabletd style={{ color: "purple" }}>
                   {item.severe_critical
                     .toString()
@@ -170,11 +170,12 @@ function Home(props) {
                       item.confirmed_cases})`
                   }}
                 >
-                  {((item.severe_critical / item.confirmed_cases) * 100).toFixed(
-                    2
-                  )}
+                  {(
+                    (item.severe_critical / item.confirmed_cases) *
+                    100
+                  ).toFixed(2)}
                   %
-              </Tabletd>
+                </Tabletd>
                 <Tabletd style={{ color: "grey" }}>
                   {item.tested
                     .toString()
@@ -191,13 +192,11 @@ function Home(props) {
                       item.confirmed_cases})`
                   }}
                 >
-                  {(
-                    (item.active_cases /
-                      item.confirmed_cases) *
-                    100
-                  ).toFixed(2)}
+                  {((item.active_cases / item.confirmed_cases) * 100).toFixed(
+                    2
+                  )}
                   %
-              </Tabletd>
+                </Tabletd>
               </tr>
             ))}
           </tbody>
@@ -205,7 +204,6 @@ function Home(props) {
       </div>
     );
   }
-
 }
 const mapStateToProps = state => {
   return {
