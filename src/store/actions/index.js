@@ -4,7 +4,7 @@ import * as ActionTypes from './ActionTypes';
 export const getCountryList = () => dispatch => {
   dispatch({ type: ActionTypes.FETCHING_COUNTRY_START });
   axios
-    .get('https://cvid.herokuapp.com/country/sort')
+    .get('https://staging-cvid.herokuapp.com/country/sort')
     .then(res => {
       dispatch({
         type: ActionTypes.FETCHING_COUNTRY_SUCCESS,
@@ -23,7 +23,7 @@ export const getSortedCountryList = sortedBy => dispatch => {
   }
   dispatch({ type: ActionTypes.FETCHING_COUNTRY_START });
   axios
-    .get('https://cvid.herokuapp.com/country/sort')
+    .get('https://staging-cvid.herokuapp.com/country/sort')
     .then(res => {
       res.data.forEach(item => {
         item.active_cases = item.confirmed_cases - item.deaths - item.recovered;
@@ -50,7 +50,7 @@ export const getSortedCountryList = sortedBy => dispatch => {
 export const getUsRegions = () => dispatch => {
   dispatch({ type: ActionTypes.FETCHING_US_START });
   axios
-    .get('https://cvid.herokuapp.com/usa_regions')
+    .get('https://staging-cvid.herokuapp.com/usa_regions')
     .then(res => {
       console.log('usa_regions:', res);
       dispatch({ type: ActionTypes.FETCHING_US_SUCCESS, payload: res.data });
@@ -65,7 +65,7 @@ export const isUpdating = (country_id, updates, token) => dispatch => {
   dispatch({ type: ActionTypes.IS_UPDATING_START });
 
   axios
-    .put(`https://cvid.herokuapp.com/country/${country_id}`, updates, {
+    .put(`https://staging-cvid.herokuapp.com/country/${country_id}`, updates, {
       headers: {
         Authorization: `Token ${token}`,
       },
@@ -83,10 +83,22 @@ export const isUpdating = (country_id, updates, token) => dispatch => {
     });
 };
 
+/*Needs daily countries ordered by confirmed cases by server can limit to 25 for 
+export const getTopCountries = () => dispatch => {
+  dispatxh({type: ActionTypes.FETCHING_TOP_COUNTRIES});
+  axios
+    .get("https://staging-cvid.herokuapp.com/")
+    .then(res => {
+      dispatch({ type: ActionTypes.FETCHING_TOP_COUNTRIES_SUCCESS, payload: res.data});
+    })
+    .catch(err => {
+      dispatch({type: ActionTypes.FETCHING_TOP_COUNTRIES_FAILURE, payload: err})
+    })
+}*/
 
 export const login = ({ username, password }) => async dispatch => {
   await axios
-    .post('https://cvid.herokuapp.com/auth/login', {
+    .post('https://staging-cvid.herokuapp.com/auth/login', {
       username,
       password,
     })
