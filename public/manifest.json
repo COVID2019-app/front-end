@@ -8,12 +8,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "covid2019-logo.svg",
+      "src": "LOGO.svg",
       "type": "image/svg",
       "sizes": "192x192"
     },
     {
-      "src": "covid2019-logo.svg",
+      "src": "LOGO.svg",
       "type": "image/svg",
       "sizes": "512x512"
     }
