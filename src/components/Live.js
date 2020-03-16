@@ -28,8 +28,8 @@ function Live (props) {
                                     <Card >
                                         <CardHeader>{x.country_name === "United States of America" ? "USA" : x.country_name}</CardHeader>
                                         <CardBody className="live-card">
-                                            <CardText className="live-cases">{x.confirmed_cases}</CardText>
-                                            <CardText className="live-deaths">{x.deaths}</CardText>
+                                            <CardText className="live-cases">{x.confirmed_cases.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}</CardText>
+                                            <CardText className="live-deaths">{x.deaths.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}</CardText>
                                             {/*<Button>Go to Page</Button>*/}
                                         </CardBody>
                                     </Card>

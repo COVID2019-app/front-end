@@ -5,7 +5,7 @@ import {COUNTRIES} from '../shared/livecountries';
 import { Button } from 'devextreme-react/button';
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.light.css';
-import LOGO from './LOGO.svg'
+
 //import UsaRegionsChart from '../components/usa/UsaRegionsChart'
 
 
@@ -51,7 +51,7 @@ const SideMenu = (props) => {
           
                 <div className="col-lg-2 sidebar sidebar-sicky bg-light">
                   <div className="container">
-                  <img src={LOGO} width="125" alt="covid2019 logo"/>
+                  <img src={require("../components/LOGO.svg")} width="125" alt="covid2019 logo"/>
                     <Nav onClick={toggleNavbar} vertical>
                       Dashboard
                       <NavItem>
