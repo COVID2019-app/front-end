@@ -69,7 +69,7 @@ const Routes = () => {
           <Route path="/login" component={LoginPage} />
           <Redirect to="/" />
         </Switch>
-      </main>{' '}
+      </main>
     </React.Fragment>
   );
 };
