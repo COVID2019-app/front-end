@@ -5,7 +5,7 @@ import {COUNTRIES} from '../shared/livecountries';
 import { Button } from 'devextreme-react/button';
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.dark.css';
-import LOGO from '../shared/images/LOGO.svg'
+import LOGO from './LOGO.svg'
 //import UsaRegionsChart from '../components/usa/UsaRegionsChart'
 
 
