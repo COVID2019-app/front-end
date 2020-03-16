@@ -7,7 +7,9 @@ import Header from '../components/Header';
 import USAChart from '../components/usa/USAChart';
 import EditForm from '../Form'
 import UsaRegionsChart from '../components/usa/UsaRegionsChart';
-import HomeTableEdit from '../components/HomeTableEdit'
+import HomeTableEdit from '../components/HomeTableEdit';
+import BarChart from '../components/charts/BarChart';
+
 const Routes = () => {
 	return (
 		<React.Fragment>
@@ -21,6 +23,7 @@ const Routes = () => {
 					<Route exact path="/edit" component={HomeTableEdit}/>
 					<Route exact path="/usa/chart" component={USAChart} /> 
 					<Route exact path="/usa/charts/regions" component={UsaRegionsChart}/>
+          
 				
                     <Redirect to="/" />
 				</Switch>

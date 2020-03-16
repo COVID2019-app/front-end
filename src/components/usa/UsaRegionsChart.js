@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
 import usaflag from '../../shared/images/usaflag.png'
 import { getUsRegions } from '../../store/actions/index';
+import CountryPieChart from '../charts/PieChart';
+import BarChart from '../charts/BarChart';
+import SplineChart from '../charts/SplineChart';
 
 
 function UsaRegionsChart(props){
@@ -68,6 +71,19 @@ function UsaRegionsChart(props){
             <td className="table-secondary">**Repatriated means they were not infected on the diamond princess/Grand Princess cruise ships but tested positve once returned and in quarentime and 3 others came home from Wuhan rescue flights</td>
             </tr>
         </tfoot>
+
+    <div className="container align-items-center, justify-content-center">
+        <div className="row justify-content-center">
+            <CountryPieChart country="USA" /> 
+        </div>
+        <div className="container">
+            <BarChart country="USA"/>
+        </div>
+        <div className="container">
+            <SplineChart/>
+        </div>
+
+    </div>
      </div>
  )
 }
