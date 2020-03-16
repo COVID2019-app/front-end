@@ -29,6 +29,7 @@ import Austria from '../components/Austria/Austria';
 import Bahrain from '../components/Bahrain/Bahrain';
 import Singapore from '../components/Singapore/Singapore';
 import PrivateRoute from '../components/PrivateRoute';
+import LoginPage from '../components/LoginPage';
 
 const Routes = () => {
   return (
@@ -65,6 +66,7 @@ const Routes = () => {
           <Route exact path="/austria" component={Austria} />
           <Route exact path="/bahrain" component={Bahrain} />
           <Route exact path="/singapore" component={Singapore} />
+          <Route path="/login" component={LoginPage} />
           <Redirect to="/" />
         </Switch>
       </main>{' '}

@@ -1,11 +1,10 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 // A wrapper for <Route> that redirects to the login
 // screen if user is not yet authenticated.
-const PrivateRoute = ({ children, ...rest }) => {
-  const token = localStorage.getItem('token');
-
+const PrivateRoute = ({ children, token, ...rest }) => {
   return (
     <Route
       {...rest}
@@ -25,4 +24,8 @@ const PrivateRoute = ({ children, ...rest }) => {
   );
 };
 
-export default PrivateRoute;
+const mapStateToProps = state => ({
+  token: state.token
+});
+
+export default withRouter(connect(mapStateToProps)(PrivateRoute));
