@@ -15,7 +15,7 @@ const PrivateRoute = ({ children, token, ...rest }) => {
           <Redirect
             to={{
               pathname: '/login',
-              state: { from: location }
+              state: { from: location },
             }}
           />
         )
@@ -25,7 +25,7 @@ const PrivateRoute = ({ children, token, ...rest }) => {
 };
 
 const mapStateToProps = state => ({
-  token: state.token
+  token: state.token,
 });
 
 export default withRouter(connect(mapStateToProps)(PrivateRoute));

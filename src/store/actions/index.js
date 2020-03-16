@@ -8,7 +8,7 @@ export const getCountryList = () => dispatch => {
     .then(res => {
       dispatch({
         type: ActionTypes.FETCHING_COUNTRY_SUCCESS,
-        payload: res.data
+        payload: res.data,
       });
     })
     .catch(err => {
@@ -39,7 +39,7 @@ export const getSortedCountryList = sortedBy => dispatch => {
       });
       dispatch({
         type: ActionTypes.FETCHING_COUNTRY_SUCCESS,
-        payload: res.data
+        payload: res.data,
       });
     })
     .catch(err => {
@@ -61,15 +61,19 @@ export const getUsRegions = () => dispatch => {
     });
 };
 
-export const isUpdating = (country_id, updates) => dispatch => {
+export const isUpdating = (country_id, updates, token) => dispatch => {
   dispatch({ type: ActionTypes.IS_UPDATING_START });
 
   axios
-    .put(`https://cvid.herokuapp.com/country/${country_id}`, updates)
+    .put(`https://cvid.herokuapp.com/country/${country_id}`, updates, {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
     .then(response => {
       dispatch({
         type: ActionTypes.IS_UPDATING_SUCCESS,
-        payload: response.data
+        payload: response.data,
       });
     })
 
@@ -96,18 +100,18 @@ export const login = ({ username, password }) => dispatch => {
   axios
     .post('https://cvid.herokuapp.com/auth/login', {
       username,
-      password
+      password,
     })
     .then(response => {
       dispatch({
         type: ActionTypes.LOGIN_USER_SUCCESS,
-        payload: response.data
+        payload: response.data,
       });
     })
     .catch(error => {
       dispatch({
         type: ActionTypes.LOGIN_USER_FAILURE,
-        payload: error
+        payload: error,
       });
     });
 };

@@ -9,7 +9,7 @@ export const initialState = {
   usa_region: [],
   isUpdating: false,
   updatedCountry: [],
-  token: null
+  token: null,
 };
 
 function rootReducer(state = initialState, action) {
@@ -17,45 +17,45 @@ function rootReducer(state = initialState, action) {
     case ActionTypes.FETCHING_COUNTRY_START:
       return {
         ...state,
-        isFetching: true
+        isFetching: true,
       };
     case ActionTypes.FETCHING_COUNTRY_SUCCESS:
       return {
         ...state,
         country: action.payload,
-        isFetching: false
+        isFetching: false,
       };
     case ActionTypes.FETCHING_COUNTRY_FAILURE:
       return {
         ...state,
         isFetching: false,
         isServerError: true,
-        message: action.payload
+        message: action.payload,
       };
     case ActionTypes.FETCHING_US_START:
       return {
         ...state,
-        isFetching: true
+        isFetching: true,
       };
     case ActionTypes.FETCHING_US_SUCCESS:
       return {
         ...state,
         usa_region: action.payload,
-        isFetching: false
+        isFetching: false,
       };
     case ActionTypes.FETCHING_US_FAILURE:
       return {
         ...state,
         isFetching: false,
         isServerError: true,
-        message: action.payload
+        message: action.payload,
       };
     case ActionTypes.IS_UPDATING_START:
       return {
         ...state,
         isUpdating: true,
         isServerError: false,
-        message: action.payload
+        message: action.payload,
       };
     case ActionTypes.IS_UPDATING_SUCCESS:
       return {
@@ -63,26 +63,26 @@ function rootReducer(state = initialState, action) {
         isUpdating: false,
         isServerError: false,
         updatedCountry: action.payload,
-        message: action.payload
+        message: action.payload,
       };
     case ActionTypes.IS_UPDATING_FAILURE:
       return {
         ...state,
         isUpdating: false,
         isServerError: true,
-        message: action.payload
+        message: action.payload,
       };
     case ActionTypes.LOGIN_USER_SUCCESS:
       return {
         ...state,
-        token: action.payload.token
+        token: action.payload.token,
       };
     case ActionTypes.LOGIN_USER_FAILURE:
       return {
         ...state,
         isFetching: false,
         isServerError: true,
-        message: action.payload
+        message: action.payload,
       };
 
     default:
