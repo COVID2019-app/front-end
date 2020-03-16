@@ -175,11 +175,11 @@ function Home(props) {
                   )}
                   %
               </Tabletd>
-                {/* <Tabletd style={{ color: "grey" }}>
+                <Tabletd style={{ color: "grey" }}>
                   {item.tested
                     .toString()
                     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
-                </Tabletd> */}
+                </Tabletd>
                 <Tabletd style={{ color: "#e69900" }}>
                   {item.active_cases
                     .toString()
