@@ -147,11 +147,16 @@ div ::-webkit-scrollbar {
 }
 
 footer {
-    background-color: rgb(245, 245, 245, 0.6);
+    background-color: rgba(245, 245, 245, 0.6);
     position: absolute;
     bottom: 0;
     width: 100%;
     /*height: 60px;*/
     line-height: 30px;
     display: block;
+}
+
+#root > nav.\.d-md-none.\.d-lg-block.navbar.navbar-expand-lg > div.collapse.navbar-collapse > div > img{
+  width:150 px;
+  margin-top: -60px
 }

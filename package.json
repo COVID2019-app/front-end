@@ -19,6 +19,7 @@
     "logger": "^0.0.1",
     "material-ui": "^0.20.2",
     "mdbreact": "^4.25.3",
+    "node-sass": "^4.13.1",
     "react": "^16.13.0",
     "react-bootstrap-table-next": "^4.0.0",
     "react-bootstrap-table2-editor": "^1.4.0",
