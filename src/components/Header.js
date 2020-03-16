@@ -12,7 +12,7 @@ import {
   DropdownItem,
   Collapse,
 } from 'reactstrap';
-import logo from '../components/LOGO.svg';
+import logo from '../components/logo.png';
 import { COUNTRIES } from '../shared/livecountries';
 import { Link } from 'react-router-dom';
 
@@ -26,7 +26,7 @@ const Header = () => {
       <NavbarBrand
         tag={props => (
           <Link to="/" {...props}>
-            <img src={logo} alt="covid2019 logo" width="64" height="64" />
+            <img src={logo} alt="covid2019 logo" width="48" height="48" />
           </Link>
         )}
       />
