@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table } from 'reactstrap';
 import usaflag from '../../shared/images/usaflag.png'
+//import { getUsRegions } from '../../store/actions/index';
 import RegionsTableModal from "../../shared/RegionsTableModal"
 
 function UsaRegionsChart({data}){
@@ -48,7 +49,8 @@ function UsaRegionsChart({data}){
          </tr>
        </tfoot>
      </Table>
-   </div>
+     </div>
+
  );
 }
 
