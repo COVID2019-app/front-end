@@ -48,10 +48,11 @@ const SideMenu = (props) => {
                 id="navToggler"
               />
               <Collapse isOpen={!collapsed} navbar>
-          
+        
                 <div className="col-lg-2 sidebar sidebar-sicky bg-light">
+                <img className="logo" src={require("../components/LOGO.svg")} width="200" alt="covid2019 logo"/>
                   <div className="container">
-                  <img src={require("../components/LOGO.svg")} width="125" alt="covid2019 logo"/>
+               
                     <Nav onClick={toggleNavbar} vertical>
                       Dashboard
                       <NavItem>
