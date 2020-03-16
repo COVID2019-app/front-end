@@ -1,5 +1,5 @@
 import * as ActionTypes from '../actions/ActionTypes'
-import { isUpdating } from '../actions';
+//import { isUpdating } from '../actions';
 
 export const initialState = {
          isFetching: false,

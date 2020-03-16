@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect/*, useState*/ } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory, { Type } from 'react-bootstrap-table2-editor';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
-import { connect,useDispatch } from 'react-redux';
+import { connect/*,useDispatch*/ } from 'react-redux';
 import { getCountryList,isUpdating } from '../store/actions/index';
-import number from 'react-bootstrap-table2-filter/lib/src/components/number';
+//import number from 'react-bootstrap-table2-filter/lib/src/components/number';
 
 const HomeTableEdit = props => {
 

@@ -25,7 +25,6 @@ class BarChart extends React.Component {
     
 
     render() {
-        console.log(countrydata.USA[5])
         return (
             <React.Fragment>
             <Chart id="chart"
