@@ -33,31 +33,38 @@ const LoginPage = ({ login }) => {
 
   return (
     <React.Fragment>
-      <Alert color="danger" isOpen={isAlertVisible} toggle={onDismiss}>
-        Invalid username or password. Please try again!
+      <div className="row justify-content-center align-items-center" style={{height: '75vh'}}>
+        <div className="col-lg-3">
+          <Alert color="danger" isOpen={isAlertVisible} toggle={onDismiss}>
+            Invalid username or password. Please try again!
       </Alert>
-      <Form action="post" onSubmit={submitForm}>
-        <FormGroup>
-          <Label for="username">Username</Label>
-          <Input
-            id="username"
-            value={username}
-            onChange={event => setUsername(event.target.value)}
-            required
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="password">Password</Label>
-          <Input
-            type="password"
-            id="password"
-            value={password}
-            onChange={event => setPassword(event.target.value)}
-            required
-          />
-        </FormGroup>
-        <Button disabled={isSubmitting}>Submit</Button>
-      </Form>
+          <Form action="post" onSubmit={submitForm}>
+            <FormGroup>
+              <Label for="username">Username</Label>
+              <Input
+                id="username"
+                value={username}
+                onChange={event => setUsername(event.target.value)}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="password">Password</Label>
+              <Input
+                type="password"
+                id="password"
+                value={password}
+                onChange={event => setPassword(event.target.value)}
+                required
+              />
+            </FormGroup>
+            <Button disabled={isSubmitting}>Submit</Button>
+          </Form>
+
+        </div>
+
+      </div>
+      
     </React.Fragment>
   );
 };
