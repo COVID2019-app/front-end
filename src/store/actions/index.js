@@ -28,7 +28,7 @@ export const getSortedCountryList = sortedBy => dispatch => {
       res.data.forEach(item => {
         item.active_cases = item.confirmed_cases - item.deaths - item.recovered;
       });
-      res.data.sort(function (a, b) {
+      res.data.sort(function(a, b) {
         let comparison = 0;
         if (a[sortedBy] > b[sortedBy]) {
           comparison = 1;
@@ -83,7 +83,6 @@ export const isUpdating = (country_id, updates, token) => dispatch => {
     });
 };
 
-
 export const login = ({ username, password }) => async dispatch => {
   await axios
     .post('https://cvid.herokuapp.com/auth/login', {
@@ -91,7 +90,7 @@ export const login = ({ username, password }) => async dispatch => {
       password,
     })
     .then(response => {
-      //add token to local storage 
+      //add token to local storage
       //have to eventually write code to expire token (especially if user doesn't choose to remember login)
       sessionStorage.setItem('token', response.data.token);
       dispatch({
