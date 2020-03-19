@@ -33,11 +33,14 @@ const LoginPage = ({ login }) => {
 
   return (
     <React.Fragment>
-      <div className="row justify-content-center align-items-center" style={{height: '75vh'}}>
+      <div
+        className="row justify-content-center align-items-center"
+        style={{ height: '75vh' }}
+      >
         <div className="col-lg-3">
           <Alert color="danger" isOpen={isAlertVisible} toggle={onDismiss}>
             Invalid username or password. Please try again!
-      </Alert>
+          </Alert>
           <Form action="post" onSubmit={submitForm}>
             <FormGroup>
               <Label for="username">Username</Label>
@@ -60,11 +63,8 @@ const LoginPage = ({ login }) => {
             </FormGroup>
             <Button disabled={isSubmitting}>Submit</Button>
           </Form>
-
         </div>
-
       </div>
-      
     </React.Fragment>
   );
 };

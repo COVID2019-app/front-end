@@ -7,6 +7,14 @@ import { connect /*,useDispatch*/ } from 'react-redux';
 import { getCountryList, isUpdating } from '../store/actions/index';
 //import number from 'react-bootstrap-table2-filter/lib/src/components/number';
 
+const PARSE_FUNCTIONS = {
+  confirmed_cases: parseInt,
+  deaths: parseInt,
+  recovered: parseInt,
+  severe_critical: parseInt,
+  test: parseInt,
+};
+
 const HomeTableEdit = props => {
   const { country, getCountryList, isUpdating, token } = props;
 
@@ -16,7 +24,9 @@ const HomeTableEdit = props => {
 
   const handleChange = (row, column, newValue) => {
     let updatedData = {};
-    updatedData[column.dataField] = parseInt(newValue);
+    const parseFunction = PARSE_FUNCTIONS[column.dataField];
+    updatedData[column.dataField] =
+      parseFunction !== undefined ? parseFunction(newValue) : newValue;
     isUpdating(row.country_id, updatedData, token);
   };
 
@@ -38,23 +48,43 @@ const HomeTableEdit = props => {
     },
     {
       dataField: 'confirmed_cases',
-      text: 'Cases',
+      text: 'Confirmed cases',
+    },
+    {
+      dataField: 'confirmed_cases_link',
+      text: 'Cases source',
     },
     {
       dataField: 'deaths',
       text: 'Deaths',
     },
     {
+      dataField: 'deaths_link',
+      text: 'Deaths source',
+    },
+    {
       dataField: 'recovered',
       text: 'Recovered',
+    },
+    {
+      dataField: 'recovered_link',
+      text: 'Recovered source',
     },
     {
       dataField: 'severe_critical',
       text: 'Severe',
     },
     {
+      dataField: 'severe_critical_link',
+      text: 'Severe/Critical source',
+    },
+    {
       dataField: 'tested',
       text: 'Tested',
+    },
+    {
+      dataField: 'tested_link',
+      text: 'Tested source',
     },
   ];
   return (
