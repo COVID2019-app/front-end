@@ -16,7 +16,7 @@ export default function Italy() {
       <br/>
       <PieChart country="Italy" />
       <br/>
-      <BarChart country="Italy" />
+      <BarChart country={25} />
       <br/>
       <SplineChart country='Italy' />
       <hr/>
@@ -25,7 +25,7 @@ export default function Italy() {
       <br/>
       <PieChart country="Italy Deaths" />
       <br />
-      <BarChart country="Italy Deaths" />
+      <BarChart country={25} />
       <br />
       <SplineChart country='Italy Deaths' />
 

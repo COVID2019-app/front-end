@@ -14,25 +14,18 @@ function formatText(arg) {
 }
 
 const USAPieChart = ({data}) => {
-    var regions_data = []
-    for (var i in data) {
-        var d = {
-          region: data[i].region_name.toUpperCase(),
-          confirmed_cases: data[i].confirmed
-        };
-        regions_data.push(d)
-    }
+ 
 
     return (
       <div style={{ textAlign: "center" }}>
         <h4>Confirmed Cases by Regions</h4>
         <PieChart
           id="pie"
-          dataSource={regions_data}
+          dataSource={data}
           palette="Bright"
           resolveLabelOverlapping="shift"
         >
-          <Series argumentField="region" valueField="confirmed_cases">
+          <Series argumentField="regions_name" valueField="cases">
             <Label visible={true} customizeText={formatText} />
           </Series>
           <Margin bottom={20} />
