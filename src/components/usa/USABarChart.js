@@ -6,12 +6,11 @@ const USABarChart = ({ data }) => {
   var regions_data = [];
   for (var i in data) {
     var d = {
-      region: data[i].region_name.toUpperCase(),
-      confirmed_cases: data[i].confirmed_cases,
+      region: data[i].regions_name.toUpperCase(),
+      cases: parseInt(data[i].cases),
     };
     regions_data.push(d);
   }
-  console.log('regions data', regions_data)
 
   return (
     <div style={{ textAlign: 'center' }}>

@@ -1,14 +1,13 @@
 import React from 'react';
 import DataGrid, {
-  Column,
-  Sorting,
+  Sorting
+  /*Column,
   Summary,
-  TotalItem,
+  TotalItem,*/
 } from 'devextreme-react/data-grid';
 //import { CheckBox } from 'devextreme-react';
-import { countrydata } from '../../shared/allcountries';
 
-function CountryTable({ country }) {
+function CountryTable(props) {
   /*var dataGrid = null
     var positionDisableSorting = false
 
@@ -19,26 +18,34 @@ function CountryTable({ country }) {
 
     }*/
 
+  const { region_data } = props
+
+  console.log("region data 4", region_data[4])
+
   return (
     <div>
       <DataGrid
-        dataSource={countrydata[country].slice(1, countrydata[country].length)}
+        dataSource={region_data}
         showBorders={true}
         showRowLines={true}
       >
         <Sorting mode="multiple" />
+        {/*
 
-        {Object.keys(countrydata[country][0]).map(x => {
+        might need to lazy load to get this working again (should lazy load anyay)
+
+        {Object.keys(region_data[0]).map(x => {
           return <Column key={x} dataField={x} width={90} />;
         })}
-
+      
         <Summary>
-          {Object.keys(countrydata[country][0])
-            .slice(1, Object.keys(countrydata[country][0]).length)
+          
+          {Object.keys(region_data[4])
+            .slice(1, Object.keys(region_data[4]).length)
             .map(x => {
               return <TotalItem key={x} column={x} summaryType="sum" />;
             })}
-        </Summary>
+        </Summary>*/}
       </DataGrid>
       {/*<div className="options">
                     <div className="caption">Options</div>
