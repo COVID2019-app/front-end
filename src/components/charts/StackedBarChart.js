@@ -1,27 +1,10 @@
-import React, { useEffect } from 'react';
-import { getCountryRegions } from '../../store/actions'
-import { connect } from "react-redux";
-import { withRouter } from 'react-router-dom';
+import React from 'react';
 import { Chart, Series, CommonSeriesSettings, Legend, ValueAxis, Title, Export, Tooltip, Label, ArgumentAxis } from 'devextreme-react/chart';
 
 
+function StackedBarChart(props) {
 
-function BarChart(props) {
-
-    const { getCountryRegions, region, country } = props;
-    useEffect(() => {
-        getCountryRegions(country);
-    }, [getCountryRegions, country])
-
-    console.log("region", region)
-
-    if (country === 8) {
-        var country_name = "USA"
-    } else if (country === 2) {
-        country_name = "China"
-    } else if (country === 25) {
-        country_name = "Italy"
-    }
+    const { country_name, region_data, region_names, title } = props;
 
     const customizeTooltip = (arg) => {
         return {
@@ -29,26 +12,23 @@ function BarChart(props) {
         };
     }
 
-    for (var i in region) {
-        if (new Date(region[i].date_of_case) !== "Invalid Date") {
-            region[i].date_of_case = new Date(region[i].date_of_case)
+    for (var i in region_data) {
+        if (new Date(region_data[i].date) !== "Invalid Date") {
+            region_data[i].date = new Date(region_data[i].date)
         }
     }
-
 
     return (
         <React.Fragment>
             <Chart id="chart"
-                title={`${country_name} Stacked Bar Chart`}
-                dataSource={region}
+                title={`${country_name} Stacked Bar Chart (${title})`}
+                dataSource={region_data}
             >
-
                 <CommonSeriesSettings
-                    argumentField="date_of_case"
+                    argumentField="date"
                     type="stackedBar"
                     dataType="date"
                 >
-
                 </CommonSeriesSettings>
                 <ArgumentAxis
                     workdaysOnly={false}
@@ -65,13 +45,13 @@ function BarChart(props) {
                     itemTextPosition="top"
                 />
                 {   
-                    region.map((x) => {
+                    region_names.map((x) => {
 
                         return (
                             <Series
-                                key={x.regions_id}
-                                valueField="confirmed_cases"
-                                name={x.regions_name}
+                                key={x}
+                                valueField={x}
+                                name={x}
                             />
                         )
                     })
@@ -82,18 +62,11 @@ function BarChart(props) {
                     location="edge"
                     customizeTooltip={customizeTooltip}
                 />
-
             </Chart>
         </React.Fragment>
-
     )
 
 }
 
 
-const mapStateToProps = state => {
-    return {
-        region: state.region
-    };
-};
-export default withRouter(connect(mapStateToProps, { getCountryRegions })(BarChart));
+export default StackedBarChart;

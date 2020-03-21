@@ -17,8 +17,8 @@ const USAPieChart = ({ data }) => {
   var regions_data = [];
   for (var i in data) {
     var d = {
-      region: data[i].region_name.toUpperCase(),
-      confirmed_cases: data[i].confirmed,
+      region: data[i].regions_name.toUpperCase(),
+      confirmed_cases: data[i].cases,
     };
     regions_data.push(d);
   }
