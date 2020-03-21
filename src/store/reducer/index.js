@@ -7,11 +7,11 @@ export const initialState = {
   isServerError: false,
   message: '',
   usa_region: [],
+  region: [],
+  region_sum: [],
   isUpdating: false,
   updatedCountry: [],
-  region:[],
-  region_sum: [],
-  token: sessionStorage.getItem('token')
+  token: sessionStorage.getItem('token'),
 };
 
 function rootReducer(state = initialState, action) {

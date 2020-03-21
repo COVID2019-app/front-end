@@ -6,9 +6,6 @@ import { Chart, Series, CommonSeriesSettings, Legend, ValueAxis, Title, Export, 
 
 
 
-
-
-
 function BarChart(props) {
 
     const { getCountryRegions, region, country } = props;
@@ -18,12 +15,12 @@ function BarChart(props) {
 
     console.log("region", region)
 
-    if (country===8){
-        var country_name="USA"
-    } else if(country===2){
-        country_name="China"
-    } else if (country===25){
-        country_name="Italy"
+    if (country === 8) {
+        var country_name = "USA"
+    } else if (country === 2) {
+        country_name = "China"
+    } else if (country === 25) {
+        country_name = "Italy"
     }
 
     const customizeTooltip = (arg) => {
@@ -37,8 +34,6 @@ function BarChart(props) {
             region[i].date_of_case = new Date(region[i].date_of_case)
         }
     }
-
-
 
 
     return (
@@ -69,9 +64,7 @@ function BarChart(props) {
                     horizontalAlignment="center"
                     itemTextPosition="top"
                 />
-
-                {
-
+                {   
                     region.map((x) => {
 
                         return (
@@ -103,4 +96,4 @@ const mapStateToProps = state => {
         region: state.region
     };
 };
-export default withRouter(connect(mapStateToProps, { getCountryRegions})(BarChart));
+export default withRouter(connect(mapStateToProps, { getCountryRegions })(BarChart));

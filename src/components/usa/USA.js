@@ -20,13 +20,13 @@ function USA(props) {
     return <Loading />;
   } else {*/
     return (
-<div>
+    <div>
           <UsaRegionsChart data={usa_region} />
           <USABarChart data={region_sum} />
           <USAPieChart data={region_sum} />
           <BarChart country={8} /> 
           <SplineChart country='USA' />
-</div>
+    </div>
     );
   }
 //}
@@ -34,10 +34,8 @@ const mapStateToProps = state => {
   return {
     isFetching: state.isFetching,
     usa_region: state.usa_region,
-    region_sum: state.region_sum,
   };
 };
 export default connect(mapStateToProps, {
   getUsRegions, getRegionSum
 })(USA);
-
