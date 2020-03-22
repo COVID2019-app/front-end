@@ -9,12 +9,8 @@ export const initialState = {
   usa_region: [],
   isUpdating: false,
   updatedCountry: [],
-<<<<<<< HEAD
   token: null,
   form:formReducer
-=======
-  token: sessionStorage.getItem('token')
->>>>>>> d95eff252041822f8485070145a034e086bb1fd6
 };
 
 function rootReducer(state = initialState, action) {
