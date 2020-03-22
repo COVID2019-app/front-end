@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import NativeSelect from '@material-ui/core/NativeSelect';
+
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from 'reactstrap';
+
 import { Table } from 'reactstrap';
 import Loading from './Loading';
 
@@ -16,7 +20,7 @@ var headers = [
     colspanNum: '1',
   },
   {
-    name: 'Confirmed Case',
+    name: 'Confirmed Cases',
     color: 'blue',
     colspanNum: '1',
   },
@@ -46,32 +50,52 @@ var headers = [
     colspanNum: '2',
   },
 ];
-const useStyles = makeStyles(theme => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-}));
+
+function renderDataCell(item, dataProperty, linkProperty) {
+  return (
+    <div className="d-flex justify-content-around">
+      <div>
+        {item[dataProperty]
+          .toString()
+          .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+      </div>
+      {item[linkProperty] && (
+        <div>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={item[linkProperty]}
+          >
+            [source]
+          </a>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function Home(props) {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggle = () => setDropdownOpen(prevState => !prevState);
+
   // interactions with Redux Store
   const { getSortedCountryList, country, isFetching } = props;
 
-  const classes = useStyles();
+  // const classes = useStyles();
   const [sorted, setSorted] = useState({
     search: '',
     category: 'confirmed_cases',
+    title: 'Confirmed Cases',
   });
   useEffect(() => {
     getSortedCountryList(sorted.category);
   }, [getSortedCountryList, sorted]);
 
-  const handleChange = name => event => {
+  const handleChange = event => {
     setSorted({
       ...sorted,
-      [name]: event.target.value,
+      category: event.currentTarget.getAttribute('dropdownvalue'),
+      title: event.currentTarget.textContent,
     });
   };
 
@@ -86,22 +110,37 @@ function Home(props) {
     });
     return (
       <React.Fragment>
-        <FormControl className={classes.formControl}>
-          <NativeSelect
-            value={sorted.category}
-            onChange={handleChange('category')}
-            name="category"
-            className={classes.selectEmpty}
-            inputProps={{ 'aria-label': 'category' }}
-          >
-            <option value="confirmed_cases">confirmed cases</option>
-            <option value={'deaths'}>deaths</option>
-            <option value={'severe_critical'}>severe/critical</option>
-            <option value={'active_cases'}>active cases</option>
-            <option value={'country_name'}>territories</option>
-          </NativeSelect>
-          <FormHelperText>Sorted By</FormHelperText>
-        </FormControl>
+        <Dropdown
+          isOpen={dropdownOpen}
+          toggle={toggle}
+          style={{ margin: '10px 0' }}
+        >
+          <DropdownToggle caret>Sorted by: {sorted.title}</DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem
+              onClick={handleChange}
+              dropdownvalue="confirmed_cases"
+            >
+              Confirmed Cases
+            </DropdownItem>
+            <DropdownItem onClick={handleChange} dropdownvalue="deaths">
+              Deaths
+            </DropdownItem>
+            <DropdownItem
+              onClick={handleChange}
+              dropdownvalue="severe_critical"
+            >
+              Severe/Critical
+            </DropdownItem>
+            <DropdownItem onClick={handleChange} dropdownvalue="active_cases">
+              Active Cases
+            </DropdownItem>
+            <DropdownItem onClick={handleChange} dropdownvalue="country_name">
+              Territories
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+
         <Table bordered>
           <thead>
             <tr>
@@ -129,14 +168,14 @@ function Home(props) {
               <tr key={item.country_id}>
                 <td>{item.country_name}</td>
                 <td style={{ textAlign: 'center' }}>
-                  {item.confirmed_cases
-                    .toString()
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                  {renderDataCell(
+                    item,
+                    'confirmed_cases',
+                    'confirmed_cases_link'
+                  )}
                 </td>
                 <td style={{ color: 'red', textAlign: 'center' }}>
-                  {item.deaths
-                    .toString()
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                  {renderDataCell(item, 'deaths', 'deaths_link')}
                 </td>
                 <td
                   style={{
@@ -148,9 +187,7 @@ function Home(props) {
                   {((item.deaths / item.confirmed_cases) * 100).toFixed(2)}%
                 </td>
                 <td style={{ color: 'green', textAlign: 'center' }}>
-                  {item.recovered
-                    .toString()
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                  {renderDataCell(item, 'recovered', 'recovered_link')}
                 </td>
                 <td
                   style={{
@@ -162,9 +199,11 @@ function Home(props) {
                   {((item.recovered / item.confirmed_cases) * 100).toFixed(2)}%
                 </td>
                 <td style={{ color: 'purple', textAlign: 'center' }}>
-                  {item.severe_critical
-                    .toString()
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                  {renderDataCell(
+                    item,
+                    'severe_critical',
+                    'severe_critical_link'
+                  )}
                 </td>
                 <td
                   style={{
@@ -180,9 +219,7 @@ function Home(props) {
                   %
                 </td>
                 <td style={{ color: 'grey', textAlign: 'center' }}>
-                  {item.tested
-                    .toString()
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                  {renderDataCell(item, 'tested', 'tested_link')}
                 </td>
                 <td style={{ color: '#e69900', textAlign: 'center' }}>
                   {item.active_cases

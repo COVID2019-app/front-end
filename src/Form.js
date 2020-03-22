@@ -10,12 +10,12 @@ import Form, {
   RangeRule,
   RequiredRule,
   StringLengthRule,
-  AsyncRule
+  AsyncRule,
 } from 'devextreme-react/form';
 import notify from 'devextreme/ui/notify';
 import 'devextreme-react/autocomplete';
-import {getCountryList} from './store/actions/index';
-import './index.css'
+import { getCountryList } from './store/actions/index';
+import './index.css';
 class EditForm extends React.Component {
   constructor(props) {
     super(props);
@@ -23,37 +23,32 @@ class EditForm extends React.Component {
     this.buttonOptions = {
       text: 'Register',
       type: 'success',
-      useSubmitBehavior: true
+      useSubmitBehavior: true,
     };
     this.checkBoxOptions = {
       text: 'I agree to the Terms and Conditions',
-      value: false
+      value: false,
     };
     this.casesEditorOptions = {
       dataSource: getCountryList(),
-      minSearchLength: 5
+      minSearchLength: 5,
     };
     this.countryEditorOptions = {
-      dataSource: getCountryList()
+      dataSource: getCountryList(),
     };
-   
 
     this.maxDate = new Date().setYear(new Date().getYear() - 21);
     this.dateBoxOptions = {
-      invalidDateMessage:
-        'The date must have the following format: MM/dd/yyyy'
+      invalidDateMessage: 'The date must have the following format: MM/dd/yyyy',
     };
     this.state = {
-      country: this.props.country
+      country: this.props.country,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-
   }
 
   render() {
-    const {
-   cases
-    } = this.state;
+    const { cases } = this.state;
     return (
       <React.Fragment>
         <form action="your-action" onSubmit={this.handleSubmit}>
@@ -70,52 +65,68 @@ class EditForm extends React.Component {
                 <EmailRule message="Email is invalid" />
                 <AsyncRule
                   message="Email is already registered"
-                  validationCallback={asyncValidation} />
+                  validationCallback={asyncValidation}
+                />
               </SimpleItem>
-       
-            
-              
-               
             </GroupItem>
             <GroupItem caption="Case  Data">
               <SimpleItem dataField="Type">
                 <RequiredRule message="Name is required" />
-                <PatternRule message="Do not use digits in the Name"
-                  pattern={/^[^0-9]+$/} />
+                <PatternRule
+                  message="Do not use digits in the Name"
+                  pattern={/^[^0-9]+$/}
+                />
               </SimpleItem>
-              <SimpleItem dataField="Date"
+              <SimpleItem
+                dataField="Date"
                 editorType="dxDateBox"
-                editorOptions={this.dateBoxOptions}>
+                editorOptions={this.dateBoxOptions}
+              >
                 <Label text="Date of report" />
                 <RequiredRule message="Report Date Required" />
-              
               </SimpleItem>
             </GroupItem>
             <GroupItem caption="Territory">
-              <SimpleItem dataField="Country" editorType="dxSelectBox" editorOptions={this.countryEditorOptions}>
+              <SimpleItem
+                dataField="Country"
+                editorType="dxSelectBox"
+                editorOptions={this.countryEditorOptions}
+              >
                 <RequiredRule message="Country is required" />
               </SimpleItem>
-              <SimpleItem dataField="Region" editorType="dxAutocomplete" editorOptions={this.cityEditorOptions}>
-                <PatternRule pattern={/^[^0-9]+$/} message="Do not use digits in the City name" />
-                <StringLengthRule min={2} message="City must have at least 2 symbols" />
+              <SimpleItem
+                dataField="Region"
+                editorType="dxAutocomplete"
+                editorOptions={this.cityEditorOptions}
+              >
+                <PatternRule
+                  pattern={/^[^0-9]+$/}
+                  message="Do not use digits in the City name"
+                />
+                <StringLengthRule
+                  min={2}
+                  message="City must have at least 2 symbols"
+                />
                 <RequiredRule message="City is required" />
               </SimpleItem>
               <SimpleItem dataField="URL">
-                <RequiredRule message='Please enter source url' />
+                <RequiredRule message="Please enter source url" />
               </SimpleItem>
-           
-          
-            
-              <SimpleItem dataField="Accepted"
+
+              <SimpleItem
+                dataField="Accepted"
                 editorType="dxCheckBox"
-                editorOptions={this.checkBoxOptions}>
+                editorOptions={this.checkBoxOptions}
+              >
                 <Label visible={false} />
-                <CompareRule message="You must certify this report is accurte and your source was validated"
+                <CompareRule
+                  message="You must certify this report is accurte and your source was validated"
                   comparisonTarget={this.checkComparison}
                 />
               </SimpleItem>
             </GroupItem>
-            <ButtonItem horizontalAlignment="center"
+            <ButtonItem
+              horizontalAlignment="center"
               buttonOptions={this.buttonOptions}
             />
           </Form>
@@ -129,21 +140,24 @@ class EditForm extends React.Component {
   }
 
   handleSubmit(e) {
-    notify({
-      message: 'You have submitted the form',
-      position: {
-        my: 'center top',
-        at: 'center top'
-      }
-    }, 'success', 3000);
+    notify(
+      {
+        message: 'You have submitted the form',
+        position: {
+          my: 'center top',
+          at: 'center top',
+        },
+      },
+      'success',
+      3000
+    );
     e.preventDefault();
   }
-
 }
 
 function sendRequest(value) {
   const validEmail = 'test@test.com';
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(function() {
       resolve(value === validEmail);
     }, 1000);

@@ -12,13 +12,13 @@ const PrivateRoute = ({ children, token, ...rest }) => {
         !!token ? (
           children
         ) : (
-            <Redirect
-              to={{
-                pathname: '/login',
-                state: { from: location },
-              }}
-            />
-          )
+          <Redirect
+            to={{
+              pathname: '/login',
+              state: { from: location },
+            }}
+          />
+        )
       }
     />
   );

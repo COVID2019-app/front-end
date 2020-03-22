@@ -7,9 +7,11 @@ export const initialState = {
   isServerError: false,
   message: '',
   usa_region: [],
+  region: [],
+  region_sum: [],
   isUpdating: false,
   updatedCountry: [],
-  token: sessionStorage.getItem('token')
+  token: sessionStorage.getItem('token'),
 };
 
 function rootReducer(state = initialState, action) {
@@ -44,6 +46,42 @@ function rootReducer(state = initialState, action) {
         isFetching: false,
       };
     case ActionTypes.FETCHING_US_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        isServerError: true,
+        message: action.payload,
+      };
+    case ActionTypes.FETCHING_REGION_START:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case ActionTypes.FETCHING_REGION_SUCCESS:
+      return {
+        ...state,
+        region: action.payload,
+        isFetching: false,
+      };
+    case ActionTypes.FETCHING_REGION_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        isServerError: true,
+        message: action.payload,
+      };
+    case ActionTypes.FETCHING_REGION_SUM_START:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case ActionTypes.FETCHING_REGION_SUM_SUCCESS:
+      return {
+        ...state,
+        region_sum: action.payload,
+        isFetching: false,
+      };
+    case ActionTypes.FETCHING_REGION_SUM_FAILURE:
       return {
         ...state,
         isFetching: false,
