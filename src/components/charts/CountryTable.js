@@ -1,10 +1,11 @@
 import React from 'react';
 import DataGrid, {
-  Sorting
-  /*Column,
+  Sorting,
   Summary,
-  TotalItem,*/
+  TotalItem,
+  /*Column*/
 } from 'devextreme-react/data-grid';
+import Loading from '../Loading';
 //import { CheckBox } from 'devextreme-react';
 
 function CountryTable(props) {
@@ -18,26 +19,34 @@ function CountryTable(props) {
 
     }*/
 
-  const { region_data } = props
+  const { region_data, isFetching } = props
 
-  console.log("region data 4", region_data[4])
+    
+  if (region_data.length < 1 || isFetching){
+    return (
+      <Loading />
+    )
+  }
 
-  return (
+  else {
+    return (
     <div>
       <DataGrid
+          elementAttr={{
+            id: 'gridContainer'
+          }}
         dataSource={region_data}
         showBorders={true}
         showRowLines={true}
+        columnMinWidth={80}
+        wordWrapEnabled={true}
+
       >
         <Sorting mode="multiple" />
-        {/*
 
-        might need to lazy load to get this working again (should lazy load anyay)
-
-        {Object.keys(region_data[0]).map(x => {
-          return <Column key={x} dataField={x} width={90} />;
-        })}
-      
+          {/*To do: Lazy load / masonry!!*/}
+        
+        
         <Summary>
           
           {Object.keys(region_data[4])
@@ -45,7 +54,8 @@ function CountryTable(props) {
             .map(x => {
               return <TotalItem key={x} column={x} summaryType="sum" />;
             })}
-        </Summary>*/}
+        </Summary>
+        
       </DataGrid>
       {/*<div className="options">
                     <div className="caption">Options</div>
@@ -57,6 +67,8 @@ function CountryTable(props) {
                 </div>*/}
     </div>
   );
+  }
+  
 }
 
 export default CountryTable;

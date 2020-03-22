@@ -12,6 +12,7 @@ import France from '../components/Franch/France';
 import Germany from '../components/Germany/Germany';
 import Iran from '../components/Iran/Iran';
 import Italy from '../components/Italy/Italy';
+import Iraq from '../components/Iraq/Iraq';
 import Korea from '../components/Korea/Korea';
 import Spain from '../components/Spain/Spain';
 import China from '../components/China/China';
@@ -49,6 +50,7 @@ const Routes = () => {
           <Route exact path="/france" component={France} />
           <Route exact path="/germany" component={Germany} />
           <Route exact path="/iran" component={Iran} />
+          <Route exact path="/iraq" component={Iraq} />
           <Route exact path="/italy" component={Italy} />
           <Route exact path="/korea" component={Korea} />
           <Route exact path="/spain" component={Spain} />

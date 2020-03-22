@@ -7,11 +7,12 @@ import SplineChart from "./SplineChart";
 import CountryPieChart from './CountryPieChart';
 import RegionBarChart from './RegionBarChart';
 import CountryTable from './CountryTable';
+//import Loading from '../Loading';
 
 
 function CommonChart(props) {
 
-    const { getRegionSum, getCountryRegions, region, country, country_name, field, region_sum, title } = props;
+    const { getRegionSum, getCountryRegions, region, country, country_name, field, region_sum, title, isFetching } = props;
 
     useEffect(() => {
         getCountryRegions(country);
@@ -39,7 +40,6 @@ function CommonChart(props) {
 
         }
     }
-    console.log("region data", region_data)
 
 
     for (var i in region_data) {
@@ -48,48 +48,53 @@ function CommonChart(props) {
         }
     }
 
-    if(country_name==="USA"){
+    /*if(isFetching){
         return(
+            <Loading/>
+        )
+    }else{*/
+        if (country_name === "USA") {
+            return (
+                <React.Fragment>
+                    <RegionBarChart region_sum={region_sum} field={field} title={title} />
+                    <br />
+                    <br />
+                    <CountryPieChart region_sum={region_sum} field={field} title={title} />
+                    <br />
+                    <br />
+                    <StackedBarChart region_data={region_data} country={country} country_name={country_name} field={field} region_names={region_names} title={title} />
+                    <br />
+                    <br />
+                    <SplineChart region_data={region_data} country={country} country_name={country_name} field={field} region_names={region_names} title={title} />
+                </React.Fragment>
+
+            )
+        } else return (
             <React.Fragment>
+                <CountryTable region_data={region_data} field={field} title={title} isFetching={isFetching} region_names={region_names} />
+                <br />
+                <br />
                 <RegionBarChart region_sum={region_sum} field={field} title={title} />
                 <br />
                 <br />
-                <CountryPieChart region_sum={region_sum} field={field} title={title}/>
+                <CountryPieChart region_sum={region_sum} field={field} title={title} />
                 <br />
                 <br />
                 <StackedBarChart region_data={region_data} country={country} country_name={country_name} field={field} region_names={region_names} title={title} />
                 <br />
                 <br />
-                <SplineChart region_data={region_data} country={country} country_name={country_name} field={field} region_names={region_names} title={title}/>
+                <SplineChart region_data={region_data} country={country} country_name={country_name} field={field} region_names={region_names} title={title} />
             </React.Fragment>
-
         )
-    }else return (
-        <React.Fragment>
-            <CountryTable region_data={region_data} field={field} title={title}/>
-            <br />
-            <br />
-            <RegionBarChart region_sum={region_sum} field={field} title={title}/>
-            <br />
-            <br />
-            <CountryPieChart region_sum={region_sum} field={field} title={title}/>
-            <br />
-            <br />
-            <StackedBarChart region_data={region_data} country={country} country_name={country_name} field={field} region_names={region_names} title={title}/>
-            <br />
-            <br />
-            <SplineChart region_data={region_data} country={country} country_name={country_name} field={field} region_names={region_names} title={title}/>
-        </React.Fragment>
-
-    )
-
+    //}
 }
 
 
 const mapStateToProps = state => {
     return {
         region: state.region,
-        region_sum: state.region_sum
+        region_sum: state.region_sum,
+        isFetching: state.isFetching,
     };
 };
 export default withRouter(connect(mapStateToProps, { getCountryRegions, getRegionSum })(CommonChart));

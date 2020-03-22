@@ -13,7 +13,8 @@ import {
   Tooltip,
   Label,
   ValueAxis,
-  Title
+  Title,
+  TickInterval
 } from 'devextreme-react/chart';
 
 function SplineChart(props) {
@@ -28,7 +29,6 @@ function SplineChart(props) {
   return (
     <React.Fragment>
       <Chart
-        palette="Violet"
         dataSource={region_data}
         title={`${country_name} Spline Chart by Region (${title})`}
       >
@@ -52,11 +52,12 @@ function SplineChart(props) {
           })
         }
         <Margin bottom={20} />
-        <ArgumentAxis
-          workdaysOnly={false}
-
-        >
-          <Label format="shortDate" />
+        <ArgumentAxis>
+          <Label 
+            wordWrap="breakWord"
+            overlappingBehavior="rotate"
+            format="shortDate" />
+          <TickInterval days={3} />
 
         </ArgumentAxis>
         <ValueAxis position="left">
