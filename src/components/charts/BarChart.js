@@ -59,7 +59,7 @@ function BarChart({country}){
                     />
               
                 {
-                    Object.keys(countrydata[country][0]).slice(2, ((Object.keys(countrydata[country][0])).length)).map((x)=>{
+                    Object.keys(countrydata[country][0]).slice(1, ((Object.keys(countrydata[country][0])).length)).map((x)=>{
                         return(
                             <Series
                                 key={x}

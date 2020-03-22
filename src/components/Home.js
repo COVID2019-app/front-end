@@ -1,59 +1,59 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import styled from "styled-components";
-import { makeStyles } from "@material-ui/core/styles";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import NativeSelect from "@material-ui/core/NativeSelect";
-import Loading from "./Loading";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import { Table } from 'reactstrap';
+import Loading from './Loading';
 
-import { getSortedCountryList } from "../store/actions";
+import { getSortedCountryList } from '../store/actions';
 
 var headers = [
   {
-    name: "Territories",
-    color: "black",
-    colspanNum: "1"
+    name: 'Territories',
+    color: 'black',
+    colspanNum: '1',
   },
   {
-    name: "Confirmed Case",
-    color: "blue",
-    colspanNum: "1"
+    name: 'Confirmed Case',
+    color: 'blue',
+    colspanNum: '1',
   },
   {
-    name: "Deaths",
-    color: "red",
-    colspanNum: "2"
+    name: 'Deaths',
+    color: 'red',
+    colspanNum: '2',
   },
   {
-    name: "Recovered",
-    color: "green",
-    colspanNum: "2"
+    name: 'Recovered',
+    color: 'green',
+    colspanNum: '2',
   },
   {
-    name: "Severe/Critical",
-    color: "purple",
-    colspanNum: "2"
+    name: 'Severe/Critical',
+    color: 'purple',
+    colspanNum: '2',
   },
   {
-    name: "Tested",
-    color: "grey",
-    colspanNum: "1"
+    name: 'Tested',
+    color: 'grey',
+    colspanNum: '1',
   },
   {
-    name: "Active Cases",
-    color: "#e69900",
-    colspanNum: "2"
-  }
+    name: 'Active Cases',
+    color: '#e69900',
+    colspanNum: '2',
+  },
 ];
 const useStyles = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120
+    minWidth: 120,
   },
   selectEmpty: {
-    marginTop: theme.spacing(2)
-  }
+    marginTop: theme.spacing(2),
+  },
 }));
 function Home(props) {
   // interactions with Redux Store
@@ -61,8 +61,8 @@ function Home(props) {
 
   const classes = useStyles();
   const [sorted, setSorted] = useState({
-    search: "",
-    category: "confirmed_cases"
+    search: '',
+    category: 'confirmed_cases',
   });
   useEffect(() => {
     getSortedCountryList(sorted.category);
@@ -71,7 +71,7 @@ function Home(props) {
   const handleChange = name => event => {
     setSorted({
       ...sorted,
-      [name]: event.target.value
+      [name]: event.target.value,
     });
   };
 
@@ -85,24 +85,24 @@ function Home(props) {
       }
     });
     return (
-      <div>
+      <React.Fragment>
         <FormControl className={classes.formControl}>
           <NativeSelect
             value={sorted.category}
-            onChange={handleChange("category")}
+            onChange={handleChange('category')}
             name="category"
             className={classes.selectEmpty}
-            inputProps={{ "aria-label": "category" }}
+            inputProps={{ 'aria-label': 'category' }}
           >
             <option value="confirmed_cases">confirmed cases</option>
-            <option value={"deaths"}>deaths</option>
-            <option value={"severe_critical"}>severe/critical</option>
-            <option value={"active_cases"}>active cases</option>
-            <option value={"country_name"}>territories</option>
+            <option value={'deaths'}>deaths</option>
+            <option value={'severe_critical'}>severe/critical</option>
+            <option value={'active_cases'}>active cases</option>
+            <option value={'country_name'}>territories</option>
           </NativeSelect>
           <FormHelperText>Sorted By</FormHelperText>
         </FormControl>
-        <TableContainer>
+        <Table bordered>
           <thead>
             <tr>
               {headers.map(heading => (
@@ -111,12 +111,12 @@ function Home(props) {
                   colSpan={heading.colspanNum}
                   style={{
                     color: heading.color,
-                    border: "1px solid #ddd",
-                    padding: "8px",
-                    position: "sticky",
-                    top: "25px",
-                    background: "skyblue",
-                    textAlign: "center"
+                    border: '1px solid #ddd',
+                    padding: '8px',
+                    position: 'sticky',
+                    top: '0',
+                    background: 'skyblue',
+                    textAlign: 'center',
                   }}
                 >
                   {heading.name.toUpperCase()}
@@ -127,47 +127,50 @@ function Home(props) {
           <tbody>
             {country.map(item => (
               <tr key={item.country_id}>
-                <Tabletd>{item.country_name}</Tabletd>
-                <Tabletd>
+                <td>{item.country_name}</td>
+                <td style={{ textAlign: 'center' }}>
                   {item.confirmed_cases
                     .toString()
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
-                </Tabletd>
-                <Tabletd style={{ color: "red" }}>
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                </td>
+                <td style={{ color: 'red', textAlign: 'center' }}>
                   {item.deaths
                     .toString()
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
-                </Tabletd>
-                <Tabletd
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                </td>
+                <td
                   style={{
                     background: `rgba(255, 0, 0, ${item.deaths /
-                      item.confirmed_cases})`
+                      item.confirmed_cases})`,
+                    textAlign: 'center',
                   }}
                 >
                   {((item.deaths / item.confirmed_cases) * 100).toFixed(2)}%
-                </Tabletd>
-                <Tabletd style={{ color: "green" }}>
+                </td>
+                <td style={{ color: 'green', textAlign: 'center' }}>
                   {item.recovered
                     .toString()
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
-                </Tabletd>
-                <Tabletd
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                </td>
+                <td
                   style={{
                     background: `rgba(0,128,0, ${item.recovered /
-                      item.confirmed_cases})`
+                      item.confirmed_cases})`,
+                    textAlign: 'center',
                   }}
                 >
                   {((item.recovered / item.confirmed_cases) * 100).toFixed(2)}%
-                </Tabletd>
-                <Tabletd style={{ color: "purple" }}>
+                </td>
+                <td style={{ color: 'purple', textAlign: 'center' }}>
                   {item.severe_critical
                     .toString()
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
-                </Tabletd>
-                <Tabletd
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                </td>
+                <td
                   style={{
                     background: `rgba(128,0,128, ${item.severe_critical /
-                      item.confirmed_cases})`
+                      item.confirmed_cases})`,
+                    textAlign: 'center',
                   }}
                 >
                   {(
@@ -175,55 +178,45 @@ function Home(props) {
                     100
                   ).toFixed(2)}
                   %
-                </Tabletd>
-                <Tabletd style={{ color: "grey" }}>
+                </td>
+                <td style={{ color: 'grey', textAlign: 'center' }}>
                   {item.tested
                     .toString()
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
-                </Tabletd>
-                <Tabletd style={{ color: "#e69900" }}>
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                </td>
+                <td style={{ color: '#e69900', textAlign: 'center' }}>
                   {item.active_cases
                     .toString()
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
-                </Tabletd>
-                <Tabletd
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                </td>
+                <td
                   style={{
                     background: `rgba(255, 171, 0, ${item.active_cases /
-                      item.confirmed_cases})`
+                      item.confirmed_cases})`,
+                    textAlign: 'center',
                   }}
                 >
                   {((item.active_cases / item.confirmed_cases) * 100).toFixed(
                     2
                   )}
                   %
-                </Tabletd>
+                </td>
               </tr>
             ))}
           </tbody>
-        </TableContainer>
-      </div>
+        </Table>
+      </React.Fragment>
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
     isFetching: state.isFetching,
-    country: state.country
+    country: state.country,
   };
 };
+
 export default connect(mapStateToProps, {
-  getSortedCountryList
+  getSortedCountryList,
 })(Home);
-
-const TableContainer = styled.table`
-  max-width: 1200px;
-  margin: 20px auto 50px auto;
-  position: relative;
-  border-collapse: collapse;
-`;
-
-const Tabletd = styled.td`
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
-`;
