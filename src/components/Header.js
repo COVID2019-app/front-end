@@ -69,21 +69,19 @@ const Header = () => {
               ))}
             </DropdownMenu>
           </UncontrolledDropdown>
-          {sessionStorage.getItem('token')!==null ?
-          
-          <NavItem>
-            <NavLink
-              tag={props => (
-                <Link to="/edit" {...props}>
-                  Edit
-                </Link>
-              )}
-            />
-          </NavItem>
-          :
-          <div></div>
-
-            }
+          {sessionStorage.getItem('token') !== null ? (
+            <NavItem>
+              <NavLink
+                tag={props => (
+                  <Link to="/edit" {...props}>
+                    Edit
+                  </Link>
+                )}
+              />
+            </NavItem>
+          ) : (
+            <div></div>
+          )}
         </Nav>
       </Collapse>
     </Navbar>

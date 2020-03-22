@@ -1,10 +1,11 @@
 import axios from 'axios';
 import * as ActionTypes from './ActionTypes';
+import {baseUrl} from '../../shared/baseUrl'
 
 export const getCountryList = () => dispatch => {
   dispatch({ type: ActionTypes.FETCHING_COUNTRY_START });
   axios
-    .get('https://cvid.herokuapp.com/country/sort')
+    .get(baseUrl + 'country/sort')
     .then(res => {
       dispatch({
         type: ActionTypes.FETCHING_COUNTRY_SUCCESS,
@@ -23,12 +24,12 @@ export const getSortedCountryList = sortedBy => dispatch => {
   }
   dispatch({ type: ActionTypes.FETCHING_COUNTRY_START });
   axios
-    .get('https://cvid.herokuapp.com/country/sort')
+    .get(baseUrl + 'country/sort')
     .then(res => {
       res.data.forEach(item => {
         item.active_cases = item.confirmed_cases - item.deaths - item.recovered;
       });
-      res.data.sort(function (a, b) {
+      res.data.sort(function(a, b) {
         let comparison = 0;
         if (a[sortedBy] > b[sortedBy]) {
           comparison = 1;
@@ -50,9 +51,8 @@ export const getSortedCountryList = sortedBy => dispatch => {
 export const getUsRegions = () => dispatch => {
   dispatch({ type: ActionTypes.FETCHING_US_START });
   axios
-    .get('https://cvid.herokuapp.com/usa_regions')
+    .get(baseUrl + 'usa_regions')
     .then(res => {
-      console.log('usa_regions:', res);
       dispatch({ type: ActionTypes.FETCHING_US_SUCCESS, payload: res.data });
     })
     .catch(err => {
@@ -61,11 +61,37 @@ export const getUsRegions = () => dispatch => {
     });
 };
 
+export const getCountryRegions = (id) => dispatch => {
+  dispatch({ type: ActionTypes.FETCHING_REGION_START });
+  axios
+    .get(baseUrl + `regions/${id}`)
+    .then(res => {
+      dispatch({ type: ActionTypes.FETCHING_REGION_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: ActionTypes.FETCHING_REGION_FAILURE, payload: err.message });
+      console.log(err);
+    });
+};
+
+export const getRegionSum = (id) => dispatch => {
+  dispatch({ type: ActionTypes.FETCHING_REGION_SUM_START });
+  axios
+    .get(baseUrl + `regions/sum/${id}`)
+    .then(res => {
+      dispatch({ type: ActionTypes.FETCHING_REGION_SUM_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: ActionTypes.FETCHING_REGION_SUM_FAILURE, payload: err.message });
+      console.log(err);
+    });
+};
+
 export const isUpdating = (country_id, updates, token) => dispatch => {
   dispatch({ type: ActionTypes.IS_UPDATING_START });
 
   axios
-    .put(`https://cvid.herokuapp.com/country/${country_id}`, updates, {
+    .put(baseUrl + country_id, updates, {
       headers: {
         Authorization: `Token ${token}`,
       },
@@ -83,15 +109,14 @@ export const isUpdating = (country_id, updates, token) => dispatch => {
     });
 };
 
-
 export const login = ({ username, password }) => async dispatch => {
   await axios
-    .post('https://cvid.herokuapp.com/auth/login', {
+    .post(baseUrl + 'auth/login', {
       username,
       password,
     })
     .then(response => {
-      //add token to local storage 
+      //add token to local storage
       //have to eventually write code to expire token (especially if user doesn't choose to remember login)
       sessionStorage.setItem('token', response.data.token);
       dispatch({

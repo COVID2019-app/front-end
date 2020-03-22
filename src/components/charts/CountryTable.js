@@ -1,12 +1,14 @@
 import React from 'react';
-import DataGrid, { Column, Sorting, Summary, TotalItem } from 'devextreme-react/data-grid';
+import DataGrid, {
+  Sorting
+  /*Column,
+  Summary,
+  TotalItem,*/
+} from 'devextreme-react/data-grid';
 //import { CheckBox } from 'devextreme-react';
-import { countrydata } from '../../shared/allcountries';
 
-function CountryTable ({country}) {
-
-
-    /*var dataGrid = null
+function CountryTable(props) {
+  /*var dataGrid = null
     var positionDisableSorting = false
 
     function onPositionSortingChanged() {
@@ -16,42 +18,36 @@ function CountryTable ({country}) {
 
     }*/
 
+  const { region_data } = props
 
-        return (
-            <div>
-                <DataGrid
-                    dataSource={countrydata[country].slice(1, (countrydata[country].length))}
-                    showBorders={true}
-                    showRowLines= {true}
-                >
-                    <Sorting mode="multiple" />
+  console.log("region data 4", region_data[4])
 
-                    {
-                        Object.keys(countrydata[country][0]).map((x) => {
-                            return (
-                                <Column
-                                    key={x}
-                                    dataField={x}
-                                    width={90}
-                                />
-                            )
-                        })
-                        }
+  return (
+    <div>
+      <DataGrid
+        dataSource={region_data}
+        showBorders={true}
+        showRowLines={true}
+      >
+        <Sorting mode="multiple" />
+        {/*
 
-                    <Summary>
-                        {
-                        Object.keys(countrydata[country][0]).slice(1, ((Object.keys(countrydata[country][0])).length)).map((x) => {
-                            return(
-                        <TotalItem
-                            key={x}
-                            column={x}
-                            summaryType="sum" />
-                            )
-                        })}
-                    </Summary>
+        might need to lazy load to get this working again (should lazy load anyay)
 
-                </DataGrid>
-                {/*<div className="options">
+        {Object.keys(region_data[0]).map(x => {
+          return <Column key={x} dataField={x} width={90} />;
+        })}
+      
+        <Summary>
+          
+          {Object.keys(region_data[4])
+            .slice(1, Object.keys(region_data[4]).length)
+            .map(x => {
+              return <TotalItem key={x} column={x} summaryType="sum" />;
+            })}
+        </Summary>*/}
+      </DataGrid>
+      {/*<div className="options">
                     <div className="caption">Options</div>
                     <div className="option">
                         <CheckBox text="Disable Sorting for the Position Column"
@@ -59,11 +55,8 @@ function CountryTable ({country}) {
                             onValueChanged={onPositionSortingChanged} />
                     </div>
                 </div>*/}
-            </div>
-        );
-
-
-  
+    </div>
+  );
 }
 
 export default CountryTable;

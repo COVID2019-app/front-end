@@ -1,19 +1,27 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/59721884-4bcf-4157-b386-7893179ab322/deploy-status)](https://app.netlify.com/sites/staging-covid2019app/deploys)
 # Front-end repo for COVID2019 app
-### This is the react repo for the COVID2019 app 
+
+### This is the react repo for the COVID2019 app
+
 ### To contribute git clone `repo url`
+
 ### cd `front-end`
+
 ### git checkout -b `your-name` to create your own branch
+
 ### `npm install` or `yarn install`
+
 ### `npm start` or `yarn start` to start the dev server
 
-### If you make changes `git add -A` to add your files to be tracked and uploaded 
+### If you make changes `git add -A` to add your files to be tracked and uploaded
+
 ### `git commit -am "your-commit-message"`
+
 ### `git push origin "your-branch-name"` to push changes to github
 
 ### After changes are pushed visit the repo on github and submit a pull request to have your changes merged to master.
 
 # PLEASE DO NOT MERGE YOUR OWN PULL REQUESTS
-
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

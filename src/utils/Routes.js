@@ -36,8 +36,7 @@ const Routes = () => {
       <Header />
       <main className="p-4">
         <Switch>
-          <Route exact path="/" render={() => <Redirect to="/live" />} />
-
+          <Route exact path="/" render={() => <Redirect to="/live" />}/>
           <Route exact path="/home" component={Home} />
           <Route exact path="/live" component={Live} />
           <PrivateRoute exact path="/edit">
