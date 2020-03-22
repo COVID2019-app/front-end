@@ -1,3 +1,4 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/59721884-4bcf-4157-b386-7893179ab322/deploy-status)](https://app.netlify.com/sites/staging-covid2019app/deploys)
 # Front-end repo for COVID2019 app
 
 ### This is the react repo for the COVID2019 app
