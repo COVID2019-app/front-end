@@ -1,6 +1,6 @@
 import * as ActionTypes from '../actions/ActionTypes';
 //import { isUpdating } from '../actions';
-
+import { reducer as formReducer } from 'redux-form'
 export const initialState = {
   isFetching: false,
   country: [],
@@ -10,6 +10,7 @@ export const initialState = {
   isUpdating: false,
   updatedCountry: [],
   token: null,
+  form:formReducer
 };
 
 function rootReducer(state = initialState, action) {
