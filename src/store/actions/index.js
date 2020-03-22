@@ -103,7 +103,7 @@ export const isUpdating = (country_id, updates, token) => dispatch => {
   dispatch({ type: ActionTypes.IS_UPDATING_START });
 
   axios
-    .put(baseUrl + `country/${country_id}` + country_id, updates, {
+    .put(baseUrl + `country/${country_id}`, updates, {
       headers: {
         Authorization: `Token ${token}`,
       },
