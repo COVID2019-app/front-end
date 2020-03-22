@@ -8,20 +8,17 @@ import PieChart, {
   Legend,
 } from 'devextreme-react/pie-chart';
 
-import { countrydata } from '../../shared/allcountries';
+function CountryPieChart(props) {
 
-function CountryPieChart({ country }) {
-  var pieData = [];
-  var y = countrydata[country][0];
-  var keys = Object.keys(countrydata[country][0]).slice(
-    1,
-    Object.keys(countrydata[country][0]).length
-  );
-  for (var i in keys) {
-    pieData.push({
-      region: keys[i],
-      cases: y[keys[i]],
-    });
+  const { region_sum, field, title } = props;
+
+  var data = [];
+  for (var i in region_sum) {
+    var d = {
+      region: region_sum[i].regions_name,
+      cases: region_sum[i][`${field}`],
+    };
+    data.push(d);
   }
 
   function pointClickHandler(e) {
@@ -43,9 +40,9 @@ function CountryPieChart({ country }) {
     <div className="row justify-content-center" style={{ height: '650px' }}>
       <PieChart
         id="pie"
-        dataSource={pieData}
+        dataSource={data}
         palette="Bright"
-        title="Cases by Region"
+        title={`${title} by Region`}
         onPointClick={pointClickHandler}
         onLegendClick={legendClickHandler}
       >

@@ -43,7 +43,7 @@ const HomeTableEdit = props => {
     },
     {
       dataField: 'country_name',
-      text: 'Territorry',
+      text: 'Territory',
       filter: textFilter(),
     },
     {
