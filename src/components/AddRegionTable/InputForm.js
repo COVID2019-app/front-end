@@ -33,7 +33,7 @@ function InputForm(prop) {
           <Label for="confirmed">Confirmed Cases</Label>
           <Input
             type="number"
-            id="confirmed"
+            name="confirmed"
             value={confirmed}
             onChange={event => setConfirmed(event.target.value)}
             required
@@ -43,7 +43,7 @@ function InputForm(prop) {
           <Label for="deaths">Deaths</Label>
           <Input
             type="number"
-            id="password"
+            name="password"
             value={deaths}
             onChange={event => setDeaths(event.target.value)}
             required
