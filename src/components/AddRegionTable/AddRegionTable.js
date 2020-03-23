@@ -22,19 +22,14 @@ function AddRegionTable() {
 
   // region dropdown setup
 
-  const [regiondata, setRegiondata] = useState({
-    regionList: [],
-  });
+  const [regiondata, setRegiondata] = useState([]);
 
   // date setup
   const [date, setDate] = useState(new Date());
 
   // change region list when the country name is changed
   useEffect(() => {
-    setRegiondata({
-      ...regiondata,
-      regionList: Regions[countrydata.countryName],
-    });
+    setRegiondata(Regions[countrydata.countryName]);
   }, [countrydata.countryName, regiondata]);
 
   // change country id - in country dropdown
@@ -103,8 +98,8 @@ function AddRegionTable() {
         </div>
       </div>
       <br />
-      {regiondata.regionList
-        ? regiondata.regionList.map(region => {
+      {regiondata
+        ? regiondata.map(region => {
             return (
               <InputForm
                 countrydata={countrydata}
