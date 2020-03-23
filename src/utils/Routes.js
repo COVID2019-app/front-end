@@ -7,6 +7,7 @@ import Header from '../components/Header';
 // import EditForm from '../Form'
 // import UsaRegionsChart from '../components/usa/UsaRegionsChart';
 import HomeTableEdit from '../components/HomeTableEdit';
+import AddRegionTable from '../components/AddRegionTable';
 import USA from '../components/usa/USA';
 import France from '../components/Franch/France';
 import Germany from '../components/Germany/Germany';
@@ -36,11 +37,14 @@ const Routes = () => {
       <Header />
       <main className="p-4">
         <Switch>
-          <Route exact path="/" render={() => <Redirect to="/live" />}/>
+          <Route exact path="/" render={() => <Redirect to="/live" />} />
           <Route exact path="/home" component={Home} />
           <Route exact path="/live" component={Live} />
           <PrivateRoute exact path="/edit">
             <HomeTableEdit />
+          </PrivateRoute>
+          <PrivateRoute exact path="/add">
+            <AddRegionTable />
           </PrivateRoute>
           {/* <Route exact path="/edit" component={HomeTableEdit} /> */}
           <Route exact path="/usa" component={USA} />
