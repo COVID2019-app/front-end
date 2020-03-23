@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getUsRegions } from "../../store/actions/index";
 //import Loading from "../Loading";
 import UsaRegionsChart from "./UsaRegionsChart";
-import CommonChart from "../charts/CommonChart";
+import Country from "../CountryCharts";
 
 
 function USA(props) {
@@ -18,7 +18,7 @@ function USA(props) {
     return (
     <div>
         <UsaRegionsChart data={usa_region} />
-        <CommonChart country={8} country_name="USA" field="confirmed_cases" title="Cases" /> 
+        <Country country="USA" country_name="USA" field="confirmed_cases" title="Cases" /> 
     </div>
     );
   }

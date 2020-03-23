@@ -1,10 +1,11 @@
 import React from 'react';
 import DataGrid, {
-  Sorting
-  /*Column,
+  Sorting,
   Summary,
-  TotalItem,*/
+  TotalItem,
+  /*Column*/
 } from 'devextreme-react/data-grid';
+import Loading from '../Loading';
 //import { CheckBox } from 'devextreme-react';
 
 function CountryTable(props) {
@@ -18,34 +19,62 @@ function CountryTable(props) {
 
     }*/
 
-  const { region_data } = props
+  const { region_data, isFetching, field } = props
 
-  console.log("region data 4", region_data[4])
 
-  return (
+  const onCellPrepared = (e) => {
+    if(field ==="confirmed_cases"){
+      if(e.columnIndex!==0){
+        e.cellElement.style.backgroundColor = `rgba(255, 171, 0, ${e.value / 500})`;
+      }
+    }else{
+      if (e.columnIndex !== 0) {
+        e.cellElement.style.backgroundColor = `rgba(255, 0, 0, ${e.value / 100})`;
+      }
+    }
+  }
+
+
+    
+  if (region_data.length < 1 || isFetching){
+    
+    return (
+      <Loading />
+    )
+  }
+
+  else {
+
+    return (
     <div>
       <DataGrid
+          elementAttr={{
+            id: 'gridContainer'
+          }}
         dataSource={region_data}
         showBorders={true}
-        showRowLines={true}
+        showRowLines={false}
+        showColumnLines={false}
+        columnMinWidth={80}
+        wordWrapEnabled={true}
+        onCellPrepared={onCellPrepared}
+
       >
         <Sorting mode="multiple" />
-        {/*
 
-        might need to lazy load to get this working again (should lazy load anyay)
-
-        {Object.keys(region_data[0]).map(x => {
-          return <Column key={x} dataField={x} width={90} />;
-        })}
-      
+          {/*To do: Lazy load / masonry!!*/}
+        
+        
         <Summary>
           
-          {Object.keys(region_data[4])
-            .slice(1, Object.keys(region_data[4]).length)
+          {
+          Object.keys(region_data[1])
+            .slice(1, Object.keys(region_data[1]).length)
             .map(x => {
               return <TotalItem key={x} column={x} summaryType="sum" />;
             })}
-        </Summary>*/}
+        </Summary>
+        
       </DataGrid>
       {/*<div className="options">
                     <div className="caption">Options</div>
@@ -57,6 +86,13 @@ function CountryTable(props) {
                 </div>*/}
     </div>
   );
-}
+
+    
+
+
+
+  }
+  }
+
 
 export default CountryTable;

@@ -6,6 +6,7 @@ import PieChart, {
   Size,
   Export,
   Legend,
+  SmallValuesGrouping
 } from 'devextreme-react/pie-chart';
 
 function CountryPieChart(props) {
@@ -38,6 +39,7 @@ function CountryPieChart(props) {
 
   return (
     <div className="row justify-content-center" style={{ height: '650px' }}>
+   
       <PieChart
         id="pie"
         dataSource={data}
@@ -50,18 +52,17 @@ function CountryPieChart(props) {
           <Label visible={false}>
             <Connector visible={true} width={1} />
           </Label>
+          <SmallValuesGrouping threshold={400} mode="smallValueThreshold" />
         </Series>
+        <Legend horizontalAlignment="center" verticalAlignment="bottom" />
 
-        <Legend
-          verticalAlignment="bottom"
-          horizontalAlignment="center"
-          itemTextPosition="top"
-        />
+     
 
         <Size width={300} />
         <Export enabled={true} />
       </PieChart>
-    </div>
+      </div>
+
   );
 }
 
