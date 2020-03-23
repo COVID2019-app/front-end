@@ -5,12 +5,7 @@ function InputForm(prop) {
   // form input setup
   const [confirmed, setConfirmed] = useState(0);
   const [deaths, setDeaths] = useState(0);
-  const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-
-  function onDismiss() {
-    setIsAlertVisible(false);
-  }
 
   // handle form submit -- to do: check if region in country
   function submitForm(event) {
@@ -55,9 +50,6 @@ function InputForm(prop) {
           />
         </FormGroup>
         <Button disabled={isSubmitted}>Submit</Button>
-        <Alert color="danger" isOpen={isAlertVisible} toggle={onDismiss}>
-          Invalid country or region. Please try again!
-        </Alert>
       </Form>
     </div>
   );
