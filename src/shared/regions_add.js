@@ -80,7 +80,7 @@ export const Regions = {
     'Hebei',
     'Jilin',
     'Heilongjiang',
-    'Shaanxi',
+    'Shanxi',
     'Xinjiang',
     'Gansu',
     'Inner Mongolia',
