@@ -19,7 +19,7 @@ function AddRegionTable() {
   const regionToggle = () => setRegionDropdownOpen(prevState => !prevState);
 
   const [date, setDate] = useState(convert(new Date()));
-
+  const [recovered, setRecovered] = useState(0);
   const [confirmed, setConfirmed] = useState(0);
   const [deaths, setDeaths] = useState(0);
   const [isAlertVisible, setIsAlertVisible] = useState(false);
@@ -72,6 +72,7 @@ function AddRegionTable() {
       regions_name: regiondata.regionName,
       date_of_case: date,
       confirmed_cases: confirmed,
+      recovered: recovered,
       deaths: deaths,
     };
 
@@ -193,6 +194,16 @@ function AddRegionTable() {
             id="password"
             value={deaths}
             onChange={event => setDeaths(event.target.value)}
+            required
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label for="recovered">Recovered</Label>
+          <Input
+            type="number"
+            id="password"
+            value={recovered}
+            onChange={event => setRecovered(event.target.value)}
             required
           />
         </FormGroup>
