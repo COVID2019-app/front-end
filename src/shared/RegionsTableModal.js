@@ -3,7 +3,6 @@ import { Table } from 'reactstrap';
 import Loading from '../components/Loading';
 
 function RegionsTableModal(props) {
-  console.log(props);
 
   if (props.data.length === 0) {
     return <Loading />;

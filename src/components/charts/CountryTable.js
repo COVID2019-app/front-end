@@ -19,16 +19,32 @@ function CountryTable(props) {
 
     }*/
 
-  const { region_data, isFetching } = props
+  const { region_data, isFetching, field } = props
+
+
+  const onCellPrepared = (e) => {
+    if(field ==="confirmed_cases"){
+      if(e.columnIndex!==0){
+        e.cellElement.style.backgroundColor = `rgba(255, 171, 0, ${e.value / 500})`;
+      }
+    }else{
+      if (e.columnIndex !== 0) {
+        e.cellElement.style.backgroundColor = `rgba(255, 0, 0, ${e.value / 100})`;
+      }
+    }
+  }
+
 
     
   if (region_data.length < 1 || isFetching){
+    
     return (
       <Loading />
     )
   }
 
   else {
+
     return (
     <div>
       <DataGrid
@@ -37,9 +53,11 @@ function CountryTable(props) {
           }}
         dataSource={region_data}
         showBorders={true}
-        showRowLines={true}
+        showRowLines={false}
+        showColumnLines={false}
         columnMinWidth={80}
         wordWrapEnabled={true}
+        onCellPrepared={onCellPrepared}
 
       >
         <Sorting mode="multiple" />
@@ -49,8 +67,9 @@ function CountryTable(props) {
         
         <Summary>
           
-          {Object.keys(region_data[4])
-            .slice(1, Object.keys(region_data[4]).length)
+          {
+          Object.keys(region_data[1])
+            .slice(1, Object.keys(region_data[1]).length)
             .map(x => {
               return <TotalItem key={x} column={x} summaryType="sum" />;
             })}
@@ -67,8 +86,13 @@ function CountryTable(props) {
                 </div>*/}
     </div>
   );
+
+    
+
+
+
   }
-  
-}
+  }
+
 
 export default CountryTable;

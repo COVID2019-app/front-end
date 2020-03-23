@@ -61,10 +61,10 @@ export const getUsRegions = () => dispatch => {
     });
 };
 
-export const getCountryRegions = (id) => dispatch => {
+export const getCountryRegions = (country) => dispatch => {
   dispatch({ type: ActionTypes.FETCHING_REGION_START });
   axios
-    .get(baseUrl + `regions/${id}`)
+    .get(baseUrl + `regions/${country}`)
     .then(res => {
       dispatch({ type: ActionTypes.FETCHING_REGION_SUCCESS, payload: res.data });
     })
@@ -74,10 +74,10 @@ export const getCountryRegions = (id) => dispatch => {
     });
 };
 
-export const getRegionSum = (id) => dispatch => {
+export const getRegionSum = (country) => dispatch => {
   dispatch({ type: ActionTypes.FETCHING_REGION_SUM_START });
   axios
-    .get(baseUrl + `regions/sum/${id}`)
+    .get(baseUrl + `regions/sum/${country}`)
     .then(res => {
       dispatch({ type: ActionTypes.FETCHING_REGION_SUM_SUCCESS, payload: res.data });
     })

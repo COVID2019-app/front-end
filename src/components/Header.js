@@ -13,7 +13,8 @@ import {
   Collapse,
 } from 'reactstrap';
 import logo from '../components/logo.png';
-import { COUNTRIES } from '../shared/livecountries';
+//import { COUNTRIES } from '../shared/livecountries';
+import { countrylist } from '../shared/countrylist';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
@@ -56,12 +57,12 @@ const Header = () => {
               Country Tables
             </DropdownToggle>
             <DropdownMenu right>
-              {COUNTRIES.data.map(({ index, Country }) => (
-                <DropdownItem key={index}>
+              {countrylist.map(({ id, country }) => (
+                <DropdownItem key={id}>
                   <NavLink
                     tag={props => (
-                      <Link to={`/${Country.toLowerCase()}`} {...props}>
-                        {Country}
+                      <Link to={`/${country}`} {...props}>
+                        {country}
                       </Link>
                     )}
                   />
