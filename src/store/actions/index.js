@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as ActionTypes from './ActionTypes';
-import {baseUrl} from '../../shared/baseUrl'
+import { baseUrl } from '../../shared/baseUrl';
 
 export const getCountryList = () => dispatch => {
   dispatch({ type: ActionTypes.FETCHING_COUNTRY_START });
@@ -61,28 +61,40 @@ export const getUsRegions = () => dispatch => {
     });
 };
 
-export const getCountryRegions = (country) => dispatch => {
+export const getCountryRegions = country => dispatch => {
   dispatch({ type: ActionTypes.FETCHING_REGION_START });
   axios
     .get(baseUrl + `regions/${country}`)
     .then(res => {
-      dispatch({ type: ActionTypes.FETCHING_REGION_SUCCESS, payload: res.data });
+      dispatch({
+        type: ActionTypes.FETCHING_REGION_SUCCESS,
+        payload: res.data,
+      });
     })
     .catch(err => {
-      dispatch({ type: ActionTypes.FETCHING_REGION_FAILURE, payload: err.message });
+      dispatch({
+        type: ActionTypes.FETCHING_REGION_FAILURE,
+        payload: err.message,
+      });
       console.log(err);
     });
 };
 
-export const getRegionSum = (country) => dispatch => {
+export const getRegionSum = country => dispatch => {
   dispatch({ type: ActionTypes.FETCHING_REGION_SUM_START });
   axios
     .get(baseUrl + `regions/sum/${country}`)
     .then(res => {
-      dispatch({ type: ActionTypes.FETCHING_REGION_SUM_SUCCESS, payload: res.data });
+      dispatch({
+        type: ActionTypes.FETCHING_REGION_SUM_SUCCESS,
+        payload: res.data,
+      });
     })
     .catch(err => {
-      dispatch({ type: ActionTypes.FETCHING_REGION_SUM_FAILURE, payload: err.message });
+      dispatch({
+        type: ActionTypes.FETCHING_REGION_SUM_FAILURE,
+        payload: err.message,
+      });
       console.log(err);
     });
 };
@@ -91,7 +103,7 @@ export const isUpdating = (country_id, updates, token) => dispatch => {
   dispatch({ type: ActionTypes.IS_UPDATING_START });
 
   axios
-    .put(baseUrl + country_id, updates, {
+    .put(baseUrl + `country/${country_id}`, updates, {
       headers: {
         Authorization: `Token ${token}`,
       },

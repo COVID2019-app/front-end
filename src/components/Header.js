@@ -71,15 +71,26 @@ const Header = () => {
             </DropdownMenu>
           </UncontrolledDropdown>
           {sessionStorage.getItem('token') !== null ? (
-            <NavItem>
-              <NavLink
-                tag={props => (
-                  <Link to="/edit" {...props}>
-                    Edit
-                  </Link>
-                )}
-              />
-            </NavItem>
+            <React.Fragment>
+              <NavItem>
+                <NavLink
+                  tag={props => (
+                    <Link to="/edit" {...props}>
+                      Edit
+                    </Link>
+                  )}
+                />
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  tag={props => (
+                    <Link to="/add" {...props}>
+                      Add
+                    </Link>
+                  )}
+                />
+              </NavItem>
+            </React.Fragment>
           ) : (
             <div></div>
           )}
