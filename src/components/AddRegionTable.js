@@ -22,7 +22,6 @@ function AddRegionTable() {
 
   const [confirmed, setConfirmed] = useState(0);
   const [deaths, setDeaths] = useState(0);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isAlertVisible, setIsAlertVisible] = useState(false);
 
   const [countrydata, setCountryData] = useState({
@@ -63,6 +62,9 @@ function AddRegionTable() {
       regionName: event.currentTarget.textContent,
     });
   };
+  function onDismiss() {
+    setIsAlertVisible(false);
+  }
   async function submitForm(event) {
     event.preventDefault();
     var postData = {
@@ -73,17 +75,16 @@ function AddRegionTable() {
       deaths: deaths,
     };
 
-    console.log(postData);
-    //   try {
-    //     setIsSubmitting(true);
-    //     // await login({ username, password });
-    //     history.replace(from);
-    //   } catch {
-    //     setIsSubmitting(false);
-    //     setIsAlertVisible(true);
-    //   }
+    if (
+      postData.country_id === null ||
+      postData.regions_name === "'Choose Region'"
+    ) {
+      setIsAlertVisible(true);
+    } else {
+      console.log(postData);
+    }
   }
-  console.log(date);
+
   return (
     <React.Fragment>
       <Dropdown
@@ -195,7 +196,10 @@ function AddRegionTable() {
             required
           />
         </FormGroup>
-        <Button disabled={isSubmitting}>Submit</Button>
+        <Button>Submit</Button>
+        <Alert color="danger" isOpen={isAlertVisible} toggle={onDismiss}>
+          Invalid country or region. Please try again!
+        </Alert>
       </Form>
       <br />
       <br />
