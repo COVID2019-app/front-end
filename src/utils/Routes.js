@@ -7,7 +7,7 @@ import Header from '../components/Header';
 // import EditForm from '../Form'
 // import UsaRegionsChart from '../components/usa/UsaRegionsChart';
 import HomeTableEdit from '../components/HomeTableEdit';
-import AddRegionTable from '../components/AddRegionTable';
+import AddRegionTable from '../components/AddRegionTable/AddRegionTable';
 import USA from '../components/usa/USA';
 import France from '../components/Franch/France';
 import Germany from '../components/Germany/Germany';
