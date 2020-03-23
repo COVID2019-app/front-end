@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Form, FormGroup, Label, Input, Alert, Button } from 'reactstrap';
+import React, { useState } from 'react';
+import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 function InputForm(prop) {
   // form input setup
