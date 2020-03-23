@@ -12,13 +12,9 @@ import PrivateRoute from '../components/PrivateRoute';
 import LoginPage from '../components/LoginPage';
 
 const Routes = () => {
-
-  const Country = ({match})=> {
-    return(
-      <CountryCharts country={match.params.country}/>
-    )
-  }
-
+  const Country = ({ match }) => {
+    return <CountryCharts country={match.params.country} />;
+  };
 
   return (
     <React.Fragment>
@@ -38,7 +34,7 @@ const Routes = () => {
           <Route exact path="/usa" component={USA} />
           {/* <Route exact path="/usa/charts/regions" component={UsaRegionsChart}/> */}
           <Route exact path="/france" component={France} />
-          <Route path="/:country" component={Country} />
+          <Route path="/country/:country" component={Country} />
           <Route path="/login" component={LoginPage} />
           <Redirect to="/" />
         </Switch>

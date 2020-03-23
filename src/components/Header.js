@@ -61,7 +61,7 @@ const Header = () => {
                 <DropdownItem key={id}>
                   <NavLink
                     tag={props => (
-                      <Link to={`/${country}`} {...props}>
+                      <Link to={`/country/${country}`} {...props}>
                         {country}
                       </Link>
                     )}
