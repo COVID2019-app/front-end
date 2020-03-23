@@ -35,7 +35,7 @@ function AddRegionTable() {
       ...regiondata,
       regionList: Regions[countrydata.countryName],
     });
-  }, [countrydata.countryName]);
+  }, [countrydata.countryName, regiondata]);
 
   // change country id - in country dropdown
   const handleIDChange = event => {
