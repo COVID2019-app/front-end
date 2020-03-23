@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Chart, Series, Label } from 'devextreme-react/chart';
+import { Chart, Series, Label, ArgumentAxis } from 'devextreme-react/chart';
 
 const RegionBarChart = (props) => {
     const {region_sum, field, title} = props
@@ -32,6 +32,12 @@ const RegionBarChart = (props) => {
                         visible={false}
                         showForZeroValues={true} />
                 </Series>
+                <ArgumentAxis>
+                    <Label
+                        wordWrap="breakWord"
+                        overlappingBehavior="stagger"
+                    />
+                </ArgumentAxis>
 
             </Chart>
         </div>
