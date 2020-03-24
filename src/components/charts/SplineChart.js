@@ -14,51 +14,36 @@ import {
   Label,
   ValueAxis,
   Title,
-  TickInterval
+  TickInterval,
 } from 'devextreme-react/chart';
 
 function SplineChart(props) {
+  const { country_name, region_data, region_names, title } = props;
 
-  const {country_name, region_data, region_names, title } = props;
-
-
-  var type = 'spline'
+  var type = 'spline';
   //var types = ['spline', 'stackedspline', 'fullstackedspline']
-
 
   return (
     <React.Fragment>
       <Chart
         dataSource={region_data}
-        title={`${country_name} Spline Chart by Region (${title})`}
+        title={`${country_name} Spline Chart (${title})`}
       >
-        <CommonSeriesSettings
-          argumentField="date"
-          type={type}
-        />
+        <CommonSeriesSettings argumentField="date" type={type} />
         <CommonAxisSettings>
           <Grid visible={true} />
         </CommonAxisSettings>
-        {
-          region_names.map((x) => {
-
-            return (
-              <Series
-                key={x}
-                valueField={x}
-                name={x}
-              />
-            )
-          })
-        }
+        {region_names.map(x => {
+          return <Series key={x} valueField={x} name={x} />;
+        })}
         <Margin bottom={20} />
         <ArgumentAxis>
-          <Label 
+          <Label
             wordWrap="breakWord"
             overlappingBehavior="rotate"
-            format="shortDate" />
+            format="shortDate"
+          />
           <TickInterval days={3} />
-
         </ArgumentAxis>
         <ValueAxis position="left">
           <Title text="Cases" />
@@ -87,7 +72,6 @@ function SplineChart(props) {
                 </div>*/}
     </React.Fragment>
   );
-
 }
 
 export default SplineChart;

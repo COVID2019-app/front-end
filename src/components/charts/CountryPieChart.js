@@ -6,12 +6,11 @@ import PieChart, {
   Size,
   Export,
   Legend,
-  SmallValuesGrouping
+  SmallValuesGrouping,
 } from 'devextreme-react/pie-chart';
 
 function CountryPieChart(props) {
-
-  const { region_sum, field, title } = props;
+  const { region_sum, field, title, few_regions } = props;
 
   var data = [];
   for (var i in region_sum) {
@@ -39,7 +38,6 @@ function CountryPieChart(props) {
 
   return (
     <div className="row justify-content-center" style={{ height: '650px' }}>
-   
       <PieChart
         id="pie"
         dataSource={data}
@@ -52,17 +50,18 @@ function CountryPieChart(props) {
           <Label visible={false}>
             <Connector visible={true} width={1} />
           </Label>
-          <SmallValuesGrouping threshold={400} mode="smallValueThreshold" />
+          {few_regions === false ? (
+            <SmallValuesGrouping threshold={400} mode="smallValueThreshold" />
+          ) : (
+            <div />
+          )}
         </Series>
         <Legend horizontalAlignment="center" verticalAlignment="bottom" />
-
-     
 
         <Size width={300} />
         <Export enabled={true} />
       </PieChart>
-      </div>
-
+    </div>
   );
 }
 
