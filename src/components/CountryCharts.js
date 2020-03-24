@@ -81,12 +81,14 @@ function Country(props) {
         <br />
         <CommonChart
           region_sum={region_sum}
+          regions={data.regions}
           region_data={region_cases}
           region_names={region_names}
           country_name={data.country}
           isFetching={isFetching}
           field="confirmed_cases"
           title="Cases"
+          few_regions={data.few_regions}
         />
         <br />
         {data.deaths ? (
@@ -95,6 +97,7 @@ function Country(props) {
             <h2 style={{ fontWeight: 300 }}>Deaths</h2>
             <br />
             <CommonChart
+              regions={data.regions}
               region_sum={region_sum}
               region_data={region_deaths}
               region_names={region_names}
@@ -102,6 +105,7 @@ function Country(props) {
               isFetching={isFetching}
               field="deaths"
               title="Deaths"
+              few_regions={data.few_regions}
             />
           </React.Fragment>
         ) : (
