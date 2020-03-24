@@ -36,7 +36,6 @@ const Routes = () => {
           <Route exact path="/france" component={France} />
           <Route path="/country/:country" component={Country} />
           <Route path="/login" component={LoginPage} />
-          <Redirect to="/" />
         </Switch>
       </main>
     </React.Fragment>
