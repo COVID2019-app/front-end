@@ -147,3 +147,27 @@ export const login = ({ username, password }) => async dispatch => {
       throw error;
     });
 };
+
+export const addingDailyRegion = (data, token) => dispatch => {
+  dispatch({ type: ActionTypes.ADDING_DAILYREGION_START });
+  axios
+    .post(baseUrl + `regions`, data, {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+    .then(response => {
+      dispatch({
+        type: ActionTypes.ADDING_DAILYREGION_SUCCESS,
+        payload: response.data,
+      });
+    })
+
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: ActionTypes.ADDING_DAILYREGION_FAILURE,
+        payload: err.message,
+      });
+    });
+};
