@@ -27,7 +27,7 @@ const Routes = () => {
           <PrivateRoute exact path="/edit">
             <HomeTableEdit />
           </PrivateRoute>
-          <PrivateRoute exact path="/add">
+          <PrivateRoute exact path="/addDailyRegion">
             <AddRegionTable />
           </PrivateRoute>
           {/* <Route exact path="/edit" component={HomeTableEdit} /> */}

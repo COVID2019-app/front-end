@@ -122,7 +122,20 @@ function rootReducer(state = initialState, action) {
         isServerError: true,
         message: action.payload,
       };
-
+    case ActionTypes.ADDING_DAILYREGION_START:
+      return {
+        ...state,
+      };
+    case ActionTypes.ADDING_DAILYREGION_SUCCESS:
+      console.log(action.payload);
+      return {
+        ...state,
+      };
+    case ActionTypes.ADDING_DAILYREGION_FAILURE:
+      return {
+        ...state,
+        message: action.payload,
+      };
     default:
       return state;
   }
