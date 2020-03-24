@@ -23,9 +23,9 @@ function Country(props) {
   }
 
   useEffect(() => {
-    getCountryRegions(data.id);
-    getRegionSum(data.id);
-  }, [getCountryRegions, getRegionSum, data.id]);
+    getCountryRegions(data);
+    getRegionSum(data);
+  }, [getCountryRegions, getRegionSum, data]);
 
   const region_names = [...new Set(region.map(x => x.regions_name))];
 
