@@ -21,7 +21,7 @@ const Routes = () => {
       <Header />
       <main className="p-4">
         <Switch>
-          <Route exact path="/" render={() => <Redirect to="/live" />} />
+          <Route exact path="/" />
           <Route exact path="/home" component={Home} />
           <Route exact path="/live" component={Live} />
           <PrivateRoute exact path="/edit">
@@ -36,7 +36,6 @@ const Routes = () => {
           <Route exact path="/france" component={France} />
           <Route path="/country/:country" component={Country} />
           <Route path="/login" component={LoginPage} />
-          <Redirect to="/" />
         </Switch>
       </main>
     </React.Fragment>
