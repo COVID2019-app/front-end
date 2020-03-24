@@ -107,6 +107,18 @@ function Home(props) {
       if (item.tested === null) {
         item.tested = 0;
       }
+      if (item.active_cases === null) {
+        item.active_cases = 0;
+      }
+      if (item.deaths === null) {
+        item.deaths = 0;
+      }
+      if (item.recovered === null) {
+        item.recovered = 0;
+      }
+      if (item.confirmed_cases === null) {
+        item.confirmed_cases = 0;
+      }
     });
     return (
       <React.Fragment>
