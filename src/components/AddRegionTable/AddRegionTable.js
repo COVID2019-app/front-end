@@ -25,7 +25,7 @@ function AddRegionTable() {
   const [regiondata, setRegiondata] = useState([]);
 
   // date setup
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(convert(new Date()));
 
   // change region list when the country name is changed
   useEffect(() => {
@@ -43,9 +43,14 @@ function AddRegionTable() {
 
   // change date - in date calendar
   const handleDateChange = event => {
-    setDate(event.value);
+    setDate(convert(event.value));
   };
-
+  function convert(str) {
+    var date = new Date(str),
+      mnth = ('0' + (date.getMonth() + 1)).slice(-2),
+      day = ('0' + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join('-');
+  }
   return (
     <React.Fragment>
       <Dropdown
