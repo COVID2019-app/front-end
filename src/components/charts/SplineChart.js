@@ -15,6 +15,7 @@ import {
   ValueAxis,
   Title,
   TickInterval,
+  Size,
 } from 'devextreme-react/chart';
 
 function SplineChart(props) {
@@ -55,6 +56,7 @@ function SplineChart(props) {
         />
         <Export enabled={true} />
         <Tooltip enabled={true} />
+        <Size height={600} />
       </Chart>
       {/*Need to figure out how to style this
                 <div className="row justify-content-center">

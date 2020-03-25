@@ -5,7 +5,7 @@ import CommonChart from './charts/CommonChart';
 import { countrylist } from '../shared/countrylist';
 import { getCountryRegions, getRegionSum } from '../store/actions';
 
-function Country(props) {
+function CountryCharts(props) {
   const {
     getRegionSum,
     getCountryRegions,
@@ -89,6 +89,7 @@ function Country(props) {
           field="confirmed_cases"
           title="Cases"
           few_regions={data.few_regions}
+          not_cumu={data.not_cumu}
         />
         <br />
         {data.deaths ? (
@@ -106,6 +107,7 @@ function Country(props) {
               field="deaths"
               title="Deaths"
               few_regions={data.few_regions}
+              not_cumu={data.not_cumu}
             />
           </React.Fragment>
         ) : (
@@ -124,5 +126,5 @@ const mapStateToProps = state => {
   };
 };
 export default withRouter(
-  connect(mapStateToProps, { getCountryRegions, getRegionSum })(Country)
+  connect(mapStateToProps, { getCountryRegions, getRegionSum })(CountryCharts)
 );

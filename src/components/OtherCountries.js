@@ -49,7 +49,7 @@ export default function OtherCountries() {
                     </Link>
                   </DropdownItem>
                 ) : (
-                  <div />
+                  <div key={id + 'a'} />
                 )
               )}
             </DropdownMenu>

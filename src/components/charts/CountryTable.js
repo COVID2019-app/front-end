@@ -1,8 +1,8 @@
 import React from 'react';
 import DataGrid, {
   Sorting,
-  Summary,
-  TotalItem,
+  /*Summary,
+  TotalItem,*/
   Column,
 } from 'devextreme-react/data-grid';
 import Loading from '../Loading';
@@ -35,6 +35,8 @@ function CountryTable(props) {
     }
   };
 
+  console.log(region_data);
+
   if (region_data.length < 1 || isFetching) {
     return <Loading />;
   } else {
@@ -59,7 +61,7 @@ function CountryTable(props) {
           {Object.keys(region_data[region_data.length - 1]).map(x => {
             return <Column key={x} dataField={x} />;
           })}
-
+          {/*
           <Summary>
             {Object.keys(region_data[region_data.length - 1])
               .slice(1, Object.keys(region_data[region_data.length - 1]).length)
@@ -67,6 +69,7 @@ function CountryTable(props) {
                 return <TotalItem key={x} column={x} summaryType="sum" />;
               })}
           </Summary>
+          */}
         </DataGrid>
         {/*<div className="options">
                     <div className="caption">Options</div>

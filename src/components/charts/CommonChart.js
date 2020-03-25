@@ -17,6 +17,7 @@ function CommonChart(props) {
     region_names,
     few_regions,
     regions,
+    not_cumu,
   } = props;
 
   /*if(isFetching){
@@ -24,7 +25,7 @@ function CommonChart(props) {
             <Loading/>
         )
     }else{*/
-  if (country_name === 'USA') {
+  /* if (country_name === 'USA') {
     return (
       <React.Fragment>
         <RegionBarChart region_sum={region_sum} field={field} title={title} />
@@ -56,7 +57,9 @@ function CommonChart(props) {
         />
       </React.Fragment>
     );
-  } else if (regions) {
+  } else*/ if (
+    regions
+  ) {
     return (
       <React.Fragment>
         <CountryTable
@@ -68,14 +71,22 @@ function CommonChart(props) {
         />
         <br />
         <br />
-        <RegionBarChart region_sum={region_sum} field={field} title={title} />
+        <RegionBarChart
+          region_data={region_data}
+          region_sum={region_sum}
+          field={field}
+          title={title}
+          not_cumu={not_cumu}
+        />
         <br />
         <br />
         <CountryPieChart
           region_sum={region_sum}
+          region_data={region_data}
           field={field}
           title={title}
           few_regions={few_regions}
+          not_cumu={not_cumu}
         />
         <br />
         <br />
