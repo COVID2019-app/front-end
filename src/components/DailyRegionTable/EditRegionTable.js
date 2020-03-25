@@ -16,6 +16,7 @@ import {
   updateDailyRegion,
 } from '../../store/actions/index';
 import { COUNTRIES } from '../../shared/country_add';
+import Loading from '../Loading';
 
 //import number from 'react-bootstrap-table2-filter/lib/src/components/number';
 
@@ -26,7 +27,13 @@ const PARSE_FUNCTIONS = {
 };
 
 const EditRegionTable = props => {
-  const { regions, getCountryRegionsByDate, updateDailyRegion, token } = props;
+  const {
+    regions,
+    getCountryRegionsByDate,
+    isFetching,
+    updateDailyRegion,
+    token,
+  } = props;
 
   // country dropdown setup
   const [countryDropdownOpen, setCountryDropdownOpen] = useState(false);
@@ -160,18 +167,22 @@ const EditRegionTable = props => {
       </div>
       <br />
       {countrydata.country_id ? (
-        <BootstrapTable
-          keyField="regions_id"
-          data={regions}
-          columns={columns}
-          cellEdit={cellEditFactory({
-            mode: 'click',
-            afterSaveCell: (oldValue, newValue, row, column) => {
-              handleChange(row, column, newValue);
-            },
-          })}
-          filter={filterFactory()}
-        />
+        isFetching ? (
+          <Loading />
+        ) : (
+          <BootstrapTable
+            keyField="regions_id"
+            data={regions}
+            columns={columns}
+            cellEdit={cellEditFactory({
+              mode: 'click',
+              afterSaveCell: (oldValue, newValue, row, column) => {
+                handleChange(row, column, newValue);
+              },
+            })}
+            filter={filterFactory()}
+          />
+        )
       ) : null}
     </React.Fragment>
   );
@@ -181,6 +192,7 @@ const mapStateToProps = state => {
   return {
     regions: state.daily_region,
     token: state.token,
+    isFetching: state.isFetching,
   };
 };
 export default connect(mapStateToProps, {
