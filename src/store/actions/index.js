@@ -171,3 +171,55 @@ export const addingDailyRegion = (data, token) => dispatch => {
       });
     });
 };
+
+export const getCountryRegionsByDate = data => dispatch => {
+  dispatch({ type: ActionTypes.FETCHING_REGIONBYDATE_START });
+  axios
+    .post(baseUrl + `regions/byDate`, data)
+    .then(res => {
+      res.data.sort(function(a, b) {
+        let comparison = 0;
+        if (a['regions_name'] > b['regions_name']) {
+          comparison = 1;
+        } else if (a['regions_name'] < b['regions_name']) {
+          comparison = -1;
+        }
+        return comparison;
+      });
+      dispatch({
+        type: ActionTypes.FETCHING_REGIONBYDATE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: ActionTypes.FETCHING_REGIONBYDATE_FAILURE,
+        payload: err.message,
+      });
+      console.log(err);
+    });
+};
+export const updateDailyRegion = (region_id, updates, token) => dispatch => {
+  dispatch({ type: ActionTypes.IS_UPDATINGDAILYREGION_START });
+  console.log(region_id, updates);
+  axios
+    .put(baseUrl + `regions/${region_id}`, updates, {
+      headers: {
+        authorization: token,
+      },
+    })
+    .then(response => {
+      dispatch({
+        type: ActionTypes.IS_UPDATINGDAILYREGION_SUCCESS,
+        payload: response.data,
+      });
+    })
+
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: ActionTypes.IS_UPDATINGDAILYREGION_FAILURE,
+        payload: err.message,
+      });
+    });
+};
