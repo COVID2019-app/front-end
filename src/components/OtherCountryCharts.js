@@ -1,10 +1,9 @@
 import React from 'react';
-
 import { Redirect } from 'react-router-dom';
-import CommonChart from './RegionCharts/CommonChart';
+import SimpleCommonChart from './SimpleCharts/SimpleCommonChart';
 import { countrylist } from '../shared/countrylist';
 
-function CountryCharts(props) {
+function OtherCountryCharts(props) {
   const { country } = props;
 
   var data;
@@ -17,8 +16,8 @@ function CountryCharts(props) {
   if (!data) {
     return <Redirect to="/" />;
   } else {
-    return <CommonChart data={data} country={country} />;
+    return <SimpleCommonChart data={data} country={country} />;
   }
 }
 
-export default CountryCharts;
+export default OtherCountryCharts;

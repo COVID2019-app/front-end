@@ -10,16 +10,44 @@ import PieChart, {
 } from 'devextreme-react/pie-chart';
 
 function CountryPieChart(props) {
-  const { region_sum, field, title, few_regions } = props;
+  const {
+    region_sum,
+    region_data,
+    not_cumu,
+    field,
+    title,
+    few_regions,
+  } = props;
 
   var data = [];
-  for (var i in region_sum) {
-    var d = {
-      region: region_sum[i].regions_name,
-      cases: region_sum[i][`${field}`],
-    };
-    data.push(d);
+
+  if (not_cumu) {
+    for (var i in region_sum) {
+      var d = {
+        region: region_sum[i].regions_name,
+        cases: region_sum[i][`${field}`],
+      };
+      data.push(d);
+    }
+  } else {
+    //if (region_data.length>1){
+    //  console.log(Object.keys(region_data[region_data.length - 1]).slice(1, Object.keys(region_data[region_data.length - 1]).length))
+
+    //}
+    if (region_data.length > 1) {
+      Object.keys(region_data[region_data.length - 2])
+        .slice(1, Object.keys(region_data[region_data.length - 2]).length)
+        .map(x => {
+          var d = {
+            region: x,
+            cases: region_data[region_data.length - 2][x],
+          };
+          data.push(d);
+          return data;
+        });
+    }
   }
+  console.log('data', data);
 
   function pointClickHandler(e) {
     toggleVisibility(e.target);
