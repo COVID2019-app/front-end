@@ -110,6 +110,17 @@ const Header = () => {
                       />
                     </NavItem>
                   </DropdownItem>
+                  <DropdownItem>
+                    <NavItem>
+                      <NavLink
+                        tag={props => (
+                          <Link to="/editDailyRegion" {...props}>
+                            Edit
+                          </Link>
+                        )}
+                      />
+                    </NavItem>
+                  </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
             </React.Fragment>

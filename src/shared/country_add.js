@@ -35,4 +35,28 @@ export const COUNTRIES = [
     name: 'Iraq',
     country_id: 38,
   },
+  {
+    name: 'United Kingdom',
+    country_id: 26,
+  },
+  {
+    name: 'Netherlands',
+    country_id: 53,
+  },
+  {
+    name: 'Canada',
+    country_id: 17,
+  },
+  {
+    name: 'Australia',
+    country_id: 15,
+  },
+  {
+    name: 'Denmark',
+    country_id: 51,
+  },
+  {
+    name: 'France',
+    country_id: 14,
+  },
 ];

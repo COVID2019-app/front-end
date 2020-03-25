@@ -4,7 +4,8 @@ import Home from '../components/Home';
 import Live from '../components/Live';
 import Header from '../components/Header';
 import HomeTableEdit from '../components/HomeTableEdit';
-import AddRegionTable from '../components/AddRegionTable/AddRegionTable';
+import AddRegionTable from '../components/DailyRegionTable/AddRegionTable';
+import EditRegionTable from '../components/DailyRegionTable/EditRegionTable';
 import USA from '../components/usa/USA';
 import France from '../components/France/France';
 import CountryCharts from '../components/CountryCharts';
@@ -30,6 +31,9 @@ const Routes = () => {
           </PrivateRoute>
           <PrivateRoute exact path="/addDailyRegion">
             <AddRegionTable />
+          </PrivateRoute>
+          <PrivateRoute exact path="/editDailyRegion">
+            <EditRegionTable />
           </PrivateRoute>
           {/* <Route exact path="/edit" component={HomeTableEdit} /> */}
           <Route exact path="/usa" component={USA} />
