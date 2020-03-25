@@ -53,6 +53,7 @@ function AddRegionTable() {
   }
   return (
     <React.Fragment>
+      <h2 style={{ textAlign: 'center' }}>Add Daily Data</h2>
       <Dropdown
         isOpen={countryDropdownOpen}
         toggle={countryToggle}
