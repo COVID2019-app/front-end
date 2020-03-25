@@ -36,8 +36,16 @@
     transform: rotate(360deg);
   }
 }
+html,
+body {
+  min-height: 100vh;
+}
 main {
   overflow-y: scroll;
+  min-height: 80%;
+}
+.p-4 {
+  height: 100%;
 }
 .live-card {
   padding: 0rem;
@@ -154,6 +162,11 @@ footer {
   line-height: 30px;
   display: block;
 }
+.btn,
+.btn.focus,
+.button:focus {
+  box-shadow: none;
+}
 
 #root
   > nav.\.d-md-none.\.d-lg-block.navbar.navbar-expand-lg
@@ -162,4 +175,7 @@ footer {
   > img {
   width: 150 px;
   margin-top: -60px;
+}
+.p-4 {
+  min-height: 85vh;
 }
