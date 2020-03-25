@@ -177,6 +177,15 @@ export const getCountryRegionsByDate = data => dispatch => {
   axios
     .post(baseUrl + `regions/byDate`, data)
     .then(res => {
+      res.data.sort(function(a, b) {
+        let comparison = 0;
+        if (a['regions_name'] > b['regions_name']) {
+          comparison = 1;
+        } else if (a['regions_name'] < b['regions_name']) {
+          comparison = -1;
+        }
+        return comparison;
+      });
       dispatch({
         type: ActionTypes.FETCHING_REGIONBYDATE_SUCCESS,
         payload: res.data,

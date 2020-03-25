@@ -159,18 +159,20 @@ const EditRegionTable = props => {
         </div>
       </div>
       <br />
-      <BootstrapTable
-        keyField="regions_id"
-        data={regions}
-        columns={columns}
-        cellEdit={cellEditFactory({
-          mode: 'click',
-          afterSaveCell: (oldValue, newValue, row, column) => {
-            handleChange(row, column, newValue);
-          },
-        })}
-        filter={filterFactory()}
-      />{' '}
+      {countrydata.country_id ? (
+        <BootstrapTable
+          keyField="regions_id"
+          data={regions}
+          columns={columns}
+          cellEdit={cellEditFactory({
+            mode: 'click',
+            afterSaveCell: (oldValue, newValue, row, column) => {
+              handleChange(row, column, newValue);
+            },
+          })}
+          filter={filterFactory()}
+        />
+      ) : null}
     </React.Fragment>
   );
 };
