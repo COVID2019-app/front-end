@@ -58,7 +58,7 @@ function CountryTable(props) {
 
           {/*To do: Lazy load / masonry!!*/}
 
-          {Object.keys(region_data[region_data.length - 1]).map(x => {
+          {Object.keys(region_data[region_data.length - 2]).map(x => {
             return <Column key={x} dataField={x} />;
           })}
           {/*

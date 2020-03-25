@@ -15,11 +15,11 @@ import {
 } from 'devextreme-react/chart';
 
 function StackedBarChart(props) {
-  const { country_name, region_data, region_names, title } = props;
+  const { country_name, region_data, region_names, title, field } = props;
 
   const customizeTooltip = arg => {
     return {
-      text: `${arg.seriesName} cases: ${arg.valueText}`,
+      text: `${arg.seriesName} ${field}: ${arg.valueText}`,
     };
   };
 
@@ -52,7 +52,7 @@ function StackedBarChart(props) {
           maxAutoBreakCount={2}
           breakStyle={{ line: 'waved' }}
         >
-          <Title text="Cases" />
+          <Title text={title} />
         </ValueAxis>
         <Legend
           verticalAlignment="bottom"

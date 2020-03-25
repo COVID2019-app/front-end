@@ -1,60 +1,75 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Dropdown,
+  UncontrolledButtonDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  NavLink,
 } from 'reactstrap';
 import { countrylist } from '../shared/countrylist';
-import { Link } from 'react-router-dom';
+import { Link, Switch, Route } from 'react-router-dom';
+import OtherCountryCharts from './OtherCountryCharts';
 
 export default function OtherCountries() {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  const toggle = () => setDropdownOpen(prevState => !prevState);
+  const Country = ({ match }) => {
+    return <OtherCountryCharts country={match.params.country} />;
+  };
 
   return (
     <React.Fragment>
-      <div className="row justify-content-center" style={{ height: '100vh' }}>
-        <h2 style={{ fontWeight: 300 }}>
-          Select a Country from the Dropdown:{' '}
-        </h2>
+      <div className="container-fluid">
+        <div
+          className="row justify-content-center align-items-center"
+          style={{ textAlign: 'center' }}
+        >
+          <br></br>
 
-        <br></br>
-        <div className="col-lg-3">
-          <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-            <DropdownToggle
-              style={{
-                borderRadius: 0,
-                backgroundColor: 'rgb(230, 230, 230)',
-                borderColor: 'rgb(230, 230, 230)',
-                color: 'rgb(0,0,0,0.8)',
-              }}
-              caret
-            >
-              Countries
-            </DropdownToggle>
-            <DropdownMenu style={{ overflow: 'scroll' }}>
-              {countrylist.map(({ id, country, regions }) =>
-                !regions ? (
-                  <DropdownItem key={id}>
-                    <Link
-                      style={{
-                        textDecoration: 'None',
-                        color: 'rgb(0,0,0,0.8)',
-                      }}
-                      to={`/country/${country}`}
-                    >
-                      {country}
-                    </Link>
-                  </DropdownItem>
-                ) : (
-                  <div key={id + 'a'} />
-                )
-              )}
-            </DropdownMenu>
-          </Dropdown>
+          <div className="col-lg-3">
+            <UncontrolledButtonDropdown>
+              <DropdownToggle
+                color="link"
+                style={{
+                  textDecoration: 'none',
+                  color: 'rgb(0,0,0,0.8)',
+                }}
+                caret
+              >
+                <h2 style={{ fontWeight: 300 }}>Select a Country: </h2>
+              </DropdownToggle>
+              <DropdownMenu
+                style={{
+                  height: '80vh',
+                  overflowY: 'scroll',
+                  backgroundColor: 'rgb(255,255,255,0.5)',
+                }}
+              >
+                {countrylist.map(({ id, country, regions }) =>
+                  !regions ? (
+                    <DropdownItem key={id}>
+                      <NavLink
+                        tag={props => (
+                          <Link
+                            style={{
+                              textDecoration: 'None',
+                              color: 'rgb(0,0,0,0.8)',
+                            }}
+                            to={`/countrypages/${country}`}
+                            {...props}
+                          >
+                            {country}
+                          </Link>
+                        )}
+                      />
+                    </DropdownItem>
+                  ) : null
+                )}
+              </DropdownMenu>
+            </UncontrolledButtonDropdown>
+          </div>
         </div>
+        <Switch>
+          <Route exact path="/countrypages/:country" component={Country} />
+        </Switch>
       </div>
     </React.Fragment>
   );
