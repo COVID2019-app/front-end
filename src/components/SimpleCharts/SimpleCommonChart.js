@@ -81,7 +81,6 @@ function SimpleCommonChart(props) {
       }
     }
   }
-  console.log('recoveries', region_recovered);
 
   for (var j in region_cases) {
     if (new Date(region_cases[j].date) !== 'Invalid Date') {
