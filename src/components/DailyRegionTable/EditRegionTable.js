@@ -89,6 +89,7 @@ const EditRegionTable = props => {
       dataField: 'regions_name',
       text: 'Region',
       filter: textFilter(),
+      sort: true,
     },
     {
       dataField: 'daily_confirmed_cases',
@@ -168,7 +169,6 @@ const EditRegionTable = props => {
             handleChange(row, column, newValue);
           },
         })}
-        sort={{ dataField: 'daily_confirmed_cases', order: 'asc' }}
         filter={filterFactory()}
       />{' '}
     </React.Fragment>
