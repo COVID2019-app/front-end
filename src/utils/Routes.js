@@ -10,6 +10,7 @@ import France from '../components/France/France';
 import CountryCharts from '../components/CountryCharts';
 import PrivateRoute from '../components/PrivateRoute';
 import LoginPage from '../components/LoginPage';
+import OtherCountries from '../components/OtherCountries';
 
 const Routes = () => {
   const Country = ({ match }) => {
@@ -36,6 +37,9 @@ const Routes = () => {
           <Route exact path="/france" component={France} />
           <Route path="/country/:country" component={Country} />
           <Route path="/login" component={LoginPage} />
+          <Route path="/countrypages" component={OtherCountries} />
+
+          <Redirect to="/" />
         </Switch>
       </main>
     </React.Fragment>

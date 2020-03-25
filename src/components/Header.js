@@ -57,17 +57,30 @@ const Header = () => {
               Country Tables
             </DropdownToggle>
             <DropdownMenu right>
-              {countrylist.map(({ id, country }) => (
-                <DropdownItem key={id}>
-                  <NavLink
-                    tag={props => (
-                      <Link to={`/country/${country}`} {...props}>
-                        {country}
-                      </Link>
-                    )}
-                  />
-                </DropdownItem>
-              ))}
+              {countrylist.map(({ id, country, regions }) =>
+                regions ? (
+                  <DropdownItem key={id}>
+                    <NavLink
+                      tag={props => (
+                        <Link to={`/country/${country}`} {...props}>
+                          {country}
+                        </Link>
+                      )}
+                    />
+                  </DropdownItem>
+                ) : (
+                  <div key={id + 'a'}></div>
+                )
+              )}
+              <DropdownItem key={'b'}>
+                <NavLink
+                  tag={props => (
+                    <Link to="/countrypages" {...props}>
+                      Rest of Countries
+                    </Link>
+                  )}
+                />
+              </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
           {sessionStorage.getItem('token') !== null ? (

@@ -3,7 +3,7 @@ import DataGrid, {
   Sorting,
   Summary,
   TotalItem,
-  /*Column*/
+  Column,
 } from 'devextreme-react/data-grid';
 import Loading from '../Loading';
 //import { CheckBox } from 'devextreme-react';
@@ -19,64 +19,56 @@ function CountryTable(props) {
 
     }*/
 
-  const { region_data, isFetching, field } = props
+  const { region_data, isFetching, field } = props;
 
-
-  const onCellPrepared = (e) => {
-    if(field ==="confirmed_cases"){
-      if(e.columnIndex!==0){
-        e.cellElement.style.backgroundColor = `rgba(255, 171, 0, ${e.value / 500})`;
-      }
-    }else{
+  const onCellPrepared = e => {
+    if (field === 'confirmed_cases') {
       if (e.columnIndex !== 0) {
-        e.cellElement.style.backgroundColor = `rgba(255, 0, 0, ${e.value / 100})`;
+        e.cellElement.style.backgroundColor = `rgba(255, 171, 0, ${e.value /
+          500})`;
+      }
+    } else {
+      if (e.columnIndex !== 0) {
+        e.cellElement.style.backgroundColor = `rgba(255, 0, 0, ${e.value /
+          100})`;
       }
     }
-  }
+  };
 
-
-    
-  if (region_data.length < 1 || isFetching){
-    
+  if (region_data.length < 1 || isFetching) {
+    return <Loading />;
+  } else {
     return (
-      <Loading />
-    )
-  }
-
-  else {
-
-    return (
-    <div>
-      <DataGrid
+      <div>
+        <DataGrid
           elementAttr={{
-            id: 'gridContainer'
+            id: 'gridContainer',
           }}
-        dataSource={region_data}
-        showBorders={true}
-        showRowLines={false}
-        showColumnLines={false}
-        columnMinWidth={80}
-        wordWrapEnabled={true}
-        onCellPrepared={onCellPrepared}
-
-      >
-        <Sorting mode="multiple" />
+          dataSource={region_data}
+          showBorders={true}
+          showRowLines={false}
+          showColumnLines={false}
+          columnMinWidth={80}
+          wordWrapEnabled={true}
+          onCellPrepared={onCellPrepared}
+        >
+          <Sorting mode="multiple" />
 
           {/*To do: Lazy load / masonry!!*/}
-        
-        
-        <Summary>
-          
-          {
-          Object.keys(region_data[1])
-            .slice(1, Object.keys(region_data[1]).length)
-            .map(x => {
-              return <TotalItem key={x} column={x} summaryType="sum" />;
-            })}
-        </Summary>
-        
-      </DataGrid>
-      {/*<div className="options">
+
+          {Object.keys(region_data[region_data.length - 1]).map(x => {
+            return <Column key={x} dataField={x} />;
+          })}
+
+          <Summary>
+            {Object.keys(region_data[region_data.length - 1])
+              .slice(1, Object.keys(region_data[region_data.length - 1]).length)
+              .map(x => {
+                return <TotalItem key={x} column={x} summaryType="sum" />;
+              })}
+          </Summary>
+        </DataGrid>
+        {/*<div className="options">
                     <div className="caption">Options</div>
                     <div className="option">
                         <CheckBox text="Disable Sorting for the Position Column"
@@ -84,15 +76,9 @@ function CountryTable(props) {
                             onValueChanged={onPositionSortingChanged} />
                     </div>
                 </div>*/}
-    </div>
-  );
-
-    
-
-
-
+      </div>
+    );
   }
-  }
-
+}
 
 export default CountryTable;

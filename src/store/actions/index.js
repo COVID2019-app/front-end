@@ -105,7 +105,7 @@ export const isUpdating = (country_id, updates, token) => dispatch => {
   axios
     .put(baseUrl + `country/${country_id}`, updates, {
       headers: {
-        Authorization: `Token ${token}`,
+        authorization: token,
       },
     })
     .then(response => {
@@ -153,7 +153,7 @@ export const addingDailyRegion = (data, token) => dispatch => {
   axios
     .post(baseUrl + `regions`, data, {
       headers: {
-        Authorization: `Token ${token}`,
+        authorization: token,
       },
     })
     .then(response => {

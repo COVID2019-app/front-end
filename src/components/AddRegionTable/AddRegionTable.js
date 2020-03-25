@@ -103,18 +103,27 @@ function AddRegionTable() {
         </div>
       </div>
       <br />
-      {regiondata
-        ? regiondata.map(region => {
-            return (
-              <InputForm
-                countrydata={countrydata}
-                regionName={region}
-                date={date}
-                key={region}
-              />
-            );
-          })
-        : null}
+      {regiondata ? (
+        regiondata.map(region => {
+          return (
+            <InputForm
+              countrydata={countrydata}
+              regionName={region}
+              date={date}
+              key={region}
+            />
+          );
+        })
+      ) : (
+        <>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+        </>
+      )}
 
       <br />
       <br />
