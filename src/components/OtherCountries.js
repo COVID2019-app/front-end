@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   UncontrolledButtonDropdown,
   DropdownToggle,
@@ -14,6 +14,43 @@ export default function OtherCountries() {
   const Country = ({ match }) => {
     return <OtherCountryCharts country={match.params.country} />;
   };
+
+  var country_list = [];
+  countrylist.map(x => {
+    country_list.push(x.country);
+  });
+  const [filtered, updatefiltered] = useState(country_list);
+
+  //useEffect(() => {
+  //   updatefiltered(newList)
+  //},[newList]
+  //)
+
+  const handleChange = e => {
+    let currentList = [];
+    let newList = [];
+
+    e.stopPropagation();
+
+    if (e.target.value !== '') {
+      console.log(e.target.value);
+
+      currentList = country_list;
+
+      newList = currentList.filter(item => {
+        const lc = item.toLowerCase();
+        const filter = e.target.value.toLowerCase();
+        return lc.includes(filter);
+      });
+      console.log(newList);
+    } else {
+      newList = currentList;
+    }
+
+    updatefiltered(newList);
+  };
+
+  console.log('new', filtered);
 
   return (
     <React.Fragment>
@@ -34,7 +71,13 @@ export default function OtherCountries() {
                 }}
                 caret
               >
-                <h2 style={{ fontWeight: 300 }}>Select a Country: </h2>
+                <input
+                  type="text"
+                  className="input"
+                  onChange={handleChange}
+                  placeholder="Select a Country:"
+                />
+                {/*<h2 style={{ fontWeight: 300 }}>Select a Country: </h2>*/}
               </DropdownToggle>
               <DropdownMenu
                 style={{
@@ -43,9 +86,9 @@ export default function OtherCountries() {
                   backgroundColor: 'rgb(255,255,255,0.5)',
                 }}
               >
-                {countrylist.map(({ id, country, regions }) =>
-                  !regions ? (
-                    <DropdownItem key={id}>
+                {filtered.map(x =>
+                  filtered.length > 1 ? (
+                    <DropdownItem key={x}>
                       <NavLink
                         tag={props => (
                           <Link
@@ -53,10 +96,10 @@ export default function OtherCountries() {
                               textDecoration: 'None',
                               color: 'rgb(0,0,0,0.8)',
                             }}
-                            to={`/countrypages/${country}`}
+                            to={`/countrypages/${x}`}
                             {...props}
                           >
-                            {country}
+                            {x}
                           </Link>
                         )}
                       />

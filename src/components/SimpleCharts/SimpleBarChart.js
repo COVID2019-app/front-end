@@ -18,25 +18,30 @@ function SimpleBarChart(props) {
 
   const customizeTooltip = arg => {
     return {
-      text: `${field}: ${arg.valueText}`,
+      text: `${field}: ${arg.valueText.replace('_', ' ')}`,
     };
   };
 
+  var new_region_data = [];
+
   for (var i in region_data) {
-    if (new Date(region_data[i].date) !== 'Invalid Date') {
-      region_data[i].date = new Date(region_data[i].date);
+    if (new Date(region_data[i].date) !== 'Invalid Date' && i > 0) {
+      new_region_data.push({
+        arg: new Date(region_data[i].date),
+        val: region_data[i][country_name] - region_data[i - 1][country_name],
+      });
     }
   }
 
   return (
-    <React.Fragment>
+    <div className="col-lg-6">
       <Chart
         id="chart"
-        title={`${country_name} Bar Chart (${title})`}
-        dataSource={region_data}
+        title={`${country_name} Bar Chart, Daily Increases (${title})`}
+        dataSource={new_region_data}
       >
         <CommonSeriesSettings
-          argumentField="date"
+          argumentField="arg"
           type="Bar"
           dataType="date"
         ></CommonSeriesSettings>
@@ -53,9 +58,10 @@ function SimpleBarChart(props) {
           itemTextPosition="top"
           visible={false}
         />
+
         <Series
           key={country_name}
-          valueField={country_name}
+          valueField="val"
           name={field}
           color={color}
         />
@@ -67,7 +73,7 @@ function SimpleBarChart(props) {
           customizeTooltip={customizeTooltip}
         />
       </Chart>
-    </React.Fragment>
+    </div>
   );
 }
 
