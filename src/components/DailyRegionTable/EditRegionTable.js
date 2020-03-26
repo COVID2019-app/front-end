@@ -5,6 +5,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  Alert,
 } from 'reactstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory, { Type } from 'react-bootstrap-table2-editor';
@@ -33,7 +34,9 @@ const EditRegionTable = props => {
     isFetching,
     updateDailyRegion,
     token,
+    isServerError,
   } = props;
+  const [isAlertVisible, setIsAlertVisible] = useState(isServerError);
 
   // country dropdown setup
   const [countryDropdownOpen, setCountryDropdownOpen] = useState(false);
@@ -48,10 +51,10 @@ const EditRegionTable = props => {
 
   useEffect(() => {
     if (countrydata.country_id) {
-      console.log();
       getCountryRegionsByDate({ id: countrydata.country_id, date: date });
+      setIsAlertVisible(isServerError);
     }
-  }, [getCountryRegionsByDate, countrydata.country_id, date]);
+  }, [getCountryRegionsByDate, countrydata.country_id, date, isServerError]);
 
   // change country id - in country dropdown
   const handleIDChange = event => {
@@ -80,7 +83,9 @@ const EditRegionTable = props => {
       parseFunction !== undefined ? parseFunction(newValue) : newValue;
     updateDailyRegion(row.regions_id, updatedData, token);
   };
-
+  function onDismiss() {
+    setIsAlertVisible(false);
+  }
   const columns = [
     {
       dataField: 'regions_id',
@@ -170,18 +175,23 @@ const EditRegionTable = props => {
         isFetching ? (
           <Loading />
         ) : (
-          <BootstrapTable
-            keyField="regions_id"
-            data={regions}
-            columns={columns}
-            cellEdit={cellEditFactory({
-              mode: 'click',
-              afterSaveCell: (oldValue, newValue, row, column) => {
-                handleChange(row, column, newValue);
-              },
-            })}
-            filter={filterFactory()}
-          />
+          <React.Fragment>
+            <Alert color="danger" isOpen={isAlertVisible} toggle={onDismiss}>
+              Unauthorized! Please Login again!
+            </Alert>
+            <BootstrapTable
+              keyField="regions_id"
+              data={regions}
+              columns={columns}
+              cellEdit={cellEditFactory({
+                mode: 'click',
+                afterSaveCell: (oldValue, newValue, row, column) => {
+                  handleChange(row, column, newValue);
+                },
+              })}
+              filter={filterFactory()}
+            />
+          </React.Fragment>
         )
       ) : null}
     </React.Fragment>
@@ -193,6 +203,7 @@ const mapStateToProps = state => {
     regions: state.daily_region,
     token: state.token,
     isFetching: state.isFetching,
+    isServerError: state.isServerError,
   };
 };
 export default connect(mapStateToProps, {
