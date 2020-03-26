@@ -1,10 +1,12 @@
-import React, { useEffect /*, useState*/ } from 'react';
+import React, { useEffect, useState } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory, { Type } from 'react-bootstrap-table2-editor';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
 import { connect /*,useDispatch*/ } from 'react-redux';
 import { getCountryList, isUpdating } from '../store/actions/index';
+import { Alert } from 'reactstrap';
+
 //import number from 'react-bootstrap-table2-filter/lib/src/components/number';
 
 const PARSE_FUNCTIONS = {
@@ -16,12 +18,13 @@ const PARSE_FUNCTIONS = {
 };
 
 const HomeTableEdit = props => {
-  const { country, getCountryList, isUpdating, token } = props;
+  const { country, getCountryList, isUpdating, token, isServerError } = props;
 
+  const [isAlertVisible, setIsAlertVisible] = useState(isServerError);
   useEffect(() => {
     getCountryList();
-  }, [getCountryList]);
-
+    setIsAlertVisible(isServerError);
+  }, [getCountryList, isServerError]);
   const handleChange = (row, column, newValue) => {
     let updatedData = {};
     const parseFunction = PARSE_FUNCTIONS[column.dataField];
@@ -29,7 +32,9 @@ const HomeTableEdit = props => {
       parseFunction !== undefined ? parseFunction(newValue) : newValue;
     isUpdating(row.country_id, updatedData, token);
   };
-
+  function onDismiss() {
+    setIsAlertVisible(false);
+  }
   const columns = [
     {
       dataField: 'country_id',
@@ -88,19 +93,24 @@ const HomeTableEdit = props => {
     },
   ];
   return (
-    <BootstrapTable
-      keyField="country_id"
-      data={country}
-      columns={columns}
-      cellEdit={cellEditFactory({
-        mode: 'click',
-        afterSaveCell: (oldValue, newValue, row, column) => {
-          handleChange(row, column, newValue);
-        },
-      })}
-      sort={{ dataField: 'country_name', order: 'asc' }}
-      filter={filterFactory()}
-    />
+    <React.Fragment>
+      <Alert color="danger" isOpen={isAlertVisible} toggle={onDismiss}>
+        Unauthorized! Please Login again!
+      </Alert>
+      <BootstrapTable
+        keyField="country_id"
+        data={country}
+        columns={columns}
+        cellEdit={cellEditFactory({
+          mode: 'click',
+          afterSaveCell: (oldValue, newValue, row, column) => {
+            handleChange(row, column, newValue);
+          },
+        })}
+        sort={{ dataField: 'country_name', order: 'asc' }}
+        filter={filterFactory()}
+      />
+    </React.Fragment>
   );
 };
 
@@ -108,6 +118,7 @@ const mapStateToProps = state => {
   return {
     country: state.country,
     token: state.token,
+    isServerError: state.isServerError,
   };
 };
 export default connect(mapStateToProps, {
