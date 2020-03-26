@@ -126,6 +126,7 @@ function rootReducer(state = initialState, action) {
     case ActionTypes.ADDING_DAILYREGION_START:
       return {
         ...state,
+        isServerError: false,
       };
     case ActionTypes.ADDING_DAILYREGION_SUCCESS:
       console.log(action.payload);
@@ -136,6 +137,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         message: action.payload,
+        isServerError: true,
       };
     case ActionTypes.FETCHING_REGIONBYDATE_START:
       return {

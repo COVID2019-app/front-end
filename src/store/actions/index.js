@@ -201,7 +201,6 @@ export const getCountryRegionsByDate = data => dispatch => {
 };
 export const updateDailyRegion = (region_id, updates, token) => dispatch => {
   dispatch({ type: ActionTypes.IS_UPDATINGDAILYREGION_START });
-  console.log(region_id, updates);
   axios
     .put(baseUrl + `regions/${region_id}`, updates, {
       headers: {
