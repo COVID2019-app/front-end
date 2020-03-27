@@ -7,6 +7,7 @@ export const initialState = {
   isServerError: false,
   message: '',
   usa_region: [],
+  daily_region: [],
   region: [],
   region_sum: [],
   isUpdating: false,
@@ -125,6 +126,7 @@ function rootReducer(state = initialState, action) {
     case ActionTypes.ADDING_DAILYREGION_START:
       return {
         ...state,
+        isServerError: false,
       };
     case ActionTypes.ADDING_DAILYREGION_SUCCESS:
       console.log(action.payload);
@@ -134,6 +136,44 @@ function rootReducer(state = initialState, action) {
     case ActionTypes.ADDING_DAILYREGION_FAILURE:
       return {
         ...state,
+        message: action.payload,
+        isServerError: true,
+      };
+    case ActionTypes.FETCHING_REGIONBYDATE_START:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case ActionTypes.FETCHING_REGIONBYDATE_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        daily_region: action.payload,
+      };
+    case ActionTypes.FETCHING_REGIONBYDATE_FAILURE:
+      return {
+        ...state,
+        message: action.payload,
+      };
+    case ActionTypes.IS_UPDATINGDAILYREGION_START:
+      return {
+        ...state,
+        isUpdating: true,
+        isServerError: false,
+        message: action.payload,
+      };
+    case ActionTypes.IS_UPDATINGDAILYREGION_SUCCESS:
+      return {
+        ...state,
+        isUpdating: false,
+        isServerError: false,
+        message: action.payload,
+      };
+    case ActionTypes.IS_UPDATINGDAILYREGION_FAILURE:
+      return {
+        ...state,
+        isUpdating: false,
+        isServerError: true,
         message: action.payload,
       };
     default:
