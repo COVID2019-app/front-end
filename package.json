@@ -68,16 +68,7 @@
       "last 1 safari version"
     ]
   },
-  "bit": {
-    "env": {},
-    "componentsDefaultDirectory": "components/{name}",
-    "packageManager": "npm"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
+
   "lint-staged": {
     "*.{js,css,md,jsx,scss}": "prettier --write"
   }
