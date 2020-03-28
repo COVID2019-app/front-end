@@ -9,7 +9,6 @@ import { createLogger } from 'redux-logger';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import rootReducer /*{ initialState }*/ from './store/reducer';
-
 const logger = createLogger();
 let middleware = [];
 if (process.env.NODE_ENV === 'development') {
