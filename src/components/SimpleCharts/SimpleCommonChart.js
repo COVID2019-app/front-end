@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import SimpleBarChart from './SimpleBarChart';
 import SimpleSplineChart from './SimpleSplineChart';
+import CountryInfo from './CountryInfo';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getCountryRegions } from '../../store/actions';
@@ -17,7 +18,7 @@ const RenderSimpleCharts = props => {
   } = props;
 
   return (
-    <React.Fragment>
+    <div className="row justify-content-between">
       <SimpleBarChart
         region_data={region_data}
         country_name={country_name}
@@ -36,7 +37,7 @@ const RenderSimpleCharts = props => {
         title={title}
         color={color}
       />
-    </React.Fragment>
+    </div>
   );
 };
 
@@ -58,49 +59,21 @@ function SimpleCommonChart(props) {
       Obj['date'] = item.date_of_case;
       Obj[item.regions_name] = item['confirmed_cases'];
       region_cases.push(Obj);
-      if (data.deaths) {
-        var Obj2 = {};
-        Obj2['date'] = item.date_of_case;
-        Obj2[item.regions_name] = item['deaths'];
-        region_deaths.push(Obj2);
-      }
-      if (data.recoveries) {
-        var Obj3 = {};
-        Obj3['date'] = item.date_of_case;
-        Obj3[item.regions_name] = item['recovered'];
-        region_recovered.push(Obj3);
-      }
+
+      var Obj2 = {};
+      Obj2['date'] = item.date_of_case;
+      Obj2[item.regions_name] = item['deaths'];
+      region_deaths.push(Obj2);
+
+      var Obj3 = {};
+      Obj3['date'] = item.date_of_case;
+      Obj3[item.regions_name] = item['recovered'];
+      region_recovered.push(Obj3);
     } else if (map.has(item.date_of_case)) {
       var key = region_cases.findIndex(x => x.date === item.date_of_case);
       region_cases[key][item.regions_name] = item['confirmed_cases'];
-      if (data.deaths) {
-        region_deaths[key][item.regions_name] = item['deaths'];
-      }
-      if (data.recoveries) {
-        region_recovered[key][item.regions_name] = item['recovered'];
-      }
-    }
-  }
-
-  for (var j in region_cases) {
-    if (new Date(region_cases[j].date) !== 'Invalid Date') {
-      region_cases[j].date = new Date(
-        region_cases[j].date
-      ).toLocaleString('en-US', { timeZone: 'Asia/Brunei' });
-    }
-    if (data.deaths) {
-      if (new Date(region_deaths[j].date) !== 'Invalid Date') {
-        region_deaths[j].date = new Date(
-          region_deaths[j].date
-        ).toLocaleString('en-US', { timeZone: 'Asia/Brunei' });
-      }
-    }
-    if (data.recoveries) {
-      if (new Date(region_recovered[j].date) !== 'Invalid Date') {
-        region_deaths[j].date = new Date(
-          region_deaths[j].date
-        ).toLocaleString('en-US', { timeZone: 'Asia/Brunei' });
-      }
+      region_deaths[key][item.regions_name] = item['deaths'];
+      region_recovered[key][item.regions_name] = item['recovered'];
     }
   }
 
@@ -108,8 +81,10 @@ function SimpleCommonChart(props) {
     <div style={{ textAlign: 'center' }}>
       <h1 style={{ fontWeight: 300 }}>{country}</h1>
       <br />
+      <CountryInfo region_data={region} />
       <br />
       <h2 style={{ fontWeight: 300 }}>Cases</h2>
+      <br />
       <br />
       <RenderSimpleCharts
         region_data={region_cases}
