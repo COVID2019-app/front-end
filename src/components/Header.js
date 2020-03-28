@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import useDarkMode  from '../shared/hooks/useDarkMode';
+
+import { darkTheme } from '../themes/theme';
+
 import {
   Navbar,
   NavbarBrand,
@@ -16,21 +20,35 @@ import logo from '../components/logo.png';
 //import { COUNTRIES } from '../shared/livecountries';
 import { countrylist } from '../shared/countrylist';
 import { Link } from 'react-router-dom';
+import { Toggle } from 'material-ui';
 
 const Header = () => {
+  const [darkMode, setDarkMode] = useDarkMode(false);
+  const toggleMode = e => {
+    e.preventDefault();
+    setDarkMode(!darkMode);
+  };
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <Navbar color="light" light expand="md">
+
+  
+    <Navbar className='dark-mode' color={darkMode ? 'dark-mode':'light'} light expand="md">
       <NavbarBrand
         tag={props => (
           <Link to="/" {...props}>
             <img src={logo} alt="covid2019 logo" width="48" height="48" />
           </Link>
+      
         )}
       />
+      
+     
+      
+   
+   
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="mr-auto" navbar>
@@ -74,6 +92,7 @@ const Header = () => {
               )}
               <DropdownItem key={'b'}>
                 <NavLink
+                 
                   tag={props => (
                     <Link to="/countrypages" {...props}>
                       Rest of Countries
@@ -83,6 +102,14 @@ const Header = () => {
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
+      
+          <div className="dark-mode__toggle">
+        <div
+          onClick={toggleMode}
+          className={darkMode ? 'toggle toggled' : 'toggle'}
+        />
+      </div>
+
           {sessionStorage.getItem('token') !== null ? (
             <React.Fragment>
               <NavItem>
@@ -130,6 +157,8 @@ const Header = () => {
         </Nav>
       </Collapse>
     </Navbar>
+  
+ 
   );
 };
 
