@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import useDarkMode  from '../shared/hooks/useDarkMode';
 
-import { darkTheme } from '../themes/theme';
+
 
 import {
   Navbar,
@@ -20,7 +20,7 @@ import logo from '../components/logo.png';
 //import { COUNTRIES } from '../shared/livecountries';
 import { countrylist } from '../shared/countrylist';
 import { Link } from 'react-router-dom';
-import { Toggle } from 'material-ui';
+
 
 const Header = () => {
   const [darkMode, setDarkMode] = useDarkMode(false);
