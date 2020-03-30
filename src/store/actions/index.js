@@ -10,6 +10,7 @@ export const getCountryList = () => dispatch => {
       dispatch({
         type: ActionTypes.FETCHING_COUNTRY_SUCCESS,
         payload: res.data,
+      
       });
     })
     .catch(err => {
