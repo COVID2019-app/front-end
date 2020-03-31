@@ -84,7 +84,7 @@ function Home(props) {
   // const classes = useStyles();
   const [sorted, setSorted] = useState({
     search: '',
-    category: 'confirmed_cases',
+    category: 'cases',
     title: 'Confirmed Cases',
   });
   useEffect(() => {
@@ -116,8 +116,8 @@ function Home(props) {
       if (item.recovered === null) {
         item.recovered = 0;
       }
-      if (item.confirmed_cases === null) {
-        item.confirmed_cases = 0;
+      if (item.cases === null) {
+        item.cases = 0;
       }
     });
     return (
@@ -131,7 +131,7 @@ function Home(props) {
           <DropdownMenu>
             <DropdownItem
               onClick={handleChange}
-              dropdownvalue="confirmed_cases"
+              dropdownvalue="cases"
             >
               Confirmed Cases
             </DropdownItem>
@@ -147,7 +147,7 @@ function Home(props) {
             <DropdownItem onClick={handleChange} dropdownvalue="active_cases">
               Active Cases
             </DropdownItem>
-            <DropdownItem onClick={handleChange} dropdownvalue="country_name">
+            <DropdownItem onClick={handleChange} dropdownvalue="country">
               Territories
             </DropdownItem>
           </DropdownMenu>
@@ -178,11 +178,11 @@ function Home(props) {
           <tbody>
             {country.map(item => (
               <tr key={item.country_id}>
-                <td>{item.country_name}</td>
+                <td>{item.country}</td>
                 <td style={{ textAlign: 'center' }}>
                   {renderDataCell(
                     item,
-                    'confirmed_cases',
+                    'cases',
                     'confirmed_cases_link'
                   )}
                 </td>
@@ -192,11 +192,11 @@ function Home(props) {
                 <td
                   style={{
                     background: `rgba(255, 0, 0, ${item.deaths /
-                      item.confirmed_cases})`,
+                      item.cases})`,
                     textAlign: 'center',
                   }}
                 >
-                  {((item.deaths / item.confirmed_cases) * 100).toFixed(2)}%
+                  {((item.deaths / item.cases) * 100).toFixed(2)}%
                 </td>
                 <td style={{ color: 'green', textAlign: 'center' }}>
                   {renderDataCell(item, 'recovered', 'recovered_link')}
@@ -204,11 +204,11 @@ function Home(props) {
                 <td
                   style={{
                     background: `rgba(0,128,0, ${item.recovered /
-                      item.confirmed_cases})`,
+                      item.cases})`,
                     textAlign: 'center',
                   }}
                 >
-                  {((item.recovered / item.confirmed_cases) * 100).toFixed(2)}%
+                  {((item.recovered / item.cases) * 100).toFixed(2)}%
                 </td>
                 <td style={{ color: 'purple', textAlign: 'center' }}>
                   {renderDataCell(
@@ -220,12 +220,12 @@ function Home(props) {
                 <td
                   style={{
                     background: `rgba(128,0,128, ${item.severe_critical /
-                      item.confirmed_cases})`,
+                      item.cases})`,
                     textAlign: 'center',
                   }}
                 >
                   {(
-                    (item.severe_critical / item.confirmed_cases) *
+                    (item.severe_critical / item.cases) *
                     100
                   ).toFixed(2)}
                   %
@@ -241,11 +241,11 @@ function Home(props) {
                 <td
                   style={{
                     background: `rgba(255, 171, 0, ${item.active_cases /
-                      item.confirmed_cases})`,
+                      item.cases})`,
                     textAlign: 'center',
                   }}
                 >
-                  {((item.active_cases / item.confirmed_cases) * 100).toFixed(
+                  {((item.active_cases / item.cases) * 100).toFixed(
                     2
                   )}
                   %

@@ -22,7 +22,7 @@ function CountryTable(props) {
   const { region_data, isFetching, field } = props;
 
   const onCellPrepared = e => {
-    if (field === 'confirmed_cases') {
+    if (field === 'cases') {
       if (e.columnIndex !== 0) {
         e.cellElement.style.backgroundColor = `rgba(255, 171, 0, ${e.value /
           500})`;

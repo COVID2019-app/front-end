@@ -11,7 +11,7 @@ import France from '../components/France/France';
 import CountryCharts from '../components/CountryCharts';
 import PrivateRoute from '../components/PrivateRoute';
 import LoginPage from '../components/LoginPage';
-import OtherCountries from '../components/OtherCountries';
+import OtherCountries from '../components/OtherCountries'
 
 const Routes = () => {
   const Country = ({ match }) => {
@@ -21,6 +21,7 @@ const Routes = () => {
   return (
     <React.Fragment>
       <Header />
+
       <main className="p-4">
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/live" />} />
