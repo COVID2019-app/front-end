@@ -54,11 +54,11 @@ var headers = [
 function renderDataCell(item, dataProperty, linkProperty) {
   return (
     <div className="d-flex justify-content-around">
-      <div>
+      {/* <div>
         {item[dataProperty]
           .toString()
           .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
-      </div>
+      </div> */}
       {item[linkProperty] && (
         <div>
           <a
@@ -107,8 +107,8 @@ function Home(props) {
       if (item.tested === null) {
         item.tested = 0;
       }
-      if (item.active_cases === null) {
-        item.active_cases = 0;
+      if (item.active=== null) {
+        item.active = 0;
       }
       if (item.deaths === null) {
         item.deaths = 0;
@@ -144,7 +144,7 @@ function Home(props) {
             >
               Severe/Critical
             </DropdownItem>
-            <DropdownItem onClick={handleChange} dropdownvalue="active_cases">
+            <DropdownItem onClick={handleChange} dropdownvalue="active">
               Active Cases
             </DropdownItem>
             <DropdownItem onClick={handleChange} dropdownvalue="country">
@@ -234,18 +234,18 @@ function Home(props) {
                   {renderDataCell(item, 'tested', 'tested_link')}
                 </td>
                 <td style={{ color: '#e69900', textAlign: 'center' }}>
-                  {item.active_cases
+                  {item.active
                     .toString()
                     .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                 </td>
                 <td
                   style={{
-                    background: `rgba(255, 171, 0, ${item.active_cases /
+                    background: `rgba(255, 171, 0, ${item /
                       item.cases})`,
                     textAlign: 'center',
                   }}
                 >
-                  {((item.active_cases / item.cases) * 100).toFixed(
+                  {((item.active / item.cases) * 100).toFixed(
                     2
                   )}
                   %
