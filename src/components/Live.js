@@ -97,9 +97,9 @@ function Live(props) {
                 <div key={x.country_id} className="col-sm-3 live-container ">
                   <Card style={{ border: 'none' }}>
                     <CardHeader>
-                      {x.country_name === 'United States of America'
+                      {x.country === 'United States of America'
                         ? 'USA'
-                        : x.country_name}
+                        : x.country}
                     </CardHeader>
                     <CardBody className="live-card">
                       <CardText className="live-cases">
