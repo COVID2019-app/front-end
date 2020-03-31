@@ -19,7 +19,7 @@ import {
 } from 'devextreme-react/chart';
 
 function SplineChart(props) {
-  const { country_name, region_data, region_names, title } = props;
+  const { country, region_data, region_names, title } = props;
 
   var type = 'spline';
   //var types = ['spline', 'stackedspline', 'fullstackedspline']
@@ -28,7 +28,7 @@ function SplineChart(props) {
     <React.Fragment>
       <Chart
         dataSource={region_data}
-        title={`${country_name} Spline Chart (${title})`}
+        title={`${country} Spline Chart (${title})`}
       >
         <CommonSeriesSettings argumentField="date" type={type} />
         <CommonAxisSettings>

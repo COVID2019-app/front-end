@@ -18,7 +18,7 @@ import {
 } from 'devextreme-react/chart';
 
 function SimpleSplineChart(props) {
-  const { country_name, region_data, title, color, field } = props;
+  const { country, region_data, title, color, field } = props;
 
   var type = 'spline';
   //var types = ['spline', 'stackedspline', 'fullstackedspline']
@@ -34,7 +34,7 @@ function SimpleSplineChart(props) {
     if (new Date(region_data[i].date) !== 'Invalid Date') {
       new_region_data.push({
         arg: new Date(region_data[i].date),
-        val: region_data[i][country_name],
+        val: region_data[i][country],
       });
     }
   }
@@ -43,7 +43,7 @@ function SimpleSplineChart(props) {
     <div className="col-lg-6">
       <Chart
         dataSource={new_region_data}
-        title={`${country_name} Spline Chart (${title})`}
+        title={`${country} Spline Chart (${title})`}
       >
         <CommonSeriesSettings argumentField="arg" type={type} />
         <CommonAxisSettings>
@@ -72,7 +72,7 @@ function SimpleSplineChart(props) {
         <Export enabled={true} />
         <Tooltip enabled={true} customizeTooltip={customizeTooltip} />
         <Series
-          key={country_name}
+          key={country}
           valueField="val"
           name={field}
           color={color}

@@ -10,6 +10,8 @@
     "@material-ui/icons": "^4.9.1",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
+    "d3-interpolate": "^1.4.0",
+    "d3-scale": "^3.2.1",
     "devextreme": "^19.2.7",
     "devextreme-react": "^19.2.7",
     "dotenv": "^8.2.0",

@@ -15,7 +15,7 @@ import {
 } from 'devextreme-react/chart';
 
 function StackedBarChart(props) {
-  const { country_name, region_data, region_names, title, field } = props;
+  const { country, region_data, region_names, title, field } = props;
 
   const customizeTooltip = arg => {
     return {
@@ -33,7 +33,7 @@ function StackedBarChart(props) {
     <React.Fragment>
       <Chart
         id="chart"
-        title={`${country_name} Bar Chart (${title})`}
+        title={`${country} Bar Chart (${title})`}
         dataSource={region_data}
       >
         <CommonSeriesSettings

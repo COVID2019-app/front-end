@@ -20,7 +20,7 @@ export const getCountryList = () => dispatch => {
 
 export const getSortedCountryList = sortedBy => dispatch => {
   var order = 'desc';
-  if (sortedBy === 'country_name') {
+  if (sortedBy === 'country') {
     order = 'asc';
   }
   dispatch({ type: ActionTypes.FETCHING_COUNTRY_START });

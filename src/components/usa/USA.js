@@ -18,7 +18,7 @@ function USA(props) {
     return (
     <div>
         <UsaRegionsChart data={usa_region} />
-        <Country country="USA" country_name="USA" field="confirmed_cases" title="Cases" /> 
+        <Country country="USA" country="USA" field="cases" title="Cases" /> 
     </div>
     );
   }

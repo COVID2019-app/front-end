@@ -10,7 +10,7 @@ import { Alert } from 'reactstrap';
 //import number from 'react-bootstrap-table2-filter/lib/src/components/number';
 
 const PARSE_FUNCTIONS = {
-  confirmed_cases: parseInt,
+  cases: parseInt,
   deaths: parseInt,
   recovered: parseInt,
   severe_critical: parseInt,
@@ -47,12 +47,12 @@ const HomeTableEdit = props => {
       hidden: true,
     },
     {
-      dataField: 'country_name',
+      dataField: 'country',
       text: 'Territory',
       filter: textFilter(),
     },
     {
-      dataField: 'confirmed_cases',
+      dataField: 'cases',
       text: 'Confirmed cases',
     },
     {
@@ -107,7 +107,7 @@ const HomeTableEdit = props => {
             handleChange(row, column, newValue);
           },
         })}
-        sort={{ dataField: 'country_name', order: 'asc' }}
+        sort={{ dataField: 'country', order: 'asc' }}
         filter={filterFactory()}
       />
     </React.Fragment>

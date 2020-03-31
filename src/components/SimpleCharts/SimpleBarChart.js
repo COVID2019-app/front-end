@@ -14,7 +14,7 @@ import {
 } from 'devextreme-react/chart';
 
 function SimpleBarChart(props) {
-  const { country_name, region_data, title, field, color } = props;
+  const { country, region_data, title, field, color } = props;
 
   const customizeTooltip = arg => {
     return {
@@ -28,7 +28,7 @@ function SimpleBarChart(props) {
     if (new Date(region_data[i].date) !== 'Invalid Date' && i > 0) {
       new_region_data.push({
         arg: new Date(region_data[i].date),
-        val: region_data[i][country_name] - region_data[i - 1][country_name],
+        val: region_data[i][country] - region_data[i - 1][country],
       });
     }
   }
@@ -37,7 +37,7 @@ function SimpleBarChart(props) {
     <div className="col-lg-6">
       <Chart
         id="chart"
-        title={`${country_name} Bar Chart, Daily Increases (${title})`}
+        title={`${country} Bar Chart, Daily Increases (${title})`}
         dataSource={new_region_data}
       >
         <CommonSeriesSettings
@@ -60,7 +60,7 @@ function SimpleBarChart(props) {
         />
 
         <Series
-          key={country_name}
+          key={country}
           valueField="val"
           name={field}
           color={color}
