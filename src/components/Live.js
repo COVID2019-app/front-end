@@ -4,11 +4,11 @@ import { Card, CardText, CardBody, CardGroup, CardHeader } from 'reactstrap';
 import { getCountryList } from '../store/actions';
 import { withRouter } from 'react-router-dom';
 
-function renderNumber(number) {
-  return number.toLocaleString(navigator.language, {
-    minimumFractionDigits: 0,
-  });
-}
+// function renderNumber(number) {
+//   return number.toLocaleString(navigator.language, {
+//     minimumFractionDigits: 0,
+//   });
+// }
 
 function Live(props) {
   const { getCountryList, country } = props;
