@@ -22,7 +22,7 @@ import Loading from '../Loading';
 //import number from 'react-bootstrap-table2-filter/lib/src/components/number';
 
 const PARSE_FUNCTIONS = {
-  confirmed_cases: parseInt,
+  cases: parseInt,
   deaths: parseInt,
   recovered: parseInt,
 };
@@ -105,7 +105,7 @@ const EditRegionTable = props => {
     },
     {
       dataField: 'daily_confirmed_cases',
-      text: 'confirmed_cases',
+      text: 'cases',
     },
 
     {

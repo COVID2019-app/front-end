@@ -24,7 +24,7 @@ function InputForm(prop) {
       country_id: prop.countrydata.country_id,
       regions_name: prop.regionName,
       date_of_case: prop.date,
-      confirmed_cases: confirmed,
+      cases: confirmed,
       deaths: deaths,
       recovered: recovered,
     };

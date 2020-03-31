@@ -10,7 +10,7 @@ import CountryTable from './CountryTable';
 
 const RenderCharts = props => {
   const {
-    country_name,
+    country,
     field,
     title,
     region_sum,
@@ -53,7 +53,7 @@ const RenderCharts = props => {
       <br />
       <StackedBarChart
         region_data={region_data}
-        country_name={country_name}
+        country={country}
         field={field}
         region_names={region_names}
         title={title}
@@ -62,7 +62,7 @@ const RenderCharts = props => {
       <br />
       <SplineChart
         region_data={region_data}
-        country_name={country_name}
+        country={country}
         field={field}
         region_names={region_names}
         title={title}
@@ -98,7 +98,7 @@ function CommonChart(props) {
       map.set(item.date_of_case, true);
       var Obj = {};
       Obj['date'] = item.date_of_case;
-      Obj[item.regions_name] = item['confirmed_cases'];
+      Obj[item.regions_name] = item['cases'];
       region_cases.push(Obj);
       if (data.deaths) {
         var Obj2 = {};
@@ -114,7 +114,7 @@ function CommonChart(props) {
       }
     } else if (map.has(item.date_of_case)) {
       var key = region_cases.findIndex(x => x.date === item.date_of_case);
-      region_cases[key][item.regions_name] = item['confirmed_cases'];
+      region_cases[key][item.regions_name] = item['cases'];
       if (data.deaths) {
         region_deaths[key][item.regions_name] = item['deaths'];
       }
@@ -159,9 +159,9 @@ function CommonChart(props) {
         regions={data.regions}
         region_data={region_cases}
         region_names={region_names}
-        country_name={data.country}
+        country={data.country}
         isFetching={isFetching}
-        field="confirmed_cases"
+        field="cases"
         title="Cases"
         few_regions={data.few_regions}
         not_cumu={data.not_cumu}
@@ -177,7 +177,7 @@ function CommonChart(props) {
             region_sum={region_sum}
             region_data={region_deaths}
             region_names={region_names}
-            country_name={data.country}
+            country={data.country}
             isFetching={isFetching}
             field="deaths"
             title="Deaths"
@@ -198,7 +198,7 @@ function CommonChart(props) {
             region_sum={region_sum}
             region_data={region_recovered}
             region_names={region_names}
-            country_name={data.country}
+            country={data.country}
             isFetching={isFetching}
             field="recovered"
             title="Recoveries"

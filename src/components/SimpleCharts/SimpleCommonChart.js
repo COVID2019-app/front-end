@@ -9,7 +9,7 @@ import { getCountryRegions } from '../../store/actions';
 
 const RenderSimpleCharts = props => {
   const {
-    country_name,
+    country,
     field,
     title,
     region_data,
@@ -21,7 +21,7 @@ const RenderSimpleCharts = props => {
     <div className="row justify-content-between">
       <SimpleBarChart
         region_data={region_data}
-        country_name={country_name}
+        country={country}
         field={field}
         region_names={region_names}
         title={title}
@@ -31,7 +31,7 @@ const RenderSimpleCharts = props => {
       <br />
       <SimpleSplineChart
         region_data={region_data}
-        country_name={country_name}
+        country={country}
         field={field}
         region_names={region_names}
         title={title}
@@ -57,7 +57,7 @@ function SimpleCommonChart(props) {
       map.set(item.date_of_case, true);
       var Obj = {};
       Obj['date'] = item.date_of_case;
-      Obj[item.regions_name] = item['confirmed_cases'];
+      Obj[item.regions_name] = item['cases'];
       region_cases.push(Obj);
 
       var Obj2 = {};
@@ -71,7 +71,7 @@ function SimpleCommonChart(props) {
       region_recovered.push(Obj3);
     } else if (map.has(item.date_of_case)) {
       var key = region_cases.findIndex(x => x.date === item.date_of_case);
-      region_cases[key][item.regions_name] = item['confirmed_cases'];
+      region_cases[key][item.regions_name] = item['cases'];
       region_deaths[key][item.regions_name] = item['deaths'];
       region_recovered[key][item.regions_name] = item['recovered'];
     }
@@ -88,9 +88,9 @@ function SimpleCommonChart(props) {
       <br />
       <RenderSimpleCharts
         region_data={region_cases}
-        country_name={data.country}
+        country={data.country}
         isFetching={isFetching}
-        field="confirmed_cases"
+        field="cases"
         title="Cases"
         color="rgb(102, 153, 255)"
       />
@@ -100,7 +100,7 @@ function SimpleCommonChart(props) {
       <br />
       <RenderSimpleCharts
         region_data={region_deaths}
-        country_name={data.country}
+        country={data.country}
         isFetching={isFetching}
         field="deaths"
         title="Deaths"
@@ -111,7 +111,7 @@ function SimpleCommonChart(props) {
       <br />
       <RenderSimpleCharts
         region_data={region_recovered}
-        country_name={data.country}
+        country={data.country}
         isFetching={isFetching}
         field="recovered"
         title="Recoveries"
