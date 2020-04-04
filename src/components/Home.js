@@ -20,7 +20,7 @@ var headers = [
     colspanNum: '1',
   },
   {
-    name: 'Confirmed Cases',
+    name: 'Cases',
     color: 'blue',
     colspanNum: '1',
   },
@@ -85,7 +85,7 @@ function Home(props) {
   const [sorted, setSorted] = useState({
     search: '',
     category: 'cases',
-    title: 'Confirmed Cases',
+    title: 'cases',
   });
   useEffect(() => {
     getSortedCountryList(sorted.category);
@@ -133,7 +133,7 @@ function Home(props) {
               onClick={handleChange}
               dropdownvalue="cases"
             >
-              Confirmed Cases
+              Cases
             </DropdownItem>
             <DropdownItem onClick={handleChange} dropdownvalue="deaths">
               Deaths
@@ -180,13 +180,19 @@ function Home(props) {
               <tr key={item.country_id}>
                 <td>{item.country}</td>
                 <td style={{ textAlign: 'center' }}>
+                {item.cases
+                    .toString()
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                   {renderDataCell(
                     item,
                     'cases',
-                    'confirmed_cases_link'
+                    'cases_link'
                   )}
                 </td>
                 <td style={{ color: 'red', textAlign: 'center' }}>
+                {item.deaths
+                    .toString()
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                   {renderDataCell(item, 'deaths', 'deaths_link')}
                 </td>
                 <td
@@ -195,10 +201,13 @@ function Home(props) {
                       item.cases})`,
                     textAlign: 'center',
                   }}
-                >
+                > 
                   {((item.deaths / item.cases) * 100).toFixed(2)}%
                 </td>
                 <td style={{ color: 'green', textAlign: 'center' }}>
+                {item.recovered
+                    .toString()
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                   {renderDataCell(item, 'recovered', 'recovered_link')}
                 </td>
                 <td
@@ -207,10 +216,15 @@ function Home(props) {
                       item.cases})`,
                     textAlign: 'center',
                   }}
+                  
                 >
+    
                   {((item.recovered / item.cases) * 100).toFixed(2)}%
                 </td>
                 <td style={{ color: 'purple', textAlign: 'center' }}>
+                {item.severe_critical
+                    .toString()
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                   {renderDataCell(
                     item,
                     'severe_critical',
@@ -230,11 +244,15 @@ function Home(props) {
                   ).toFixed(2)}
                   %
                 </td>
+    
                 <td style={{ color: 'grey', textAlign: 'center' }}>
+                {item.tested
+                    .toString()
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                   {renderDataCell(item, 'tested', 'tested_link')}
                 </td>
                 <td style={{ color: '#e69900', textAlign: 'center' }}>
-                  {item.active
+                  {(item.cases - item.recovered - item.deaths)
                     .toString()
                     .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                 </td>
