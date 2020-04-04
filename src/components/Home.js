@@ -180,7 +180,7 @@ function Home(props) {
               <tr key={item.country_id}>
                 <td>{item.country}</td>
                 <td style={{ textAlign: 'center' }}>
-                {item.active
+                {item.cases
                     .toString()
                     .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                   {renderDataCell(
@@ -190,6 +190,9 @@ function Home(props) {
                   )}
                 </td>
                 <td style={{ color: 'red', textAlign: 'center' }}>
+                {item.deaths
+                    .toString()
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                   {renderDataCell(item, 'deaths', 'deaths_link')}
                 </td>
                 <td
@@ -198,10 +201,13 @@ function Home(props) {
                       item.cases})`,
                     textAlign: 'center',
                   }}
-                >
+                > 
                   {((item.deaths / item.cases) * 100).toFixed(2)}%
                 </td>
                 <td style={{ color: 'green', textAlign: 'center' }}>
+                {item.recovered
+                    .toString()
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                   {renderDataCell(item, 'recovered', 'recovered_link')}
                 </td>
                 <td
@@ -210,10 +216,15 @@ function Home(props) {
                       item.cases})`,
                     textAlign: 'center',
                   }}
+                  
                 >
+    
                   {((item.recovered / item.cases) * 100).toFixed(2)}%
                 </td>
                 <td style={{ color: 'purple', textAlign: 'center' }}>
+                {item.severe_critical
+                    .toString()
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                   {renderDataCell(
                     item,
                     'severe_critical',
@@ -235,10 +246,13 @@ function Home(props) {
                 </td>
     
                 <td style={{ color: 'grey', textAlign: 'center' }}>
+                {item.tested
+                    .toString()
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                   {renderDataCell(item, 'tested', 'tested_link')}
                 </td>
                 <td style={{ color: '#e69900', textAlign: 'center' }}>
-                  {item.active
+                  {(item.cases - item.recovered - item.deaths)
                     .toString()
                     .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                 </td>
