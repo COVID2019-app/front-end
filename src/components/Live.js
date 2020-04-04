@@ -94,7 +94,7 @@ function Live(props) {
           <CardGroup>
             {country.slice(0, 24).map(x => {
               return (
-                <div key={x.country_id} className="col-sm-3 live-container ">
+                <div key={x.id} className="col-sm-3 live-container ">
                   <Card style={{ border: 'none' }}>
                     <CardHeader>
                       {x.country === 'United States of America'
