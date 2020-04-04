@@ -14,21 +14,26 @@ import {
 } from 'devextreme-react/chart';
 
 function SimpleBarChart(props) {
-  const { country, region_data, title, field, color } = props;
+  const { country, country_name, region_data, title, field, color } = props;
+
 
   const customizeTooltip = arg => {
     return {
-      text: `${field}: ${arg.valueText.replace('_', ' ')}`,
+      text: `${arg.argumentText.slice(4, 10)} \n${field.replace('_', ' ')}: ${arg.valueText}`,
+      color: '#000000',
+      borderColor: '#000000',
+      fontColor: '#ffffff',
+
     };
   };
 
   var new_region_data = [];
 
   for (var i in region_data) {
-    if (new Date(region_data[i].date) !== 'Invalid Date' && i > 0) {
+    if (new Date(region_data[i].date) !== 'Invalid Date' && i > 0 && region_data[i][country]!=="") {
       new_region_data.push({
         arg: new Date(region_data[i].date),
-        val: region_data[i][country] - region_data[i - 1][country],
+        val: region_data[i][country] - region_data[parseInt(i) - 1][country],
       });
     }
   }
@@ -37,7 +42,7 @@ function SimpleBarChart(props) {
     <div className="col-lg-6">
       <Chart
         id="chart"
-        title={`${country} Bar Chart, Daily Increases (${title})`}
+        title={`${country_name} Bar Chart, Daily Increases (${title})`}
         dataSource={new_region_data}
       >
         <CommonSeriesSettings

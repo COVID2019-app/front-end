@@ -5,10 +5,7 @@ export default function CountryInfo(props) {
   const { region_data } = props;
 
   if (region_data.length > 1) {
-    var date_of_first_case = region_data[0].date_of_case.replace(
-      'T00:00:00.000Z',
-      ''
-    );
+    var date_of_first_case = region_data[0].date
     var total_cases = region_data[region_data.length - 1].cases;
     var deaths = region_data[region_data.length - 1].deaths;
     var recovered = region_data[region_data.length - 1].recovered;

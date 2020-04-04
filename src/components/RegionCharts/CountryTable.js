@@ -21,6 +21,8 @@ function CountryTable(props) {
 
   const { region_data, isFetching, field } = props;
 
+  
+
   const onCellPrepared = e => {
     if (field === 'cases') {
       if (e.columnIndex !== 0) {
@@ -35,7 +37,6 @@ function CountryTable(props) {
     }
   };
 
-  console.log(region_data);
 
   if (region_data.length < 1 || isFetching) {
     return <Loading />;

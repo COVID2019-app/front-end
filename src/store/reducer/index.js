@@ -9,6 +9,7 @@ export const initialState = {
   usa_region: [],
   daily_region: [],
   region: [],
+  country_timeseries: [],
   region_sum: [],
   isUpdating: false,
   updatedCountry: [],
@@ -29,6 +30,24 @@ function rootReducer(state = initialState, action) {
         isFetching: false,
       };
     case ActionTypes.FETCHING_COUNTRY_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        isServerError: true,
+        message: action.payload,
+      };
+    case ActionTypes.FETCHING_COUNTRIES_TIMESERIES_START:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case ActionTypes.FETCHING_COUNTRIES_TIMESERIES_SUCCESS:
+      return {
+        ...state,
+        country_timeseries: action.payload,
+        isFetching: false,
+      };
+    case ActionTypes.FETCHING_COUNTRIES_TIMESERIES_FAILURE:
       return {
         ...state,
         isFetching: false,

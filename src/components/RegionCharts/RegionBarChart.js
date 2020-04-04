@@ -1,44 +1,46 @@
 import React from 'react';
 
-import { Chart, Series, Label, ArgumentAxis } from 'devextreme-react/chart';
+import { Chart, Series, Label, ArgumentAxis, Legend, Tooltip, ValueAxis } from 'devextreme-react/chart';
 
 const RegionBarChart = props => {
-  const { region_sum, field, title, not_cumu, region_data } = props;
+  const { field, title, region_data } = props;
+
+  const customizeTooltip = arg => {
+    return {
+      text: `Total ${field.replace('_', ' ')}: ${arg.valueText}`,
+      color: '#000000',
+      borderColor: '#000000',
+      fontColor: '#ffffff',
+    };
+  };
+
 
   var data = [];
-  if (not_cumu) {
-    for (var i in region_sum) {
-      var d = {
-        region: region_sum[i].regions_name,
-        cases: parseInt(region_sum[i][`${field}`]),
-      };
-      data.push(d);
-    }
-  } else {
     if (region_data.length > 1) {
       Object.keys(region_data[region_data.length - 2])
         .slice(1, Object.keys(region_data[region_data.length - 2]).length)
         .map(x => {
           var d = {
             region: x,
-            cases: region_data[region_data.length - 2][x],
+            cases: parseInt(region_data[region_data.length - 2][x]),
           };
           data.push(d);
           return data;
         });
-    }
   }
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <h4>Confirmed {title} by Regions</h4>
-      <Chart id="chart" dataSource={data}>
+      <Chart id="chart" 
+      dataSource={data}
+        title={`Confirmed ${title} by Regions`}>
+
         <Series
           valueField="cases"
           argumentField="region"
           name={field}
           type="bar"
-          color="#ffaa66"
+          color="#00c0c7"
         >
           <Label
             position="outside"
@@ -47,9 +49,21 @@ const RegionBarChart = props => {
             showForZeroValues={true}
           />
         </Series>
+        <Legend
+          visible={false}
+        />
         <ArgumentAxis>
           <Label wordWrap="breakWord" overlappingBehavior="rotate" />
         </ArgumentAxis>
+        <ValueAxis
+          position="left"
+          format="integer"
+        ></ValueAxis>
+        <Tooltip
+          enabled={true}
+          location="edge"
+          customizeTooltip={customizeTooltip}
+        />
       </Chart>
     </div>
   );

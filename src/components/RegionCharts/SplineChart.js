@@ -19,7 +19,17 @@ import {
 } from 'devextreme-react/chart';
 
 function SplineChart(props) {
-  const { country, region_data, region_names, title } = props;
+  const { country, region_data, region_names, title, field } = props;
+
+  const customizeTooltip = arg => {
+    return {
+      text: `${arg.argumentText.slice(4, 10)} \n ${arg.seriesName} ${field}: ${arg.valueText}`,
+      color: '#000000',
+      borderColor: '#000000',
+      fontColor: '#ffffff',
+    };
+  };
+
 
   var type = 'spline';
   //var types = ['spline', 'stackedspline', 'fullstackedspline']
@@ -55,7 +65,11 @@ function SplineChart(props) {
           itemTextPosition="top"
         />
         <Export enabled={true} />
-        <Tooltip enabled={true} />
+        <Tooltip
+          enabled={true}
+          location="edge"
+          customizeTooltip={customizeTooltip}
+        />
         <Size height={600} />
       </Chart>
       {/*Need to figure out how to style this
