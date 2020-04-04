@@ -20,7 +20,7 @@ var headers = [
     colspanNum: '1',
   },
   {
-    name: 'Confirmed Cases',
+    name: 'Cases',
     color: 'blue',
     colspanNum: '1',
   },
@@ -54,11 +54,11 @@ var headers = [
 function renderDataCell(item, dataProperty, linkProperty) {
   return (
     <div className="d-flex justify-content-around">
-      <div>
+      {/* <div>
         {item[dataProperty]
           .toString()
           .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
-      </div>
+      </div> */}
       {item[linkProperty] && (
         <div>
           <a
@@ -85,7 +85,7 @@ function Home(props) {
   const [sorted, setSorted] = useState({
     search: '',
     category: 'cases',
-    title: 'Confirmed Cases',
+    title: 'cases',
   });
   useEffect(() => {
     getSortedCountryList(sorted.category);
@@ -107,8 +107,8 @@ function Home(props) {
       if (item.tested === null) {
         item.tested = 0;
       }
-      if (item.active_cases === null) {
-        item.active_cases = 0;
+      if (item.active=== null) {
+        item.active = 0;
       }
       if (item.deaths === null) {
         item.deaths = 0;
@@ -133,7 +133,7 @@ function Home(props) {
               onClick={handleChange}
               dropdownvalue="cases"
             >
-              Confirmed Cases
+              Cases
             </DropdownItem>
             <DropdownItem onClick={handleChange} dropdownvalue="deaths">
               Deaths
@@ -144,7 +144,7 @@ function Home(props) {
             >
               Severe/Critical
             </DropdownItem>
-            <DropdownItem onClick={handleChange} dropdownvalue="active_cases">
+            <DropdownItem onClick={handleChange} dropdownvalue="active">
               Active Cases
             </DropdownItem>
             <DropdownItem onClick={handleChange} dropdownvalue="country">
@@ -180,10 +180,13 @@ function Home(props) {
               <tr key={item.country_id}>
                 <td>{item.country}</td>
                 <td style={{ textAlign: 'center' }}>
+                {item.active
+                    .toString()
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                   {renderDataCell(
                     item,
                     'cases',
-                    'confirmed_cases_link'
+                    'cases_link'
                   )}
                 </td>
                 <td style={{ color: 'red', textAlign: 'center' }}>
@@ -230,22 +233,23 @@ function Home(props) {
                   ).toFixed(2)}
                   %
                 </td>
+    
                 <td style={{ color: 'grey', textAlign: 'center' }}>
                   {renderDataCell(item, 'tested', 'tested_link')}
                 </td>
                 <td style={{ color: '#e69900', textAlign: 'center' }}>
-                  {item.active_cases
+                  {item.active
                     .toString()
                     .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                 </td>
                 <td
                   style={{
-                    background: `rgba(255, 171, 0, ${item.active_cases /
+                    background: `rgba(255, 171, 0, ${item /
                       item.cases})`,
                     textAlign: 'center',
                   }}
                 >
-                  {((item.active_cases / item.cases) * 100).toFixed(
+                  {((item.active / item.cases) * 100).toFixed(
                     2
                   )}
                   %
