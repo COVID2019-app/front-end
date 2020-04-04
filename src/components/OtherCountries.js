@@ -57,8 +57,8 @@ export default function OtherCountries() {
           <br></br>
 
           <div className="col-lg-6">
-            <UncontrolledButtonDropdown direction="right">
-              <h2 style={{ fontWeight: 300 }}>Select a Country: </h2>
+            <UncontrolledButtonDropdown >
+              <h2 className="" style={{ fontWeight: 300 }}>Select a Country: </h2>
               <DropdownToggle
                 color="link"
                 style={{

@@ -9,7 +9,7 @@ export default function CountryInfo(props) {
       'T00:00:00.000Z',
       ''
     );
-    var total_cases = region_data[region_data.length - 1].confirmed_cases;
+    var total_cases = region_data[region_data.length - 1].cases;
     var deaths = region_data[region_data.length - 1].deaths;
     var recovered = region_data[region_data.length - 1].recovered;
   }

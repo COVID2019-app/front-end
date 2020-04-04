@@ -10,6 +10,7 @@ export const getCountryList = () => dispatch => {
       dispatch({
         type: ActionTypes.FETCHING_COUNTRY_SUCCESS,
         payload: res.data,
+      
       });
     })
     .catch(err => {
@@ -19,7 +20,7 @@ export const getCountryList = () => dispatch => {
 
 export const getSortedCountryList = sortedBy => dispatch => {
   var order = 'desc';
-  if (sortedBy === 'country_name') {
+  if (sortedBy === 'country') {
     order = 'asc';
   }
   dispatch({ type: ActionTypes.FETCHING_COUNTRY_START });
@@ -27,7 +28,7 @@ export const getSortedCountryList = sortedBy => dispatch => {
     .get(baseUrl + 'country/sort')
     .then(res => {
       res.data.forEach(item => {
-        item.active_cases = item.confirmed_cases - item.deaths - item.recovered;
+        item.active = item.cases - item.deaths - item.recovered;
       });
       res.data.sort(function(a, b) {
         let comparison = 0;
