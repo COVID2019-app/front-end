@@ -46,7 +46,7 @@ export const getSortedCountryList = sortedBy => dispatch => {
     .get(baseUrl + 'country/sort')
     .then(res => {
       res.data.forEach(item => {
-        item.active_cases = item.confirmed_cases - item.deaths - item.recovered;
+        item.active = item.cases - item.deaths - item.recovered;
       });
       res.data.sort(function(a, b) {
         let comparison = 0;
