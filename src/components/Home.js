@@ -20,7 +20,7 @@ var headers = [
     colspanNum: '1',
   },
   {
-    name: 'Confirmed Cases',
+    name: 'Cases',
     color: 'blue',
     colspanNum: '1',
   },
@@ -85,7 +85,7 @@ function Home(props) {
   const [sorted, setSorted] = useState({
     search: '',
     category: 'cases',
-    title: 'Confirmed Cases',
+    title: 'cases',
   });
   useEffect(() => {
     getSortedCountryList(sorted.category);
@@ -133,7 +133,7 @@ function Home(props) {
               onClick={handleChange}
               dropdownvalue="cases"
             >
-              Confirmed Cases
+              Cases
             </DropdownItem>
             <DropdownItem onClick={handleChange} dropdownvalue="deaths">
               Deaths
@@ -180,10 +180,13 @@ function Home(props) {
               <tr key={item.country_id}>
                 <td>{item.country}</td>
                 <td style={{ textAlign: 'center' }}>
+                {item.active
+                    .toString()
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                   {renderDataCell(
                     item,
                     'cases',
-                    'confirmed_cases_link'
+                    'cases_link'
                   )}
                 </td>
                 <td style={{ color: 'red', textAlign: 'center' }}>
@@ -230,6 +233,7 @@ function Home(props) {
                   ).toFixed(2)}
                   %
                 </td>
+    
                 <td style={{ color: 'grey', textAlign: 'center' }}>
                   {renderDataCell(item, 'tested', 'tested_link')}
                 </td>
