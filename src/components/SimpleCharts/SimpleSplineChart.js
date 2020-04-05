@@ -18,14 +18,17 @@ import {
 } from 'devextreme-react/chart';
 
 function SimpleSplineChart(props) {
-  const { country, region_data, title, color, field } = props;
+  const { country, country_name, region_data, title, color, field } = props;
 
   var type = 'spline';
   //var types = ['spline', 'stackedspline', 'fullstackedspline']
 
   const customizeTooltip = arg => {
     return {
-      text: `${field.replace('_', ' ')}: ${arg.valueText}`,
+      text: `${arg.argumentText.slice(4, 10)} \n\n${field.replace('_', ' ')}: ${arg.valueText}`,
+      color: '#000000',
+      borderColor: '#000000',
+      fontColor: '#ffffff',
     };
   };
 
@@ -34,7 +37,7 @@ function SimpleSplineChart(props) {
     if (new Date(region_data[i].date) !== 'Invalid Date') {
       new_region_data.push({
         arg: new Date(region_data[i].date),
-        val: region_data[i][country],
+        val: parseInt(region_data[i][country]),
       });
     }
   }
@@ -43,7 +46,7 @@ function SimpleSplineChart(props) {
     <div className="col-lg-6">
       <Chart
         dataSource={new_region_data}
-        title={`${country} Spline Chart (${title})`}
+        title={`${country_name} Spline Chart (${title})`}
       >
         <CommonSeriesSettings argumentField="arg" type={type} />
         <CommonAxisSettings>

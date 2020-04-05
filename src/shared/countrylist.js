@@ -28,12 +28,7 @@ export const countrylist = [
   },
   {
     country: 'Iran',
-    id: 32,
-    cases: true,
-    deaths: true,
-    few_regions: false,
-    regions: true,
-    not_cumu: true,
+    id: 32
   },
   {
     country: 'France',

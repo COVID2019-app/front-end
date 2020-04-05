@@ -66,9 +66,12 @@ code {
   .table {
     color: white;
   }
+  
   text {
-    color: white !important;
+    color: black !important;
+    fill: white !important;
   }
+
 
   .navbar {
     background-color: #1F2022;
@@ -85,5 +88,8 @@ code {
     background-color: #1f2022;
     color:white
   }
+  dx-export-menu-list text{
+  fill: black;
+ }
 }
 }

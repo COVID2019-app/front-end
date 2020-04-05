@@ -18,6 +18,24 @@ export const getCountryList = () => dispatch => {
     });
 };
 
+export const getCountryTimeseries= () => dispatch => {
+
+  dispatch({ type: ActionTypes.FETCHING_COUNTRIES_TIMESERIES_START});
+  axios
+    .get('https://covid2019app.nyc3.digitaloceanspaces.com/timeseries.json')
+    .then(res => {
+      dispatch({
+        type: ActionTypes.FETCHING_COUNTRIES_TIMESERIES_SUCCESS,
+        payload: res.data,
+
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+
 export const getSortedCountryList = sortedBy => dispatch => {
   var order = 'desc';
   if (sortedBy === 'country') {
@@ -28,7 +46,7 @@ export const getSortedCountryList = sortedBy => dispatch => {
     .get(baseUrl + 'country/sort')
     .then(res => {
       res.data.forEach(item => {
-        item.active = item.cases - item.deaths - item.recovered;
+        item.active_cases = item.confirmed_cases - item.deaths - item.recovered;
       });
       res.data.sort(function(a, b) {
         let comparison = 0;

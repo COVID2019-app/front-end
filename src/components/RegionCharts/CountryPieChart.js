@@ -7,33 +7,27 @@ import PieChart, {
   Export,
   Legend,
   SmallValuesGrouping,
+  Tooltip,
 } from 'devextreme-react/pie-chart';
 
 function CountryPieChart(props) {
   const {
-    region_sum,
     region_data,
-    not_cumu,
     field,
     title,
-    few_regions,
   } = props;
+
+  const customizeTooltip = arg => {
+    return {
+      text: `Total ${field.replace('_', ' ')}: ${arg.valueText}`,
+      color: '#000000',
+      borderColor: '#000000',
+      fontColor: '#ffffff',
+    };
+  };
 
   var data = [];
 
-  if (not_cumu) {
-    for (var i in region_sum) {
-      var d = {
-        region: region_sum[i].regions_name,
-        cases: region_sum[i][`${field}`],
-      };
-      data.push(d);
-    }
-  } else {
-    //if (region_data.length>1){
-    //  console.log(Object.keys(region_data[region_data.length - 1]).slice(1, Object.keys(region_data[region_data.length - 1]).length))
-
-    //}
     if (region_data.length > 1) {
       Object.keys(region_data[region_data.length - 2])
         .slice(1, Object.keys(region_data[region_data.length - 2]).length)
@@ -46,8 +40,7 @@ function CountryPieChart(props) {
           return data;
         });
     }
-  }
-  console.log('data', data);
+  
 
   function pointClickHandler(e) {
     toggleVisibility(e.target);
@@ -78,16 +71,21 @@ function CountryPieChart(props) {
           <Label visible={false}>
             <Connector visible={true} width={1} />
           </Label>
-          {few_regions === false ? (
-            <SmallValuesGrouping threshold={400} mode="smallValueThreshold" />
+          {field === "cases" ? (
+            <SmallValuesGrouping threshold={1000} mode="smallValueThreshold" />
           ) : (
-            <div />
+              <SmallValuesGrouping threshold={5} mode="smallValueThreshold" />
           )}
         </Series>
         <Legend horizontalAlignment="center" verticalAlignment="bottom" />
 
         <Size width={300} />
         <Export enabled={true} />
+        <Tooltip
+          enabled={true}
+          location="edge"
+          customizeTooltip={customizeTooltip}
+        />
       </PieChart>
     </div>
   );

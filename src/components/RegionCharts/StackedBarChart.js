@@ -19,7 +19,10 @@ function StackedBarChart(props) {
 
   const customizeTooltip = arg => {
     return {
-      text: `${arg.seriesName} ${field}: ${arg.valueText}`,
+      text: `${arg.argumentText.slice(4, 10)} \n ${arg.seriesName} ${field}: ${arg.valueText}`,
+      color: '#000000',
+      borderColor: '#000000',
+      fontColor: '#ffffff',
     };
   };
 
@@ -48,9 +51,6 @@ function StackedBarChart(props) {
         <ValueAxis
           position="left"
           format="integer"
-          autoBreaksEnabled={true}
-          maxAutoBreakCount={2}
-          breakStyle={{ line: 'waved' }}
         >
           <Title text={title} />
         </ValueAxis>

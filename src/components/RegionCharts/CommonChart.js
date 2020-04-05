@@ -1,7 +1,4 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { getCountryRegions, getRegionSum } from '../../store/actions';
+import React from 'react';
 import StackedBarChart from './StackedBarChart';
 import SplineChart from './SplineChart';
 import CountryPieChart from './CountryPieChart';
@@ -73,153 +70,136 @@ const RenderCharts = props => {
 
 function CommonChart(props) {
   const {
-    getRegionSum,
-    getCountryRegions,
-    region,
-    data,
-    region_sum,
+
     isFetching,
-    country,
+    country, 
+    country_name, 
+    country_data,
   } = props;
 
-  useEffect(() => {
-    getCountryRegions(data.id);
-    getRegionSum(data.id);
-  }, [getCountryRegions, getRegionSum, data.id]);
 
-  const region_names = [...new Set(region.map(x => x.regions_name))];
 
+  const region_names = [...new Set(country_data.map(x => x.state))];
+
+  const compare = (a, b) => {
+    let comparison = 0
+    a.date > b.date ? comparison = 1 : comparison = -1
+    return comparison;
+  }
+
+  country_data.sort(compare)
+
+  const region_sum = []
+  region_names.map(z => {
+    region_sum.push(country_data[country_data.map(y => y.state).lastIndexOf(z)])
+    
+    return (region_sum)
+  }
+  )
+  
   const region_cases = [];
   const region_deaths = [];
   const region_recovered = [];
   const map = new Map();
-  for (const item of region) {
-    if (!map.has(item.date_of_case)) {
-      map.set(item.date_of_case, true);
+  for (const item of country_data) {
+    if (!map.has(item.date)) {
+      map.set(item.date, true);
       var Obj = {};
-      Obj['date'] = item.date_of_case;
-      Obj[item.regions_name] = item['cases'];
+      Obj['date'] = item.date;
+      !isNaN(parseInt(item['cases'])) ? Obj[item.state] = parseInt(item['cases']) : Obj[item.state] = null
       region_cases.push(Obj);
-      if (data.deaths) {
-        var Obj2 = {};
-        Obj2['date'] = item.date_of_case;
-        Obj2[item.regions_name] = item['deaths'];
-        region_deaths.push(Obj2);
-      }
-      if (data.recoveries) {
-        var Obj3 = {};
-        Obj3['date'] = item.date_of_case;
-        Obj3[item.regions_name] = item['recovered'];
-        region_recovered.push(Obj3);
-      }
-    } else if (map.has(item.date_of_case)) {
-      var key = region_cases.findIndex(x => x.date === item.date_of_case);
-      region_cases[key][item.regions_name] = item['cases'];
-      if (data.deaths) {
-        region_deaths[key][item.regions_name] = item['deaths'];
-      }
-      if (data.recoveries) {
-        region_recovered[key][item.regions_name] = item['recovered'];
-      }
-    }
-  }
-  console.log('recoveries', region_recovered);
 
-  for (var j in region_cases) {
-    if (new Date(region_cases[j].date) !== 'Invalid Date') {
-      region_cases[j].date = new Date(
-        region_cases[j].date
-      ).toLocaleString('en-US', { timeZone: 'Asia/Brunei' });
-    }
-    if (data.deaths) {
-      if (new Date(region_deaths[j].date) !== 'Invalid Date') {
-        region_deaths[j].date = new Date(
-          region_deaths[j].date
-        ).toLocaleString('en-US', { timeZone: 'Asia/Brunei' });
-      }
-    }
-    if (data.recoveries) {
-      if (new Date(region_recovered[j].date) !== 'Invalid Date') {
-        region_deaths[j].date = new Date(
-          region_deaths[j].date
-        ).toLocaleString('en-US', { timeZone: 'Asia/Brunei' });
-      }
+      var Obj2 = {};
+      Obj2['date'] = item.date;
+      !isNaN(parseInt(item['deaths'])) ? Obj2[item.state] = parseInt(item['deaths']) : Obj2[item.state] = null
+      region_deaths.push(Obj2);
+
+      var Obj3 = {};
+      Obj3['date'] = item.date;
+      !isNaN(parseInt(item['recovered'])) ? Obj3[item.state] = parseInt(item['recovered']) : Obj3[item.state] = null
+      region_recovered.push(Obj3);
+
+    } else if (map.has(item.date)) {
+      var key = region_cases.findIndex(x => x.date === item.date);
+      !isNaN(parseInt(item['cases'])) ?  region_cases[key][item.state] = parseInt(item['cases']) :region_cases[key][item.state] = null
+      !isNaN(parseInt(item['deaths'])) ? region_deaths[key][item.state] = parseInt(item['deaths']) : region_deaths[key][item.state] = null
+      !isNaN(parseInt(item['recovered'])) ? region_recovered[key][item.state] = parseInt(item['recovered']) : region_recovered[key][item.state] = null
     }
   }
 
-  return (
-    <div style={{ textAlign: 'center' }}>
-      <h1 style={{ fontWeight: 300 }}>{country}</h1>
-      <br />
-      <br />
-      <h2 style={{ fontWeight: 300 }}>Cases</h2>
-      <br />
-      <RenderCharts
-        region_sum={region_sum}
-        regions={data.regions}
-        region_data={region_cases}
-        region_names={region_names}
-        country={data.country}
-        isFetching={isFetching}
-        field="cases"
-        title="Cases"
-        few_regions={data.few_regions}
-        not_cumu={data.not_cumu}
-      />
-      <br />
-      {data.deaths ? (
-        <React.Fragment>
-          <hr />
-          <h2 style={{ fontWeight: 300 }}>Deaths</h2>
-          <br />
-          <RenderCharts
-            regions={data.regions}
-            region_sum={region_sum}
-            region_data={region_deaths}
-            region_names={region_names}
-            country={data.country}
-            isFetching={isFetching}
-            field="deaths"
-            title="Deaths"
-            few_regions={data.few_regions}
-            not_cumu={data.not_cumu}
-          />
-        </React.Fragment>
-      ) : (
-        <div></div>
-      )}
-      {data.recoveries ? (
-        <React.Fragment>
-          <hr />
-          <h2 style={{ fontWeight: 300 }}>Recoveries</h2>
-          <br />
-          <RenderCharts
-            regions={data.regions}
-            region_sum={region_sum}
-            region_data={region_recovered}
-            region_names={region_names}
-            country={data.country}
-            isFetching={isFetching}
-            field="recovered"
-            title="Recoveries"
-            few_regions={data.few_regions}
-            not_cumu={data.not_cumu}
-          />
-        </React.Fragment>
-      ) : (
-        <div></div>
-      )}
-    </div>
-  );
+
+for (var j in region_cases) {
+  if (new Date(region_cases[j].date) !== 'Invalid Date') {
+    region_cases[j].date = new Date(
+      region_cases[j].date
+    )
+    if (new Date(region_deaths[j].date) !== 'Invalid Date') {
+      region_deaths[j].date = new Date(
+        region_deaths[j].date
+      )
+    }
+    if (new Date(region_recovered[j].date) !== 'Invalid Date') {
+      region_deaths[j].date = new Date(
+        region_deaths[j].date
+      )
+    }
+  }
 }
 
-const mapStateToProps = state => {
-  return {
-    region: state.region,
-    region_sum: state.region_sum,
-    isFetching: state.isFetching,
-  };
-};
-export default withRouter(
-  connect(mapStateToProps, { getCountryRegions, getRegionSum })(CommonChart)
+
+return (
+  <div style={{ textAlign: 'center' }}>
+    <h1 style={{ fontWeight: 300 }}>{country_name} {"(" + country + ")"}</h1>
+    <br />
+    <br />
+    <h2 style={{ fontWeight: 300 }}>Cases</h2>
+    <br />
+    <RenderCharts
+      region_sum={region_sum}
+      regions={true}
+      region_data={region_cases}
+      region_names={region_names}
+      country={country}
+      country_name={country_name}
+      isFetching={isFetching}
+      field="cases"
+      title="Cases"
+    />
+    <br />
+    <React.Fragment>
+      <hr />
+      <h2 style={{ fontWeight: 300 }}>Deaths</h2>
+      <br />
+      <RenderCharts
+        regions={true}
+        region_sum={region_sum}
+        region_data={region_deaths}
+        region_names={region_names}
+        country={country}
+        country_name={country_name}
+        isFetching={isFetching}
+        field="deaths"
+        title="Deaths"
+      />
+    </React.Fragment>
+    <React.Fragment>
+      <hr />
+      <h2 style={{ fontWeight: 300 }}>Recoveries</h2>
+      <br />
+      <RenderCharts
+        regions={true}
+        region_sum={region_sum}
+        region_data={region_recovered}
+        region_names={region_names}
+        country={country}
+        isFetching={isFetching}
+        field="recovered"
+        title="Recoveries"
+      />
+    </React.Fragment>
+  </div>
 );
+}
+
+
+export default CommonChart;

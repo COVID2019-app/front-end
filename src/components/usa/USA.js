@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getUsRegions } from "../../store/actions/index";
 //import Loading from "../Loading";
 import UsaRegionsChart from "./UsaRegionsChart";
-import Country from "../CountryCharts";
+import Country from "../RegionCharts/CountryCharts";
 
 
 function USA(props) {
