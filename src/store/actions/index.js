@@ -2,6 +2,7 @@ import axios from 'axios';
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../../shared/baseUrl';
 
+
 export const getCountryList = () => dispatch => {
   dispatch({ type: ActionTypes.FETCHING_COUNTRY_START });
   axios
@@ -17,12 +18,19 @@ export const getCountryList = () => dispatch => {
       console.log(err);
     });
 };
-
 export const getCountryTimeseries= () => dispatch => {
 
   dispatch({ type: ActionTypes.FETCHING_COUNTRIES_TIMESERIES_START});
-  axios
-    .get('https://covid2019app.nyc3.digitaloceanspaces.com/timeseries.json')
+  axios({
+    method: 'get',
+    url: 'https://covid2019app.nyc3.cdn.digitaloceanspaces.com/timeseries.json',
+    headers: {
+      "Access-Control-AllowOrigin": "*",
+      //"react_app_graphql_key": process.env.REACT_APP_KEY,
+      //"Secret": process.env.REACT_APP_SECRET,
+    }
+  })
+    //.get('https://covid2019app.nyc3.cdn.digitaloceanspaces.com/timeseries.json')
     .then(res => {
       dispatch({
         type: ActionTypes.FETCHING_COUNTRIES_TIMESERIES_SUCCESS,
