@@ -21,7 +21,7 @@ export const getCountryList = () => dispatch => {
 export const getCountryTimeseries= () => dispatch => {
 
   dispatch({ type: ActionTypes.FETCHING_COUNTRIES_TIMESERIES_START});
-  axios({
+  axios/*({
     method: 'get',
     url: 'https://covid2019app.nyc3.cdn.digitaloceanspaces.com/timeseries.json',
     headers: {
@@ -29,8 +29,8 @@ export const getCountryTimeseries= () => dispatch => {
       //"react_app_graphql_key": process.env.REACT_APP_KEY,
       //"Secret": process.env.REACT_APP_SECRET,
     }
-  })
-    //.get('https://covid2019app.nyc3.cdn.digitaloceanspaces.com/timeseries.json')
+  })*/
+    .get('https://covid2019app.nyc3.digitaloceanspaces.com/timeseries.json')
     .then(res => {
       dispatch({
         type: ActionTypes.FETCHING_COUNTRIES_TIMESERIES_SUCCESS,

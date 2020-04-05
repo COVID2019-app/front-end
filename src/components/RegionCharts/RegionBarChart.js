@@ -17,12 +17,12 @@ const RegionBarChart = props => {
 
   var data = [];
     if (region_data.length > 1) {
-      Object.keys(region_data[region_data.length - 2])
-        .slice(1, Object.keys(region_data[region_data.length - 2]).length)
+      Object.keys(region_data[region_data.length - 1])
+        .slice(1, Object.keys(region_data[region_data.length - 1]).length)
         .map(x => {
           var d = {
             region: x,
-            cases: parseInt(region_data[region_data.length - 2][x]),
+            cases: parseInt(region_data[region_data.length - 1][x]),
           };
           data.push(d);
           return data;
