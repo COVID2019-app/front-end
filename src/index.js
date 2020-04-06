@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
@@ -9,7 +10,11 @@ import { createLogger } from 'redux-logger';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import rootReducer /*{ initialState }*/ from './store/reducer';
-import {register} from './serviceWorker'
+import {register} from './serviceWorker';
+import { getTimeSeries } from './store/actions/index'
+require('dotenv').config({path:__dirname+'/.env'})
+
+getTimeSeries();
 const logger = createLogger();
 let middleware = [];
 if (process.env.NODE_ENV === 'development') {

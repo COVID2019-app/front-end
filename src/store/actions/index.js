@@ -1,6 +1,21 @@
+
 import axios from 'axios';
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../../shared/baseUrl';
+import AWS from 'aws-sdk'
+require('dotenv').config({path:__dirname+'/.env'})
+
+  
+const spacesEndpoint = new AWS.Endpoint('nyc3.digitaloceanspaces.com');
+const s3 = new AWS.S3({
+    endpoint: spacesEndpoint,
+  accessKeyId: process.env.SPACES_ACCESS_KEY,
+    secretAccessKey:process.env.SPACES_SECRET_KEY
+})
+
+
+
+
 
 
 export const getCountryList = () => dispatch => {
@@ -18,30 +33,40 @@ export const getCountryList = () => dispatch => {
       console.log(err);
     });
 };
-export const getCountryTimeseries= () => dispatch => {
 
-  dispatch({ type: ActionTypes.FETCHING_COUNTRIES_TIMESERIES_START});
-  axios/*({
-    method: 'get',
-    url: 'https://covid2019app.nyc3.cdn.digitaloceanspaces.com/timeseries.json',
-    headers: {
-      "Access-Control-AllowOrigin": "*",
-      //"react_app_graphql_key": process.env.REACT_APP_KEY,
-      //"Secret": process.env.REACT_APP_SECRET,
-    }
-  })*/
-    .get('https://covid2019app.nyc3.digitaloceanspaces.com/timeseries.json')
-    .then(res => {
-      dispatch({
-        type: ActionTypes.FETCHING_COUNTRIES_TIMESERIES_SUCCESS,
-        payload: res.data,
+export const  getTimeSeries =  () => dispatch =>{
+  dispatch({type: ActionTypes.FETCHING_COUNTRIES_TIMESERIES_START});
+  axios
+      .get(baseUrl + 'time_series')
+      .then(res => {
+        dispatch({
+          type:ActionTypes.FETCHING_COUNTRIES_TIMESERIES_SUCCESS,
+          payload:res.data
+        })
+      })
+      .catch(error =>{
+        dispatch({
+          type:ActionTypes.FETCHING_COUNTRIES_TIMESERIES_FAILURE,
+          payload:error.message
+        })
+      })
 
-      });
-    })
-    .catch(err => {
-      console.log(err);
-    });
-};
+}
+export const getCountryTimeseries =  () => dispatch => err => {
+    const arr = []
+    console.log("IM HERE")
+  if (err) throw err;
+    
+ return  s3.getObject('covid2019app/timeseries.json', (err, data) => {
+  if (err) {console.log(err, err.stack)}
+ return arr.push(data).dispatch({
+    type: ActionTypes.FETCHING_COUNTRIES_TIMESERIES_SUCCESS,
+    payload: arr,
+   
+
+})
+})}
+ 
 
 
 export const getSortedCountryList = sortedBy => dispatch => {

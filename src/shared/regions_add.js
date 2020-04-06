@@ -55,6 +55,7 @@ export const Regions = {
     'Guam',
     'South Dakota',
     'West Virginia',
+    'Washington',
     'United States Virgin Islands    ',
   ],
   China: [

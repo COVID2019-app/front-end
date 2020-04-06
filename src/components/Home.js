@@ -54,11 +54,11 @@ var headers = [
 function renderDataCell(item, dataProperty, linkProperty) {
   return (
     <div className="d-flex justify-content-around">
-      {/* <div>
+      { <div>
         {item[dataProperty]
           .toString()
           .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
-      </div> */}
+      </div> }
       {item[linkProperty] && (
         <div>
           <a
